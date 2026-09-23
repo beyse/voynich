@@ -186,3 +186,7 @@ Primary direction, fit even and test odd (table: `results/mechanism/e6/report.tx
 - **Capacity of the local process:** 1.90 bits per glyph, 10.0 bits per token, about 44 KB of compressed plaintext per manuscript-sized output. That is roughly 150,000 characters of Latin, or about 43% of *De bello Gallico*.
 - **Indistinguishability:** compressed plaintext against random driving, 39/40 statistics agree. The only disagreement (token MI, 3 runs each) disappears with 8 runs per condition: 0.052 ± 0.011 against 0.053 ± 0.010, Welch p = 0.83. Raw, uncompressed plaintext bits also agree on 39/40 statistics (disagreement: T7b recurrence).
 - **Reading:** for this construction, text statistics of the kind used anywhere in this project cannot separate a message-carrying process from a message-free one. Arithmetic coding is modern, so this is a statement about what the text can show, not about what a fifteenth-century writer did.
+
+## Endpoint
+
+The mechanism is narrowed to a class defined by nine necessary properties (SYNTHESIS.md, Section 2). Within it, the remaining alternatives (explicit rule set, writer's habit, message in the free choices) are shown to be indistinguishable from the text (E7, and the identity of the generator description for rule and habit). The program stops here by its own criterion. Anything further needs physical, experimental or historical evidence (SYNTHESIS.md, Section 7).

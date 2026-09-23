@@ -49,10 +49,20 @@ python3 paper/make_figures.py && python3 paper/extract_numbers.py && python3 pap
 - Frage: Prozedur, geübte Improvisation oder klartextgesteuerte Prozedur; getrennt davon direkt auf der Seite komponiert oder aus einer Vorlage kopiert.
 - `mechanism/PREREG.md`: eingefrorene Hypothesen, Tests T1–T7, Vorhersagen, Falsifikatoren, Urteilsregeln (Commit `28ae510`). `mechanism/DEVIATIONS.md`: alle Abweichungen mit Zeitpunkt. `mechanism/REPORT.md`: Ergebnis.
 - Kontrolle für menschliche Improvisation: Gibberish-Korpus von Gaskell & Bowern (2022) in `data/gibberish/` (Lizenzhinweis in `SOURCE.md`).
-- Ergebnis in einem Satz: begrenzte, unentschiedene Konkurrenz. Naive Improvisation, stationäre Prozeduren, periodische Geräte (ab Effektstärke 0,2), glatte Drift, propagierende Innovationen, wortbewahrende Chiffren und die Naibbe-Chiffre in der veröffentlichten Form sind ausgeschlossen; Umbruch einer fortlaufenden Vorlage (K-reflow) ist ausgeschlossen.
+- Batterie-Ergebnis: begrenzte, unentschiedene Konkurrenz. Naive Improvisation, stationäre Prozeduren, periodische Geräte (ab Effektstärke 0,2), glatte Drift, propagierende Innovationen, wortbewahrende Chiffren und die Naibbe-Chiffre in der veröffentlichten Form sind ausgeschlossen; Umbruch einer fortlaufenden Vorlage (K-reflow) ist ausgeschlossen.
 ```bash
 python3 -m mechanism.run A        # Stufe A: nur Kontrollen -> results/mechanism/stageA.json
 python3 -m mechanism.run B        # Stufe B: Voynich -> results/mechanism/stageB.json
 python3 -m mechanism.posthoc      # als post hoc markierte Robustheitsprüfungen
 python3 -m mechanism.summarize AB # Tabellen
+```
+- Anschließendes iteratives Programm (E1–E7, jeweils präregistriert): `mechanism/PROGRAM.md` (Protokoll), `mechanism/SYNTHESIS.md` (Endpunkt). Der Mechanismus ist auf eine durch neun notwendige Eigenschaften definierte Klasse eingegrenzt. Ob die freien Entscheidungen von einer expliziten Regel, von Schreibgewohnheit oder von einer Nachricht getragen wurden, ist aus dem Text nicht entscheidbar; E7 zeigt das konstruktiv (Klartext in den freien Entscheidungen, exakt rückgewinnbar, in 40 Statistiken unsichtbar).
+```bash
+python3 -m mechanism.e1 A; python3 -m mechanism.e1 B          # E1 Grenz-Rezenz
+python3 -m mechanism.e2 fit; python3 -m mechanism.e2 generate; python3 -m mechanism.e2 phenotype; python3 -m mechanism.e2 report
+python3 -m mechanism.e3 fit; python3 -m mechanism.e3 generate; python3 -m mechanism.e3 phenotype; python3 -m mechanism.e3 report
+python3 -m mechanism.e4 A; python3 -m mechanism.e4 B          # lexikalische vs. sublexikalische Drift
+python3 -m mechanism.e5 A; python3 -m mechanism.e5 B          # frequenzaufgelöste Burstiness
+python3 -m mechanism.e6 fit; python3 -m mechanism.e6 generate; python3 -m mechanism.e6 phenotype; python3 -m mechanism.e6 report
+python3 -m mechanism.e7 run; python3 -m mechanism.e7 tmcheck   # Klartext in freien Entscheidungen
 ```
