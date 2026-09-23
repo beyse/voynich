@@ -71,7 +71,7 @@ The ablations identify recency, hard pruning, session state, margin-driven endin
 - **What the evidence weighs:**
   - No device footprint (C8).
   - The needed components (C3, C4, C5, C6) are standard properties of human writing. A rule set would have to specify each explicitly, including a continuously drifting preference.
-  - A message would have to be encoded so that it creates no local vocabulary (C7), no content-like clustering of rare forms (E5) and no loss of sublexical drift (E4). Every historical-style cipher tested fails at least one of these. Only an encoding equivalent to modern compression plus a mimic function passes, and that is anachronistic.
+  - A message would have to be encoded so that it creates no local vocabulary (C7), no content-like clustering of rare forms (E5) and no loss of sublexical drift (E4). Every historical-style cipher tested fails at least one of these. A mimic-function encoding passes: the message is arithmetically decoded into the process's choices, and E7 shows this works even without compression. That technique is anachronistic.
 - **Explicit rule set versus habit** cannot be separated by the text at all. The same generator describes both. Only physical or historical evidence could decide it.
 
 ## 6. Transmission
