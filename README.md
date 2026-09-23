@@ -8,7 +8,7 @@ Code, data, analysis plans and results for the paper of the same title by Sebast
 The paper has two parts:
 
 1. **An exploratory profile** (Section 3). It was not specified in advance. It applies one information-theoretic battery to the manuscript, language controls and candidate generators, and shows that a local, low-order glyph process with drifting parameters is sufficient.
-2. **A pre-specified program** (Sections 4–8). Each analysis plan was committed to this repository before its Voynich outcome was computed; this is not an external registration. The program consists of a calibrated battery T1–T7 and seven follow-up experiments E1–E7. Together they separate procedure, improvisation and plaintext-driven production, test explicit generators on held-out pages, and give a constructive non-identifiability result (E7).
+2. **A pre-specified program** (Sections 4–8). Each analysis plan was committed to this repository before its Voynich outcome was computed; this is not an external registration. The program consists of a calibrated battery T1–T7 and follow-up experiments E1–E8 (E8 and the other revision analyses R1–R4 are in `mechanism/REVISION_PLAN.md`). Together they separate procedure, improvisation and plaintext-driven production, test explicit generators on held-out pages, and give a constructive non-identifiability result (E7).
 
 ## Repository layout
 

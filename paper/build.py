@@ -3,6 +3,7 @@ Every number in text and tables is computed here (or in paper/profile.py) from t
 import datetime
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -249,11 +250,22 @@ FN = {k: str(i + 1) for i, k in enumerate(['profile', 'constraints', 'line_endin
 # ---------------------------------------------------------------- tables
 
 
-def table(head, rows, caption, note=None, cls=''):
+TABLES = []   # table data, so that the renderer can split a table that is longer than a page
+
+
+def table_html(head, rows, caption, note=None, cls='', continued=False):
     h = ''.join(f'<th>{x}</th>' for x in head)
     b = ''.join('<tr>' + ''.join(f'<td>{c}</td>' for c in r) + '</tr>' for r in rows)
     n = f'<p class="tabnote">{note}</p>' if note else ''
+    if continued:
+        m = re.match(r'(Table S?\d+)\.', caption)
+        caption = (m.group(1) if m else 'Table') + ' (continued).'
     return f'<p class="cap">{caption}</p><table class="tab {cls}"><tr>{h}</tr>{b}</table>{n}'
+
+
+def table(head, rows, caption, note=None, cls=''):
+    TABLES.append((head, [list(r) for r in rows], caption, note, cls))
+    return f'<div class="tblock" data-tb="{len(TABLES) - 1}">' + table_html(head, rows, caption, note, cls) + '</div>'
 
 
 T = {}
@@ -292,7 +304,7 @@ T['battery'] = table(
      ['T3c final-position entropy', v['t3c_v'], '–', f"Naibbe {v['t3c_naib']}; automaton {v['t3c_mk']}; languages {v['t3c_lang']}; gibberish {v['t3c_gib']}", 'collapse (Kinnison 2026) reproduced by cipher and automaton'],
      ['T4 periodicity', 'no peak', 'no peak', 'device detected from weight 0.2', 'device variants ≥ 0.2 excluded'],
      ['T5 drift shape S', v['t5_v'], v['t5_it'], f"smooth {v['t5_smooth']}; step {v['t5_step']}; section automaton {v['t5_mk']}", 'step-like (hands 2 and 3)'],
-     ['T6a recency (near)', f"{v['t6a_v']} {v['t6a_v_ci']}", v['t6a_it'], f"stationary 99th pct ≤ {v['t6a_p99']}; copy-and-modify {v['t6a_ts']}; English {v['t6a_eng']}", 'stationary procedures falsified'],
+     ['T6a recency (near)', f"{v['t6a_v']} {v['t6a_v_ci']}", v['t6a_it'], f"stationary 99th pct ≤ {v['t6a_p99']}; copy-and-modify {v['t6a_ts']}; English {v['t6a_eng']}", 'tested stationary procedures falsified'],
      ['T6b within-page drift', f"{v['t6b_v']} {v['t6b_v_ci']}", f(PH['it2a']['t4c']['slope_1_8'], 4), f"automaton {v['t6b_mk']}; languages {v['t6b_lang']}", 'drift of natural-language strength'],
      ['T7b deviant recurrence', f"{v['t7b_rec']} (slip share {v['t7b_slip']})", pc(PH['it2a']['t7b']['recurrence_share']), f"languages {v['t7b_lang']}; copy-and-modify {v['t7b_ts']}; automata {v['t7b_mk']}; Naibbe {v['t7b_naib']}", 'rare forms not reused']],
     f'Table {TN["battery"]}. The pre-specified battery on the Voynich text (Stage B) with the controls that calibrate each reading. Intervals are 95%.',
@@ -317,7 +329,7 @@ cls_rows = [
     ['C2', 'Cross-token boundary dependency within lines (last glyph of a token, first glyph of the next), strongly reduced across line breaks', f"boundary MI {v['e6_edge_v']}; T1 ratio about 0.03 (pooled) to {v['t1_v']} (page-conditional); boundary rule necessary (E6: {v['e6_d4_edge']} without)", 'strong within lines; moderate at breaks'],
     ['C3', 'Margin-associated line-final forms, weaker at paragraph ends', f"T2a {v['t2a_m']} vs {v['t2a_p']}, difference {v['t2a_diff']} {v['t2a_diff_ci']}; stars section {v['t2a_star_m']} vs {v['t2a_star_p']}; necessary in E3", 'strong'],
     ['C4', 'Short-range recency, continuous across line and paragraph boundaries', f"T6a {v['t6a_v']} > {v['t6a_p99']}; E1 no steps; within-line decay {v['e1_wldg']}; necessary in E2", 'strong'],
-    ['C5', 'Page- and quire-level variation in the weights of shared forms', f"T5 S = {v['t5_v']}; E5 very frequent forms clustered {v['e5_B']['VF']} vs languages {v['e5_lang_VF']} (descriptive); quire-level state necessary in the generator (E2)", 'moderate (hand 1 smooth)'],
+    ['C5', 'Page-level variation in the weights of shared forms, with evidence for quire-associated discontinuities', f"T5 S = {v['t5_v']}; E5 very frequent forms clustered {v['e5_B']['VF']} vs languages {v['e5_lang_VF']} (descriptive); quire-level state necessary in the generator (E2)", 'moderate (quire decomposition post hoc, few boundaries; hand 1 smooth)'],
     ['C6', 'Within-page drift of natural-language strength, mainly lexical', f"T6b {v['t6b_v']}; E4 L = {v['e4_L']}, S = {v['e4_S']}", 'strong (existence); undetermined (source)'],
     ['C7', 'Very low recurrence of locally deviant forms', f"T7b {v['t7b_rec']} vs languages {v['t7b_lang']}, copy-and-modify {v['t7b_ts']}, generators {v['gen_rec']}; page-level variant {v['t7b_page_v']}", 'strong; shared with homophonic ciphers'],
     ['C8', 'No periodicity of the tested kind', 'T4, power from mixing weight 0.2 (period 5, cycle 4)', 'moderate (tested design only)'],
@@ -332,7 +344,7 @@ T['e45'] = table(['Corpus', 'Lexical drift L (E4)', 'Sublexical drift S (E4)', '
 T['cls'] = table(['#', 'Property', 'Evidence', 'Strength'], cls_rows, f'Table {TN["cls"]}. The nine properties that define the mechanism class, stated as measured, with their evidence and an explicit strength label. Causal readings of these properties are discussed in Section 9.')
 T['excl'] = table(['Status', 'Mechanism variant', 'Decisive evidence'], [
     ['Excluded', 'naive improvisation (Gaskell & Bowern-type samples)', 'T3a, T3b'],
-    ['Excluded', 'stationary procedures (tables, grilles, automata, devices constant within a page)', 'T6a'],
+    ['Excluded', 'the tested stationary procedures without a recency state (tables, grilles, automata, devices constant within a page)', 'T6a'],
     ['Excluded', 'periodic devices of the tested design (period 5, cycle 4) with mixing weight ≥ 0.2', 'T4'],
     ['Excluded', 'improvisation with smooth drift across pages', 'T5'],
     ['Excluded', 'settings per line or paragraph as the source of the local dynamics', 'E1'],
@@ -350,12 +362,12 @@ T['e7'] = table(['Condition', 'Bits consumed', 'Bits per glyph', 'Recovery misma
                   f"{r['bits_consumed']:,}", f(r['bits_per_glyph'], 2), r['mismatches'],
                   (f"{E7['lzma']['agree']}/{E7['lzma']['n']}" if k.startswith('lzma') else f"{E7['raw']['agree']}/{E7['raw']['n']}")] for k, r in rec.items()],
                 f'Table {TN["e7"]}. E7: message-driven output of the order-3 glyph process. Bits per glyph are bits consumed divided by the number of EVA characters generated, spaces excluded. Agreement counts are per condition group (3 plaintexts against 3 random seeds).')
-T['e78'] = table(['Process', 'Message', 'Runs (message / random)', 'Bits per glyph', 'Recovery errors', 'Holm-significant', 'Unadjusted p < 0.05', 'Tolerance rule'],
+T['e78'] = table(['Process', 'Message', 'Runs (message / random)', 'Bits per glyph', 'Recovery errors', 'Equality rejected (Holm)', 'Unadjusted p < 0.05', 'Tolerance criterion met'],
                  [['order-3 automaton (E7)', 'compressed', '3 / 3', v['e7_bpg'], sum(r['mismatches'] for r in lz), '–', '–', f"{v['e7_lz_agree']}/{v['e7_n']}"],
                   ['order-3 automaton (E7, 20 runs)', 'compressed', f"{v['e7b']['runs']} / {v['e7b']['base']}", v['e7b']['bpg'], v['e7b']['mism'], f"{v['e7b']['holm']}/{v['e7b']['n']}", f"{v['e7b']['unadj']}/{v['e7b']['n']}", f"{v['e7b']['tol']}/{v['e7b']['n']}"],
                   ['order-3 automaton (E7, 20 runs)', 'raw text bits', f"{v['e7b_raw']['runs']} / {v['e7b_raw']['base']}", v['e7b_raw']['bpg'], v['e7b_raw']['mism'], f"{v['e7b_raw']['holm']}/{v['e7b_raw']['n']}", f"{v['e7b_raw']['unadj']}/{v['e7b_raw']['n']}", f"{v['e7b_raw']['tol']}/{v['e7b_raw']['n']}"],
                   ['E3 generator (E8)', 'compressed', f"{v['e8']['runs']} / {v['e8']['base']}", v['e8']['bpg'], v['e8']['mism'], f"{v['e8']['holm']}/{v['e8']['n']}", f"{v['e8']['unadj']}/{v['e8']['n']}", f"{v['e8']['tol']}/{v['e8']['n']}"]],
-                 f'Table {TN["e78"]}. Message-driven against randomly driven output over the 40 statistics. Holm-significant: Welch tests (Fisher for T4) with Holm correction at α = 0.05; about 2 unadjusted p < 0.05 are expected by chance among 40. The 20-run analyses and E8 were pre-specified in mechanism/REVISION_PLAN.md (R4). E8 carries the message only in choices the receiver can observe, so its capacity is lower.')
+                 f'Table {TN["e78"]}. Message-driven against randomly driven output over the 40 statistics. Equality rejected: Welch tests (Fisher for T4) with Holm correction at α = 0.05; about 2 unadjusted p < 0.05 are expected by chance among 40. Non-rejection is not evidence of equality on its own; the tolerance criterion (difference within 2√(SD₁² + SD₂²) + 1%) is the pre-specified agreement rule. The 20-run analyses and E8 were pre-specified in mechanism/REVISION_PLAN.md (R4). E8 carries the message only in choices the receiver can observe, so its capacity is lower.')
 T['redteam'] = table(['Claim', 'Attack', 'Check', 'Result'], [
     ['C3 margin-associated endings', 'margin and paragraph effects not actually different', 'page bootstrap of the difference', f"{v['t2a_diff']} {v['t2a_diff_ci']}"],
     ['C3', 'lines end at drawings, not margins', 'text-only stars section', f"margin {v['t2a_star_m']} vs paragraph {v['t2a_star_p']} (n = {v['t2a_star_mn']}, {v['t2a_star_pn']})"],
@@ -368,8 +380,8 @@ T['redteam'] = table(['Claim', 'Attack', 'Check', 'Result'], [
     ['All', 'transliteration choice', 'Takahashi transliteration', 'T3a, T3b, T5, T6a, T7b, T2a, E1, E5 replicate'],
     ['C1 rigidity', 'mean over writers hides writers as rigid as the Voynich text', 'each writer against Voynich stretches of the same length (R1)', f"{v['r1_below']} of {v['r1_n']} writers below the 5th percentile; writers {v['r1_min']}–{v['r1_max']}"],
     ['Naibbe exclusion', 'the reimplementation differs from the published cipher', "author's own ciphertext (R2, R3)", f"mapping {v['r2_valid']} valid, {v['r2_pass']}/{v['r2_n']} statistics agree; author's output: T6a {v['r3_t6a']}, boundary MI {v['r3_edge']}, page MI {v['r3_page']}"],
-    ['E7', 'three runs per condition are too few', '20 runs per condition (R4a)', f"Holm-significant {v['e7b']['holm']}/{v['e7b']['n']}; unadjusted p < 0.05 {v['e7b']['unadj']}/{v['e7b']['n']}"],
-    ['E7', 'only the simplest process was tested', 'message through the E3 generator (E8, R4b)', f"Holm-significant {v['e8']['holm']}/{v['e8']['n']}; recovery errors {v['e8']['mism']}"]],
+    ['E7', 'three runs per condition are too few', '20 runs per condition (R4a)', f"equality rejected (Holm) {v['e7b']['holm']}/{v['e7b']['n']}; tolerance met {v['e7b']['tol']}/{v['e7b']['n']}"],
+    ['E7', 'only the simplest process was tested', 'message through the E3 generator (E8, R4b)', f"equality rejected (Holm) {v['e8']['holm']}/{v['e8']['n']}; tolerance met {v['e8']['tol']}/{v['e8']['n']}; recovery errors {v['e8']['mism']}"]],
     f'Table {TN["redteam"]}. Red-team checks. The first nine were run before writing and are post hoc. The last four respond to a review: R1 is post hoc; R2–R4 were pre-specified in mechanism/REVISION_PLAN.md before computation.')
 
 # ---------------------------------------------------------------- supplement tables
@@ -455,30 +467,165 @@ T['s_prereg'] = table(['Stage', 'Commit', 'Committed (author date)', 'Content'],
                       f'Table {TN["s_prereg"]}. Commits of the analysis plans and stages. Each plan was committed before the corresponding Voynich outcome was computed. Commit identities were rewritten once before publication to remove an e-mail address; contents and dates are unchanged (mechanism/COMMIT_MAP.md).', cls='small')
 
 # ---------------------------------------------------------------- render
+# fitz.Story drops table rows (and text after them) when a table breaks across pages. The renderer therefore
+# places the document block by block: tables and figures are never split (a table longer than a page is
+# split into parts, each with its header), headings are kept with the next block, and a completeness check
+# compares the PDF text with the HTML afterwards.
+from check_pdf import missing  # noqa: E402
+
+VOID = {'img', 'br', 'hr', 'meta', 'link', 'input'}
+TAG = re.compile(r'<!--.*?-->|<(/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(/?)>', re.S)
+
+
+def blocks_of(body):
+    out, depth, start = [], 0, None
+    for m in TAG.finditer(body):
+        if m.group(0).startswith('<!--'):
+            continue
+        close, tag, selfclose = m.group(1), m.group(2).lower(), m.group(3)
+        if depth == 0 and not close:
+            start = m.start()
+        if tag in VOID or selfclose:
+            if depth == 0:
+                out.append(body[start:m.end()])
+            continue
+        depth += -1 if close else 1
+        if depth == 0 and close:
+            out.append(body[start:m.end()])
+    groups = []
+    for b in out:        # a figure paragraph and its caption form one unit
+        if groups and '<img' in groups[-1] and b.startswith('<p class="cap">Figure'):
+            groups[-1] += b
+        else:
+            groups.append(b)
+    return groups
+
+
+def render(html, path, css):
+    body = html.split('<body>', 1)[1].rsplit('</body>', 1)[0]
+    head_html = html.split('<body>', 1)[0]
+    wrap = lambda frag: f'{head_html}<body>{frag}</body></html>'
+    mb = fitz.paper_rect('a4')
+    area = mb + (70, 70, -70, -74)     # the text block of the earlier single-story layout
+    gap = 0
+    writer = fitz.DocumentWriter(path)
+    st = {'dev': None, 'y': None, 'pages': 0}
+
+    pending = []      # tables and figures that did not fit and float to the top of the next page
+
+    def new_page(flush=True):
+        if st['dev'] is not None:
+            writer.end_page()
+        st['dev'] = writer.begin_page(mb)
+        st['y'] = area.y0
+        st['pages'] += 1
+        while flush and pending:     # waiting floats go first, in order, as long as they fit on this page
+            first = table_parts(pending[0])[0] if pending[0].startswith('<div class="tblock"') else pending[0]
+            if st['y'] > area.y0 + 1 and st['y'] + height(first) > area.y1:
+                break                # the rest wait for the next page; text fills this one
+            place_float(pending.pop(0), defer=False)
+
+    def story(frag):
+        return fitz.Story(html=wrap(frag), user_css=css, archive=fitz.Archive('.'))
+
+    def height(frag):
+        """True height of a block, measured in an unbounded area (the fit flag of place() is unreliable for tables)."""
+        s1 = story(frag)
+        _, filled = s1.place(fitz.Rect(area.x0, 0, area.x1, 100000))
+        return fitz.Rect(filled).y1
+
+    def draw_at_y(frag):
+        s1 = story(frag)
+        _, filled = s1.place(fitz.Rect(area.x0, st['y'], area.x1, area.y1 + 1))
+        s1.draw(st['dev'])
+        st['y'] = fitz.Rect(filled).y1 + gap
+
+    def table_parts(blk):
+        idx = int(re.match(r'<div class="tblock" data-tb="(\d+)">', blk).group(1))
+        head, rows, caption, note, cls = TABLES[idx]
+        m = re.search(r'<p class="cap">(.*?)</p>', blk, re.S)     # the caption as finally numbered
+        caption = m.group(1) if m else caption
+        whole = table_html(head, rows, caption, note, cls)
+        if height(whole) <= area.height:
+            return [whole]
+        parts, start = [], 0        # taller than a page: parts that each fit a page, with the header row
+        while start < len(rows):
+            lo, hi = 1, len(rows) - start
+            while lo < hi:
+                mid = (lo + hi + 1) // 2
+                last = start + mid >= len(rows)
+                h = height(table_html(head, rows[start:start + mid], caption, note if last else None, cls, continued=bool(parts)))
+                lo, hi = (mid, hi) if h <= area.height else (lo, mid - 1)
+            last = start + lo >= len(rows)
+            parts.append(table_html(head, rows[start:start + lo], caption, note if last else None, cls, continued=bool(parts)))
+            start += lo
+        return parts
+
+    def place_float(blk, defer=True):
+        """Tables and figures are never split. If one does not fit, text continues and it floats to the next page."""
+        if defer and pending:
+            pending.append(blk)          # keep the order of floats
+            return
+        parts = table_parts(blk) if blk.startswith('<div class="tblock"') else [blk]
+        h0 = height(parts[0])
+        if st['y'] + h0 > area.y1 and st['y'] > area.y0 + 1:
+            if defer:
+                pending.append(blk)
+                return
+            new_page(flush=False)
+        for k, part in enumerate(parts):
+            if k > 0 or st['y'] + height(part) > area.y1 + 0.5:
+                if st['y'] > area.y0 + 1:
+                    new_page(flush=False)
+            if height(part) > area.height + 0.5:
+                raise RuntimeError('block taller than a page')
+            draw_at_y(part)
+
+    new_page()
+    for blk in blocks_of(body):
+        if blk.startswith('<div class="tblock"') or '<img' in blk:
+            place_float(blk)
+        elif re.match(r'<h[123]', blk):
+            if pending and re.match(r'<h[12]', blk):     # floats may pass a subsection heading, not a section heading
+                new_page()
+            while st['y'] + height(blk) + 70 > area.y1 and st['y'] > area.y0 + 1:
+                new_page()
+            draw_at_y(blk)
+        else:
+            s1 = story(blk)
+            while True:
+                while area.y1 - st['y'] < 24:
+                    new_page()
+                more, filled = s1.place(fitz.Rect(area.x0, st['y'], area.x1, area.y1))
+                s1.draw(st['dev'])
+                st['y'] = fitz.Rect(filled).y1 + gap
+                if not more:
+                    break
+                new_page()
+    if pending:
+        new_page()
+    writer.end_page()
+    writer.close()
+    return st['pages']
+
+
 env = Environment(loader=FileSystemLoader('paper/templates'), autoescape=False, undefined=StrictUndefined)
 CSS = open('paper/templates/style.css').read() + open('paper/templates/extra.css').read()
 for name, out, head in (('main', 'paper', 'Beyer — Constrained, not identifiable: statistical constraints on the production of the Voynich manuscript text'),
                         ('supplement', 'supplement', 'Supplementary material')):
     html = env.get_template(name + '.html').render(v=v, p=pv, T=T, TN=TN, FN=FN, STAT=STAT)
     open(f'paper/{out}.html', 'w').write(html)
-    story = fitz.Story(html=html, user_css=CSS, archive=fitz.Archive('.'))
     path = f'paper/{out}.pdf'
-    writer = fitz.DocumentWriter(path)
-    mb = fitz.paper_rect('a4')
-    where = mb + (60, 62, -60, -66)
-    more, n = True, 0
-    while more:
-        dev = writer.begin_page(mb)
-        more, _ = story.place(where)
-        story.draw(dev)
-        writer.end_page()
-        n += 1
-    writer.close()
+    n = render(html, path, CSS + '\nbody { margin: 0; }\n')
     doc = fitz.open(path)
+    mb = doc[0].rect
     for i, page in enumerate(doc):
         page.insert_text((60, 40), head, fontsize=7.5, fontname='helv', color=(0.35, 0.35, 0.35))
         page.insert_text((mb.width / 2 - 8, mb.height - 36), str(i + 1), fontsize=8.5, fontname='helv')
     doc.save(path + '.tmp', garbage=4, deflate=True, deflate_images=True, deflate_fonts=True)
     doc.close()
     os.replace(path + '.tmp', path)
-    print(out, 'pages:', n)
+    miss = missing(f'paper/{out}.html', path)
+    print(out, 'pages:', n, '| text missing from PDF:', len(miss))
+    for c in miss[:10]:
+        print('   MISSING:', c)
