@@ -16,6 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
+| E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md | preregistered | – |
 | E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
 
 ## E1 result and red team
