@@ -16,6 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
+| E7 | Can a compressed plaintext ride in the free choices of a local process without changing any measured statistic (constructive indistinguishability)? | E7_PREREG.md | preregistered | – |
 | E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md (537e93b); fits frozen before test | done | No. 22/40 primary, 29/40 secondary, worse than single-route HGR2 (33, 28). The boundary rule is necessary (without it edge MI 0.0005 against 0.139). |
 | E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
 | E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
