@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md | preregistered | – |
+| E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md (537e93b); fits frozen before test | done | No. 22/40 primary, 29/40 secondary, worse than single-route HGR2 (33, 28). The boundary rule is necessary (without it edge MI 0.0005 against 0.139). |
 | E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
 | E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
 | E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
@@ -157,3 +157,24 @@ Page-clustering index B by frequency band (observed / expected same-page pairs, 
 The data now point to a two-route production process: whole familiar forms retrieved from a repertoire whose preferences vary by session, page and line (with short-range recency), plus one-off forms coined from the hard grammar and never reused. The single-route glyph automaton of E2/E3 builds every word glyph by glyph and fails on exactly the properties that separate the two routes: hardness together with diversity, non-reuse of rare forms, and lexical drift.
 
 Next (E6): test the two-route generator against the full phenotype, cross-fitted like E3, with the single-route HGR2 as the direct comparison.
+
+## E6 result and red team
+
+Primary direction, fit even and test odd (table: `results/mechanism/e6/report.txt`):
+
+| Model | Pass | Unfitted pass |
+|---|---|---|
+| TR, two-route | 22/40 | 19/31 |
+| D1, no coinage | 18 | 17 |
+| D2, no repertoire variation | 32 | 28 |
+| D3, no recency | 28 | 25 |
+| D4, no boundary table | 19 | 16 (edge MI 0.0005 against 0.139) |
+| HGR2, single-route (E3) | 33 | 28 |
+
+- **The two-route hypothesis as specified is not supported.** Retrieval from a drifting repertoire collapses lexical diversity (TTR 0.13 against 0.29, hapax 0.61 against 0.72) and weakens recency. The fit could not rescue it.
+- **The boundary rule is necessary.** A process that retrieves or coins whole words reproduces the boundary coupling only with an explicit rule linking a word's first glyph to the previous word's last glyph.
+- **Unmet by every explicit generator in E2, E3 and E6:**
+  - T7b recurrence (Voynich under 1% against at least 4.3%);
+  - T6b within-page drift (−0.0084 against at least −0.002);
+  - T2b slack (2.27 against 2.5–2.8).
+- **Reading of the recurrence result.** In the Voynich text, no page or quire develops recurring forms of its own. Every recurring form is built from glyph combinations used elsewhere, and every locally unique combination occurs once. Local variation acts on the weights of globally shared forms. Natural-language text (topic vocabulary, 5–16%), copy-and-modify improvisation (32%) and every generator with local reweighting (4–15%) create local vocabulary; the Voynich text does not.
