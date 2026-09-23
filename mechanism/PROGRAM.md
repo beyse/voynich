@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md | preregistered | – |
+| E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
 | E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
 | E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
 
@@ -70,3 +70,35 @@ Necessary components, by the preregistered rule:
 Hard pruning in its simple form, however, costs lexical diversity. The unpruned automaton passes hapax share, TTR, space gain and the lexicon test; the pruned one does not. The text is hard-constrained and diverse at the same time.
 
 Reading: the failures point to three properties of the production process. The last word of a line is adapted when the line meets the margin, not at every line end. Glyph preferences drift slowly across a page. Unusual forms occur once and are not taken up again, so recency acts on established forms only. All three are revised into the class in E3, preregistered separately. E2's test half is not used for any tuning.
+
+## E3 result and red team
+
+Primary direction: fitted on even bifolios, tested on odd (table: `results/mechanism/e3/report.txt`).
+
+| Model | Pass | Unfitted pass | Fails |
+|---|---|---|---|
+| HGR2 | 33/40 | 28/31 | token MI, lexicon synthetic, T2b, T3a, T6b, T7b rate, T7b recurrence |
+| B1 without margin-driven endings | 32 | 27 | hapax, T2a margin, T2a paragraph, T2b (8.07 against 2.27), T3a, T6b, T7b recurrence, T7b slip |
+| B2 without drift | 32 | 27 | as HGR2, plus T2c |
+| B3 without slips, temperature or free pruning | 27 | 25 | hapax, TTR, space gain, h2–h4, T2b, T3a, T6a × 2, T6b, T7b recurrence, T7b slip |
+| B0, E2 class | 26 | 22 | as B3, plus lexicon real, lzma, T2a margin |
+| Secondary HGR2 (fit odd, test even) | 28 | 24 | – |
+
+What E3 establishes:
+
+- **Margin-driven line endings are necessary.** Without them the final-form statistics and line fill fail. With them, T2a margin (0.046 against 0.079) and T2a paragraph (0.054 against 0.043) pass, and the slack ratio falls from about 8 to 2.6 (Voynich 2.3). The final word of a line is chosen for the margin, and paragraph ends are treated differently from margin ends.
+- **Slow drift is not a glyph-level preference walk.** The fitted step (0.05) leaves the T6b slope at −0.002 against the Voynich −0.008. That value is as strong as topic drift in natural language (German −0.0096, Italian −0.012).
+- **Diversity comes from grammatical novelty, not slips.** Slips reproduce hapax share and TTR but soften the hard zeros (T3a 0.057 against 0.042) and double the deviant rate (49 against 23). The text is diverse while staying hard.
+- **Rare forms are not reused.** Every variant recurs its rare forms at 5–18%, against 0.9% in the Voynich text.
+- **Token MI turns negative with margin-driven endings (−0.039 against +0.059).** This is an artefact of the final-token resampling, not diagnosed further.
+
+Blindness from here on: the Voynich values of both halves have now been computed. Further generator comparisons can be preregistered but are no longer blind at the level of the Voynich values.
+
+## Hypothesis space after E3
+
+The necessary components found so far are a hard grammar, continuous recency, session state and margin-driven line endings. Two properties remain unreproduced, and they bear directly on the remaining alternatives:
+
+- **Within-page drift of natural-language strength.** It could be content drift (plaintext, S3), which should be *lexical*: which words recur. Or it could be habit drift (S2, or drifting procedural settings, S1a), which should be *sublexical*: how words are built, visible even among different word types.
+- **Non-reuse of rare forms.** Natural-language text and deterministic codes reuse rare words (5–16%). Human coinage without memory of the coined form, or homophonic encoding of rare units, would not.
+
+Next (E4): decompose the within-page drift into lexical and sublexical parts, with calibrated controls.
