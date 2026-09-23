@@ -1,8 +1,8 @@
 # Production mechanism of the Voynich text: result of the preregistered battery
 
-Preregistration: `mechanism/PREREG.md`, frozen in commit `28ae510` before any test was run on the Voynich text.
+Preregistration: `mechanism/PREREG.md`, frozen in commit `b67bb47` before any test was run on the Voynich text.
 Deviations: `mechanism/DEVIATIONS.md` (entries 1–7, all made before Stage B; entry 6 discloses one early computation of the T1 terms on the Voynich text).
-Stage A (controls only) was committed in `2403034` before Stage B (Voynich) was run.
+Stage A (controls only) was committed in `f282965` before Stage B (Voynich) was run.
 Numbers: `results/mechanism/stageA.json`, `stageB.json`, `posthoc.json`; tables: `python3 -m mechanism.summarize AB`.
 
 ## 1. Verdict

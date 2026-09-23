@@ -385,12 +385,14 @@ def md_items(path):
 T['s_dev'] = table(['File', 'Deviation (all made before the corresponding Voynich statistic was computed)'],
                    [[name, '; '.join(md_items(p))] for name, p in dev_files] + [['E2–E7', 'none beyond those recorded in PROGRAM.md (E6/E7: none)']],
                    f'Table {TN["s_dev"]}. Logged deviations from the preregistrations. Full texts in the repository.', cls='small')
-T['s_prereg'] = table(['Stage', 'Commit', 'Content'], [
-    ['Battery preregistration', '28ae510', 'PREREG.md frozen'], ['Battery Stage A', '2403034', 'controls only'], ['Battery Stage B and report', '123ee76', 'Voynich'],
-    ['E1 preregistration', 'b5dcb79', ''], ['E1 calibration', 'ea64b09', 'before the Voynich run'], ['E2 preregistration', '6b109a4', ''],
-    ['E3 preregistration', '0f50303', ''], ['E4 preregistration', 'ce8bb45', ''], ['E5 preregistration', 'f3bb895', ''],
-    ['E6 preregistration', '537e93b', ''], ['E7 preregistration', '6b6e555', ''], ['Red-team checks', '922722b', 'post hoc']],
-    f'Table {TN["s_prereg"]}. Timestamps: each preregistration was committed before the corresponding Voynich outcome was computed.', cls='small')
+_prereg_rows = [
+    ['Battery preregistration', 'b67bb47', 'PREREG.md frozen'], ['Battery Stage A', 'f282965', 'controls only'], ['Battery Stage B and report', '650abbd', 'Voynich'],
+    ['E1 preregistration', '889e908', ''], ['E1 calibration', 'c507641', 'before the Voynich run'], ['E2 preregistration', '0b40d28', ''],
+    ['E3 preregistration', 'ca203c4', ''], ['E4 preregistration', 'a647269', ''], ['E5 preregistration', 'bc6c840', ''],
+    ['E6 preregistration', 'aadd173', ''], ['E7 preregistration', '7b002ad', ''], ['Red-team checks', '355263d', 'post hoc']]
+T['s_prereg'] = table(['Stage', 'Commit', 'Committed (author date)', 'Content'],
+                      [[st, h, subprocess.run(['git', 'log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M %z', h], capture_output=True, text=True).stdout.strip(), c] for st, h, c in _prereg_rows],
+                      f'Table {TN["s_prereg"]}. Commits of the preregistrations and stages. Each preregistration was committed before the corresponding Voynich outcome was computed. Commit identities were rewritten once before publication to remove an e-mail address; contents and dates are unchanged (mechanism/COMMIT_MAP.md).', cls='small')
 
 # ---------------------------------------------------------------- render
 env = Environment(loader=FileSystemLoader('paper/templates'), autoescape=False, undefined=StrictUndefined)

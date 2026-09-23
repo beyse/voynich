@@ -2,7 +2,7 @@
 
 Iterative search for the production mechanism. Each experiment is preregistered before its Voynich outcome is computed, calibrated on controls with known mechanisms, run, red-teamed, and used to update the hypothesis space below.
 
-## Hypothesis space after the battery (REPORT.md, commit 123ee76)
+## Hypothesis space after the battery (REPORT.md, commit 650abbd)
 
 Generation:
 
@@ -16,13 +16,13 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E7 | Can a compressed plaintext ride in the free choices of a local process without changing any measured statistic (constructive indistinguishability)? | E7_PREREG.md (6b6e555) | done | Yes. Exact recovery; 39/40 statistics agree, and the single disagreement (token MI) vanishes with 8 runs per condition (p = 0.83). Capacity 1.9 bits per glyph, about 44 KB compressed per manuscript. |
-| E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md (537e93b); fits frozen before test | done | No. 22/40 primary, 29/40 secondary, worse than single-route HGR2 (33, 28). The boundary rule is necessary (without it edge MI 0.0005 against 0.139). |
-| E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
-| E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
-| E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
-| E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
-| E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
+| E7 | Can a compressed plaintext ride in the free choices of a local process without changing any measured statistic (constructive indistinguishability)? | E7_PREREG.md (7b002ad) | done | Yes. Exact recovery; 39/40 statistics agree, and the single disagreement (token MI) vanishes with 8 runs per condition (p = 0.83). Capacity 1.9 bits per glyph, about 44 KB compressed per manuscript. |
+| E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md (aadd173); fits frozen before test | done | No. 22/40 primary, 29/40 secondary, worse than single-route HGR2 (33, 28). The boundary rule is necessary (without it edge MI 0.0005 against 0.139). |
+| E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (bc6c840), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
+| E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (a647269) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
+| E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (ca203c4); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
+| E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (0b40d28), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
+| E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (889e908), E1_DEVIATIONS.md | done (c507641 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
 
 ## E1 result and red team
 

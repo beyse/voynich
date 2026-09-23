@@ -63,7 +63,7 @@ python3 paper/make_figures.py && python3 paper/build.py
 
 ## Preregistration
 
-Each preregistration was committed to this repository before the corresponding Voynich outcome was computed. The commits are listed in Table S28 of the supplement, and deviations are logged in `mechanism/*DEVIATIONS.md`. The repository was private while the work was done and was published once it was complete. The commit timestamps are therefore the author's record, not entries in an independent registry.
+Each preregistration was committed to this repository before the corresponding Voynich outcome was computed. The commits are listed in Table S28 of the supplement, and deviations are logged in `mechanism/*DEVIATIONS.md`. The repository was private while the work was done and was published once it was complete. The commit timestamps are therefore the author's record, not entries in an independent registry. Before publication the author e-mail address was replaced in every commit. This changed the commit hashes but not the file contents or dates; `mechanism/COMMIT_MAP.md` maps the old hashes, which older documents may quote, to the published ones.
 
 ## Licences and attribution
 
