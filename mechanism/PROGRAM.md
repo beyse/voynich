@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E7 | Can a compressed plaintext ride in the free choices of a local process without changing any measured statistic (constructive indistinguishability)? | E7_PREREG.md | preregistered | – |
+| E7 | Can a compressed plaintext ride in the free choices of a local process without changing any measured statistic (constructive indistinguishability)? | E7_PREREG.md (6b6e555) | done | Yes. Exact recovery; 39/40 statistics agree, and the single disagreement (token MI) vanishes with 8 runs per condition (p = 0.83). Capacity 1.9 bits per glyph, about 44 KB compressed per manuscript. |
 | E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md (537e93b); fits frozen before test | done | No. 22/40 primary, 29/40 secondary, worse than single-route HGR2 (33, 28). The boundary rule is necessary (without it edge MI 0.0005 against 0.139). |
 | E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
 | E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
@@ -179,3 +179,10 @@ Primary direction, fit even and test odd (table: `results/mechanism/e6/report.tx
   - T6b within-page drift (−0.0084 against at least −0.002);
   - T2b slack (2.27 against 2.5–2.8).
 - **Reading of the recurrence result.** In the Voynich text, no page or quire develops recurring forms of its own. Every recurring form is built from glyph combinations used elsewhere, and every locally unique combination occurs once. Local variation acts on the weights of globally shared forms. Natural-language text (topic vocabulary, 5–16%), copy-and-modify improvisation (32%) and every generator with local reweighting (4–15%) create local vocabulary; the Voynich text does not.
+
+## E7 result
+
+- **Recovery:** every plaintext-driven output (Latin, Italian and German, each compressed and raw) returns its plaintext bits with 0 mismatches over about 352,000 consumed bits.
+- **Capacity of the local process:** 1.90 bits per glyph, 10.0 bits per token, about 44 KB of compressed plaintext per manuscript-sized output. That is roughly 150,000 characters of Latin, or about 43% of *De bello Gallico*.
+- **Indistinguishability:** compressed plaintext against random driving, 39/40 statistics agree. The only disagreement (token MI, 3 runs each) disappears with 8 runs per condition: 0.052 ± 0.011 against 0.053 ± 0.010, Welch p = 0.83. Raw, uncompressed plaintext bits also agree on 39/40 statistics (disagreement: T7b recurrence).
+- **Reading:** for this construction, text statistics of the kind used anywhere in this project cannot separate a message-carrying process from a message-free one. Arithmetic coding is modern, so this is a statement about what the text can show, not about what a fifteenth-century writer did.

@@ -1,0 +1,18 @@
+prng:11 None
+prng:12 None
+prng:13 None
+lzma:LAT {'bits_available': 831328, 'bits_consumed': 354487, 'bits_recovered_compared': 354487, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.9032450309792004, 'bits_per_token': 10.039564983431987, 'plaintext_bytes_carried': 44310.875, 'exhausted': False}
+lzma:ITA {'bits_available': 1580800, 'bits_consumed': 352347, 'bits_recovered_compared': 352346, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.9050726675029197, 'bits_per_token': 10.065906753513884, 'plaintext_bytes_carried': 44043.375, 'exhausted': False}
+lzma:GER {'bits_available': 603712, 'bits_consumed': 351602, 'bits_recovered_compared': 351602, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.899134699521438, 'bits_per_token': 10.033158315260815, 'plaintext_bytes_carried': 43950.25, 'exhausted': False}
+raw:LAT {'bits_available': 2737528, 'bits_consumed': 350690, 'bits_recovered_compared': 350688, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.8978477457341856, 'bits_per_token': 10.015421962016278, 'plaintext_bytes_carried': 43836.25, 'exhausted': False}
+raw:ITA {'bits_available': 4848728, 'bits_consumed': 351787, 'bits_recovered_compared': 351786, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.8982268891239127, 'bits_per_token': 9.986288926107814, 'plaintext_bytes_carried': 43973.375, 'exhausted': False}
+raw:GER {'bits_available': 1687184, 'bits_consumed': 354204, 'bits_recovered_compared': 354202, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.9066803036012274, 'bits_per_token': 10.076354119253528, 'plaintext_bytes_carried': 44275.5, 'exhausted': False}
+lzma: 39/40 statistics agree with PRNG-driven output; disagree: ['token_mi']
+raw: 39/40 statistics agree with PRNG-driven output; disagree: ['T7b_rec']
+lzma:LAT {'bits_available': 831328, 'bits_consumed': 354487, 'bits_recovered_compared': 354487, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.903, 'bits_per_token': 10.04, 'plaintext_bytes_carried': 44310.875, 'exhausted': False}
+lzma:ITA {'bits_available': 1580800, 'bits_consumed': 352347, 'bits_recovered_compared': 352346, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.905, 'bits_per_token': 10.066, 'plaintext_bytes_carried': 44043.375, 'exhausted': False}
+lzma:GER {'bits_available': 603712, 'bits_consumed': 351602, 'bits_recovered_compared': 351602, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.899, 'bits_per_token': 10.033, 'plaintext_bytes_carried': 43950.25, 'exhausted': False}
+raw:LAT {'bits_available': 2737528, 'bits_consumed': 350690, 'bits_recovered_compared': 350688, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.898, 'bits_per_token': 10.015, 'plaintext_bytes_carried': 43836.25, 'exhausted': False}
+raw:ITA {'bits_available': 4848728, 'bits_consumed': 351787, 'bits_recovered_compared': 351786, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.898, 'bits_per_token': 9.986, 'plaintext_bytes_carried': 43973.375, 'exhausted': False}
+raw:GER {'bits_available': 1687184, 'bits_consumed': 354204, 'bits_recovered_compared': 354202, 'mismatches': 0, 'first_mismatch': None, 'bits_per_glyph': 1.907, 'bits_per_token': 10.076, 'plaintext_bytes_carried': 44275.5, 'exhausted': False}
+EXIT 0
