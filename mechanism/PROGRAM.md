@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md | preregistered | – |
+| E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
 | E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
 | E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
 | E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
@@ -103,3 +103,26 @@ The necessary components found so far are a hard grammar, continuous recency, se
 - **Non-reuse of rare forms.** Natural-language text and deterministic codes reuse rare words (5–16%). Human coinage without memory of the coined form, or homophonic encoding of rare units, would not.
 
 Next (E4): decompose the within-page drift into lexical and sublexical parts, with calibrated controls.
+
+## E4 result and red team
+
+Slopes of line similarity over line distance 2–8 (95% CI):
+
+| Corpus | Lexical L | Sublexical S |
+|---|---|---|
+| Voynich | −0.0142 (−0.0275, −0.0022) | −0.0052 (−0.0085, −0.0023) |
+| LAT | −0.0115 | −0.0028 (−0.0045, −0.0011) |
+| ITA (terza rima) | −0.0147 | −0.0121 (−0.0153, −0.0088) |
+| GER | −0.0252 | −0.0043 (−0.0070, −0.0015) |
+| ENG | −0.0128 | +0.0003 (−0.0031, 0.0040) |
+| VB-run, deterministic verbose cipher on Latin | −0.0092 | +0.0002 (−0.0020, 0.0022) |
+| NAIB-run, Naibbe on Latin | +0.0076 | −0.0015 (−0.0043, 0.0012) |
+| GDRIFT, glyph habit walk | −0.0517 | −0.0148 |
+| LDRIFT, vocabulary walk | −0.0398 | +0.0007 |
+| MK-sec | −0.0042 | −0.0007 |
+
+- **Preregistered verdict: lexical-type drift.** The sublexical slope overlaps the language range, and the "beyond content drift" bar (below −0.0153) is set by Dante's rhyme scheme, which is structural rather than topical. Content drift and vocabulary or habit drift are not separated.
+- **By-product (a comparison of preregistered statistics, stated as such):** both ciphers remove the sublexical drift that their Latin plaintext has (Latin −0.0028; ciphers +0.0002 and −0.0015). The Voynich interval lies below the deterministic cipher's interval. A letter-level cipher of the tested kinds is therefore a poor match for the Voynich drift. Unenciphered content, or production-level drift, fits better.
+- The magnitudes of the synthetic drift controls were not tuned to the Voynich text, so their slopes show directions only.
+
+Next (E5): frequency-resolved burstiness. Content drift makes rare words the burstiest; a drifting repertoire with one-off coinages does not.
