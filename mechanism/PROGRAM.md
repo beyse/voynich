@@ -16,6 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
+| E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md | preregistered | – |
 | E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
 | E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
 | E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
