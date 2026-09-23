@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md | preregistered | – |
+| E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
 | E1 | Are the local dynamics discrete sub-page settings or continuous recency? | E1_PREREG.md (b5dcb79), E1_DEVIATIONS.md | done (ea64b09 calibration, then Voynich) | Continuous. Settings at line or paragraph level of the size needed for the observed recency are excluded; recency-only is not falsified. |
 
 ## E1 result and red team
@@ -41,3 +41,31 @@ Red team:
 - S1(b), sub-page settings as the source of the local dynamics: excluded at the required magnitude.
 - Remaining: continuous recency within a hard grammar. It can be an explicit copy rule (S1a), human priming (S2) or recency-dependent choices in a plaintext system (S3).
 - Next (E2): an explicit generator of this class (hard grammar, continuous recency, session state, slips, line rules), fitted on half the quires and tested blind on the other half against the full frozen phenotype, with ablations to show which components are necessary.
+
+## E2 result and red team
+
+Test half, 40 statistics, tolerance 2·√(SE_V² + SD_G²) + 1% (table: `results/mechanism/e2/report.txt`).
+
+| Model | Pass | Fails |
+|---|---|---|
+| HGR (full) | 32 | hapax, TTR, space gain, lexicon real, T2a paragraph, T2b slack, T6b slope, T7b recurrence |
+| A1 no recency | 27 | + h2, h3, T6a near and exact, T7b slip |
+| A2/A4 no pruning | 33 | d2 MI, T3a ρ (+ the four universal fails below) |
+| A3 no session | 29 | + d2 MI, T3a ρ, T6a near |
+| A0 plain automaton | 32 | d2 MI, page MI, T3a ρ, T6a near (+ universal fails) |
+
+Universal fails, shared by every model:
+
+- **Line endings tied to the margin (T2a paragraph, T2b).** Voynich: final-form excess 0.094 at margin-bound line ends against 0.037 at paragraph ends. Generators: 0.13–0.18 at both. The automaton's end symbol makes every line end special, and its length control (60–140% of target) fills lines far more loosely than the writer (slack 9.5 against 1.96).
+- **Slow within-page drift (T6b).** Voynich −0.0082; generators −0.001 to −0.002. The recency range (8 tokens) is too short to produce it.
+- **Rare forms never reused (T7b recurrence).** Voynich 0.5% (double-coded); generators 9–19%.
+
+Necessary components, by the preregistered rule:
+
+- **Recency:** without it, h2, h3, T6a and T7b slip fail.
+- **Hard pruning:** without it, d2 MI and T3a fail.
+- **Session state:** without it, d2 MI, T3a and T6a near fail.
+
+Hard pruning in its simple form, however, costs lexical diversity. The unpruned automaton passes hapax share, TTR, space gain and the lexicon test; the pruned one does not. The text is hard-constrained and diverse at the same time.
+
+Reading: the failures point to three properties of the production process. The last word of a line is adapted when the line meets the margin, not at every line end. Glyph preferences drift slowly across a page. Unusual forms occur once and are not taken up again, so recency acts on established forms only. All three are revised into the class in E3, preregistered separately. E2's test half is not used for any tuning.
