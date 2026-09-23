@@ -1,0 +1,191 @@
+{
+ "t2a_difference": {
+  "VOYNICH": {
+   "margin": 0.08538584796691683,
+   "para": 0.03935950732388546,
+   "diff": 0.04602634064303136,
+   "diff_ci95": [
+    0.0258728649115784,
+    0.06240963345024573
+   ]
+  }
+ },
+ "t2a_stars": {
+  "margin": {
+   "jsd": 0.16027311100084995,
+   "null_mean": 0.00443438971356758,
+   "excess": 0.15583872128728238,
+   "p": 0.004975124378109453,
+   "n_final": 872,
+   "mean_len_final": 5.036697247706422,
+   "mean_len_internal": 5.048220026193595
+  },
+  "para": {
+   "jsd": 0.04148801749035415,
+   "null_mean": 0.008665252396535497,
+   "excess": 0.03282276509381865,
+   "p": 0.004975124378109453,
+   "n_final": 291,
+   "mean_len_final": 5.457044673539519,
+   "mean_len_internal": 5.048220026193595
+  }
+ },
+ "per_hand": {
+  "1": {
+   "pages": 112,
+   "tokens": 9751,
+   "t3a_rho": 0.049318539877706694,
+   "t3b_cons": 0.8450707446338296,
+   "t6a_near": 0.15994743258677302,
+   "t7b_rec_dc": 0.02,
+   "t2a_margin": 0.0635541410224606,
+   "t2a_margin_p": 0.009900990099009901
+  },
+  "2": {
+   "pages": 46,
+   "tokens": 10073,
+   "t3a_rho": 0.035819633064441365,
+   "t3b_cons": 0.8890239018086027,
+   "t6a_near": 0.16904279772836706,
+   "t7b_rec_dc": 0.057777777777777775,
+   "t2a_margin": 0.07375387582222138,
+   "t2a_margin_p": 0.009900990099009901
+  },
+  "3": {
+   "pages": 31,
+   "tokens": 10836,
+   "t3a_rho": 0.039094922351343264,
+   "t3b_cons": 0.8744127203090747,
+   "t6a_near": 0.1408641687893648,
+   "t7b_rec_dc": 0.12398042414355628,
+   "t2a_margin": 0.1553965973202975,
+   "t2a_margin_p": 0.009900990099009901
+  }
+ },
+ "VOYNICH": {
+  "recurrence_variants": {
+   "2gram_quire": 0.0,
+   "2gram_page": 0.0,
+   "3gram_quire": 0.011450381679389313,
+   "3gram_page": 0.004784688995215311
+  },
+  "recurrence_variants_nodc": {
+   "2gram_quire": 0.0,
+   "2gram_page": 0.0,
+   "3gram_quire": 0.01668806161745828,
+   "3gram_page": 0.001579778830963665
+  },
+  "raw_t3a": 0.03439260796675797,
+  "raw_t3b": 0.855828552562692
+ },
+ "GIB": {
+  "recurrence_variants": {
+   "2gram_quire": 0.11475409836065574,
+   "2gram_page": 0.11475409836065574,
+   "3gram_quire": 0.07894736842105263,
+   "3gram_page": 0.07894736842105263
+  },
+  "raw_t3a": 0.0982883037008163,
+  "raw_t3b": 0.6788854027326122
+ },
+ "LAT": {
+  "recurrence_variants": {
+   "2gram_quire": 0.0625,
+   "2gram_page": 0.0,
+   "3gram_quire": 0.11714285714285715,
+   "3gram_page": 0.02092050209205021
+  },
+  "raw_t3a": 0.10108145308451107,
+  "raw_t3b": 0.6631572298159272
+ },
+ "ITA": {
+  "recurrence_variants": {
+   "2gram_quire": 0.07246376811594203,
+   "2gram_page": 0.07142857142857142,
+   "3gram_quire": 0.055327868852459015,
+   "3gram_page": 0.02406417112299465
+  },
+  "raw_t3a": 0.07471690726019099,
+  "raw_t3b": 0.6883218843095332
+ },
+ "GER": {
+  "recurrence_variants": {
+   "2gram_quire": 0.05454545454545454,
+   "2gram_page": 0.020833333333333332,
+   "3gram_quire": 0.06459948320413436,
+   "3gram_page": 0.027692307692307693
+  },
+  "raw_t3a": 0.09719543351482583,
+  "raw_t3b": 0.6965283902959126
+ },
+ "ENG": {
+  "recurrence_variants": {
+   "2gram_quire": 0.16666666666666666,
+   "2gram_page": 0.058823529411764705,
+   "3gram_quire": 0.1609403254972875,
+   "3gram_page": 0.05069124423963134
+  },
+  "raw_t3a": 0.10436478760083655,
+  "raw_t3b": 0.7015868754537001
+ },
+ "HGR2": {
+  "recurrence_variants": {
+   "2gram_quire": 0.12087912087912088,
+   "2gram_page": 0.03571428571428571,
+   "3gram_quire": 0.0674955595026643,
+   "3gram_page": 0.02250351617440225
+  }
+ },
+ "TS": {
+  "recurrence_variants": {
+   "2gram_quire": 0.37037037037037035,
+   "2gram_page": 0.37815126050420167,
+   "3gram_quire": 0.3226788432267884,
+   "3gram_page": 0.32523148148148145
+  }
+ },
+ "NAIB-run": {
+  "recurrence_variants": {
+   "2gram_quire": 0.02127659574468085,
+   "2gram_page": 0.0,
+   "3gram_quire": 0.0375,
+   "3gram_page": 0.0036496350364963502
+  }
+ },
+ "per_hand_recurrence_fullref": {
+  "dc": {
+   "1": {
+    "analysed": 5784,
+    "deviant_types": 95,
+    "recurrence_share": 0.010526315789473684
+   },
+   "2": {
+    "analysed": 5618,
+    "deviant_types": 57,
+    "recurrence_share": 0.0
+   },
+   "3": {
+    "analysed": 5722,
+    "deviant_types": 89,
+    "recurrence_share": 0.02247191011235955
+   }
+  },
+  "nodc": {
+   "1": {
+    "analysed": 9751,
+    "deviant_types": 281,
+    "recurrence_share": 0.014234875444839857
+   },
+   "2": {
+    "analysed": 10073,
+    "deviant_types": 179,
+    "recurrence_share": 0.0111731843575419
+   },
+   "3": {
+    "analysed": 10836,
+    "deviant_types": 275,
+    "recurrence_share": 0.025454545454545455
+   }
+  }
+ }
+}
