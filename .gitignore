@@ -3,3 +3,4 @@ data/ref/
 __pycache__/
 *.pyc
 paper/figures/_render_*
+.DS_Store
