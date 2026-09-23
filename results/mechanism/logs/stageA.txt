@@ -1,0 +1,75 @@
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:168: RuntimeWarning: invalid value encountered in scalar divide
+  eb = float(np.dot(w, [r[2] for r in rows]) / w.sum())
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:169: RuntimeWarning: invalid value encountered in scalar divide
+  ew = float(np.dot(w, [r[3] for r in rows]) / w.sum())
+/Users/sebastianbeyer/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:3596: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/Users/sebastianbeyer/Library/Python/3.9/lib/python/site-packages/numpy/_core/_methods.py:138: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:324: RuntimeWarning: invalid value encountered in scalar divide
+  r1 = obs[0] / obs[2]
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:326: RuntimeWarning: invalid value encountered in divide
+  n1 = null[:, 0] / null[:, 2]
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:491: RuntimeWarning: Mean of empty slice.
+  bc = [cons[g.integers(0, len(cons), len(cons))].mean() for _ in range(1000)]
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:492: RuntimeWarning: Mean of empty slice.
+  bm = [mono[g.integers(0, len(mono), len(mono))].mean() for _ in range(1000)]
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:493: RuntimeWarning: Mean of empty slice.
+  return {'consistency': float(cons.mean()), 'cons_ci95': [float(np.percentile(bc, 2.5)), float(np.percentile(bc, 97.5))],
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:494: RuntimeWarning: Mean of empty slice.
+  'monotone': float(mono.mean()), 'mono_ci95': [float(np.percentile(bm, 2.5)), float(np.percentile(bm, 97.5))],
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:544: RuntimeWarning: invalid value encountered in divide
+  ratio = lambda idx: obs[idx][:, ks].sum(0) / exp[idx][:, ks].sum(0)
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:591: RuntimeWarning: invalid value encountered in scalar divide
+  r = lambda idx: (al[idx, d].sum() / na[idx, d].sum()) / (of[idx, d].sum() / no[idx, d].sum())
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:632: RuntimeWarning: invalid value encountered in divide
+  ratio = lambda idx: obs[idx][:, ks].sum(0) / exp[idx][:, ks].sum(0)
+/Users/sebastianbeyer/git/voynich/mechanism/tests.py:928: RuntimeWarning: Mean of empty slice
+  'median_gap': med_obs, 'null_median_gap': float(np.nanmean(meds)) if meds else None,
+LATV {'class': 'C-lang', 'note': 'natural language, V shape', 'tokens': 0, 'pages': 0, 'seconds': 0.3}
+LATW {'class': 'C-lang', 'note': 'greedy wrap at 55 letters', 'tokens': 13534, 'pages': 60, 'seconds': 4.7}
+GIB {'class': 'I', 'note': 'Gaskell & Bowern 2022, handwritten gibberish', 'tokens': 10075, 'pages': 38, 'seconds': 8.1}
+ITA {'class': 'C-lang', 'note': 'natural language, V shape', 'tokens': 32399, 'pages': 207, 'seconds': 11.3}
+ENG {'class': 'C-lang', 'note': 'natural language, V shape', 'tokens': 32399, 'pages': 207, 'seconds': 11.9}
+GER {'class': 'C-lang', 'note': 'natural language, V shape', 'tokens': 30959, 'pages': 204, 'seconds': 12.6}
+LAT {'class': 'C-lang', 'note': 'natural language, V shape', 'tokens': 32399, 'pages': 207, 'seconds': 15.9}
+MK-sec {'class': 'P', 'note': 'order-3 automaton per (language, section)', 'tokens': 35102, 'pages': 207, 'seconds': 17.8}
+MK-page {'class': 'P', 'note': 'order-3 automaton, page/section interpolation lambda=0.5', 'tokens': 35170, 'pages': 207, 'seconds': 18.5}
+RUGG {'class': 'P', 'note': 'table and grille', 'tokens': 32399, 'pages': 207, 'seconds': 16.8}
+DRIFT-smooth {'class': 'I', 'note': 'smooth drift A->B per hand', 'tokens': 36023, 'pages': 207, 'seconds': 9.2}
+NAIB-lines {'class': 'C', 'note': 'Naibbe cipher on Latin (Greshko 2025)', 'tokens': 31562, 'pages': 207, 'seconds': 11.2}
+DEV-0.1-0 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.1-1 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.7}
+TS {'class': 'I', 'note': 'copy-and-modify after Timm & Schinner 2020', 'tokens': 32399, 'pages': 207, 'seconds': 15.6}
+DRIFT-step {'class': 'P', 'note': 'step drift A->B per hand', 'tokens': 36747, 'pages': 207, 'seconds': 10.1}
+DEV-0.1-2 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+NAIB-run {'class': 'C', 'note': 'Naibbe cipher on Latin (Greshko 2025)', 'tokens': 31552, 'pages': 207, 'seconds': 14.6}
+DEV-0.1-3 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.1-4 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.1-5 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.1-6 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.1-7 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 5.0}
+DEV-0.1-8 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.1-9 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.1', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.2-0 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.2-1 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.2-3 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.7}
+DEV-0.2-2 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.2-4 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.2-5 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.2-6 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 5.0}
+DEV-0.2-7 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.2-8 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 4.9}
+DEV-0.2-9 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.2', 'tokens': 32428, 'pages': 207, 'seconds': 5.0}
+DEV-0.4-0 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 5.0}
+DEV-0.4-1 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 5.0}
+DEV-0.4-2 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.4-3 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.8}
+DEV-0.4-4 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.6}
+DEV-0.4-5 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.5}
+DEV-0.4-6 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.5}
+DEV-0.4-7 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.4}
+DEV-0.4-8 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.2}
+DEV-0.4-9 {'class': 'P', 'note': 'periodic device, period 5, cycle 4, w=0.4', 'tokens': 32428, 'pages': 207, 'seconds': 4.2}
+written results/mechanism/stageA.json
+EXIT 0
