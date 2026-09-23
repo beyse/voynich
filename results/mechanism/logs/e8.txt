@@ -1,0 +1,43 @@
+prng:201:0 None
+prng:202:0 None
+prng:203:0 None
+prng:204:0 None
+prng:205:0 None
+prng:206:0 None
+prng:207:0 None
+prng:208:0 None
+prng:209:0 None
+prng:210:0 None
+prng:211:0 None
+prng:212:0 None
+prng:213:0 None
+prng:214:0 None
+prng:215:0 None
+prng:216:0 None
+prng:217:0 None
+prng:218:0 None
+prng:219:0 None
+prng:220:0 None
+lzma:LAT:0 {'bits_available': 800000, 'bits_consumed': 274947, 'bits_recovered_compared': 274947, 'mismatches': 0, 'glyphs': 186196, 'tokens': 34035, 'bits_per_glyph': 1.477, 'bits_per_token': 8.078, 'exhausted': False}
+lzma:LAT:100000 {'bits_available': 731328, 'bits_consumed': 277691, 'bits_recovered_compared': 277691, 'mismatches': 0, 'glyphs': 186374, 'tokens': 33996, 'bits_per_glyph': 1.49, 'bits_per_token': 8.168, 'exhausted': False}
+lzma:LAT:200000 {'bits_available': 631328, 'bits_consumed': 277591, 'bits_recovered_compared': 277588, 'mismatches': 0, 'glyphs': 186196, 'tokens': 33985, 'bits_per_glyph': 1.491, 'bits_per_token': 8.168, 'exhausted': False}
+lzma:LAT:300000 {'bits_available': 531328, 'bits_consumed': 277850, 'bits_recovered_compared': 277849, 'mismatches': 0, 'glyphs': 186562, 'tokens': 33933, 'bits_per_glyph': 1.489, 'bits_per_token': 8.188, 'exhausted': False}
+lzma:LAT:400000 {'bits_available': 431328, 'bits_consumed': 278901, 'bits_recovered_compared': 278901, 'mismatches': 0, 'glyphs': 185997, 'tokens': 34150, 'bits_per_glyph': 1.499, 'bits_per_token': 8.167, 'exhausted': False}
+lzma:GER:0 {'bits_available': 603712, 'bits_consumed': 275926, 'bits_recovered_compared': 275926, 'mismatches': 0, 'glyphs': 185785, 'tokens': 34052, 'bits_per_glyph': 1.485, 'bits_per_token': 8.103, 'exhausted': False}
+lzma:GER:60000 {'bits_available': 543712, 'bits_consumed': 277153, 'bits_recovered_compared': 277153, 'mismatches': 0, 'glyphs': 186215, 'tokens': 34067, 'bits_per_glyph': 1.488, 'bits_per_token': 8.136, 'exhausted': False}
+lzma:GER:120000 {'bits_available': 483712, 'bits_consumed': 276829, 'bits_recovered_compared': 276828, 'mismatches': 0, 'glyphs': 186289, 'tokens': 34048, 'bits_per_glyph': 1.486, 'bits_per_token': 8.131, 'exhausted': False}
+lzma:GER:180000 {'bits_available': 423712, 'bits_consumed': 277138, 'bits_recovered_compared': 277138, 'mismatches': 0, 'glyphs': 185835, 'tokens': 34060, 'bits_per_glyph': 1.491, 'bits_per_token': 8.137, 'exhausted': False}
+lzma:GER:240000 {'bits_available': 363712, 'bits_consumed': 277687, 'bits_recovered_compared': 277687, 'mismatches': 0, 'glyphs': 186364, 'tokens': 33995, 'bits_per_glyph': 1.49, 'bits_per_token': 8.168, 'exhausted': False}
+lzma:ITA:0 {'bits_available': 800000, 'bits_consumed': 276574, 'bits_recovered_compared': 276574, 'mismatches': 0, 'glyphs': 186747, 'tokens': 33943, 'bits_per_glyph': 1.481, 'bits_per_token': 8.148, 'exhausted': False}
+lzma:ITA:100000 {'bits_available': 800000, 'bits_consumed': 278128, 'bits_recovered_compared': 278128, 'mismatches': 0, 'glyphs': 185530, 'tokens': 34261, 'bits_per_glyph': 1.499, 'bits_per_token': 8.118, 'exhausted': False}
+lzma:ITA:200000 {'bits_available': 800000, 'bits_consumed': 279414, 'bits_recovered_compared': 279413, 'mismatches': 0, 'glyphs': 186079, 'tokens': 34082, 'bits_per_glyph': 1.502, 'bits_per_token': 8.198, 'exhausted': False}
+lzma:ITA:300000 {'bits_available': 800000, 'bits_consumed': 273037, 'bits_recovered_compared': 273036, 'mismatches': 0, 'glyphs': 186180, 'tokens': 33889, 'bits_per_glyph': 1.467, 'bits_per_token': 8.057, 'exhausted': False}
+lzma:ITA:400000 {'bits_available': 800000, 'bits_consumed': 278053, 'bits_recovered_compared': 278053, 'mismatches': 0, 'glyphs': 185870, 'tokens': 34139, 'bits_per_glyph': 1.496, 'bits_per_token': 8.145, 'exhausted': False}
+lzma:ENG:0 {'bits_available': 800000, 'bits_consumed': 277161, 'bits_recovered_compared': 277160, 'mismatches': 0, 'glyphs': 186146, 'tokens': 34087, 'bits_per_glyph': 1.489, 'bits_per_token': 8.131, 'exhausted': False}
+lzma:ENG:100000 {'bits_available': 800000, 'bits_consumed': 275573, 'bits_recovered_compared': 275573, 'mismatches': 0, 'glyphs': 186411, 'tokens': 34030, 'bits_per_glyph': 1.478, 'bits_per_token': 8.098, 'exhausted': False}
+lzma:ENG:200000 {'bits_available': 800000, 'bits_consumed': 276015, 'bits_recovered_compared': 276015, 'mismatches': 0, 'glyphs': 186220, 'tokens': 34093, 'bits_per_glyph': 1.482, 'bits_per_token': 8.096, 'exhausted': False}
+lzma:ENG:300000 {'bits_available': 800000, 'bits_consumed': 274982, 'bits_recovered_compared': 274982, 'mismatches': 0, 'glyphs': 186234, 'tokens': 34073, 'bits_per_glyph': 1.477, 'bits_per_token': 8.07, 'exhausted': False}
+lzma:ENG:400000 {'bits_available': 800000, 'bits_consumed': 277339, 'bits_recovered_compared': 277338, 'mismatches': 0, 'glyphs': 185572, 'tokens': 34089, 'bits_per_glyph': 1.495, 'bits_per_token': 8.136, 'exhausted': False}
+lzma: 20 runs vs 20; Holm-significant []; unadjusted p<0.05: 4/40 ['h4', 'T1_R', 'T3c_e1', 'T6a_near']; tolerance 40/40; min p 0.0072
+{'lzma': {'runs': 20, 'total_mismatches': 0, 'any_exhausted': False, 'bits_per_glyph_mean': 1.4875925819346683, 'bits_per_glyph_sd': 0.00883089471947509, 'bits_consumed_mean': 276899.45, 'glyphs_mean': 186140.1, 'tokens_mean': 34050.35}, 'all_runs_exact': True}
+EXIT 0

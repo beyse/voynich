@@ -1,11 +1,17 @@
 <html><head><meta charset="utf-8"><title>Supplementary material</title></head>
 <body>
-<h1>Supplementary material for "Constrained, not identifiable: how the Voynich manuscript text was produced"</h1>
+<h1>Supplementary material for "Constrained, not identifiable: statistical constraints on the production of the Voynich manuscript text"</h1>
 <p class="author">Sebastian Beyer</p>
 <p class="affil">Independent researcher, Vienna, Austria. All tables are generated from the result files by the script that builds the main text (https://github.com/beyse/voynich, commit {{ v.commit }}).</p>
 
 <h2>S1. Exploratory profile: materials and methods</h2>
 <p><b>Parsing.</b> Page headers of the form <tt>&lt;f1r&gt; &lt;! $Q=A $P=A $F=a $B=1 $I=T $L=A $H=1 ...&gt;</tt> supply quire, illustration section, Currier language and hand. Locus lines <tt>&lt;f1r.1,@P0&gt; text</tt> carry a locus type whose first letter, after stripping the position markers <tt>@ + * = ~ ! / &amp;</tt>, gives the kind: P (paragraph text), L (label), C (circular), R (radial). Loci whose type is prefixed by <tt>&amp;</tt> (labels placed in drawings) are labels. Inline markup: alternatives <tt>[a:o]</tt> take the first reading; extended glyph codes <tt>@nnn;</tt> and <tt>?</tt> mark a token as uncertain, and such tokens are removed; comments <tt>&lt;! ... &gt;</tt> and annotations <tt>{...}</tt> are removed; drawing intrusions <tt>&lt;-&gt;</tt> and <tt>&lt;~&gt;</tt> are spaces; paragraph markers <tt>&lt;%&gt;</tt> and <tt>&lt;$&gt;</tt> are removed; fillers <tt>!</tt> are deleted. A <tt>.</tt> is a space ({{ p.dot }} occurrences) and a <tt>,</tt> an uncertain space ({{ p.comma }}), joined in the baseline. Ligature and capitalised variants are kept as distinct glyphs. Result: {{ p.lines_P }} paragraph-text lines on {{ p.pages_P }} pages, {{ p.tokens_P }} tokens; {{ p.labels_L }} label tokens.</p>
+<p><b>Token counts.</b> Three counts of the same paragraph text appear in this paper, and they differ only in preprocessing:</p>
+<ul>
+<li>{{ p.tokens_P }} tokens: uncertain spaces joined (the baseline used throughout, and in the pre-specified tests);</li>
+<li>{{ p.vms_tokens }} tokens: the same after dropping lines with fewer than two tokens, as the profile battery requires;</li>
+<li>{{ p.tokens_all }} tokens: uncertain spaces treated as spaces, used only for the basic statistics of Table {{ TN.p_basic }} and as a robustness check (Table {{ TN.p_transcr }}).</li>
+</ul>
 <p><b>Line breaks.</b> For consecutive lines of the same paragraph, the excess MI of the pair (last token of line k, first token of line k+1) is compared with that of adjacent within-line pairs subsampled to the same n (eight subsamples). For consecutive lines of the same page we also compute the excess MI of all combinations of position classes, and the page specificity I(token; page) by position in the line.</p>
 <p><b>Boundary predictability.</b> Spaces are removed from each line and a model P(boundary | k glyphs on the left, k on the right) is fitted on a random half of the lines and evaluated on the other half. We report the information gain 1 − H(boundary | context)/H(boundary) and F<sub>1</sub> at threshold 0.5. The rule-spaced Latin control is stripped of spaces and re-spaced after m, s, t or y once the current token has at least three letters.</p>
 <p><b>Lexicon test.</b> A within-token glyph model with two glyphs of context and token start and end symbols is fitted on a random half of the tokens, and tokens are sampled from it. We compare the share of held-out real tokens (and types) whose string occurs in the training half with the same share for the sampled tokens. An open inventory defined only by local glyph constraints gives equal shares; a lexicon gives a large gap.</p>
@@ -57,7 +63,7 @@
 {{ T.p_combo }}
 {{ T.p_bpe }}
 
-<h2>S3. Deviations and preregistration commits</h2>
+<h2>S3. Deviations and analysis-plan commits</h2>
 {{ T.s_dev }}
 {{ T.s_prereg }}
 
@@ -73,7 +79,14 @@
 {{ T.s_e5 }}
 {{ T.s_e4 }}
 
-<h2>S7. Definitions of the 40 phenotype statistics</h2>
+<h2>S7. Revision analyses (R1–R4)</h2>
+<p>These analyses answer a review of an earlier version. Their criteria were written in <tt>mechanism/REVISION_PLAN.md</tt> and committed before computation; R1 is labelled post hoc.</p>
+{{ T.s_r1 }}
+{{ T.s_r2 }}
+{{ T.s_r3 }}
+{{ T.s_mimic }}
+
+<h2>S8. Definitions of the 40 phenotype statistics</h2>
 <p><b>Profile statistics</b> (Section 3 of the main text):</p>
 <ul>
 <li>hapax share and type-token ratio;</li>
@@ -92,11 +105,12 @@
 <p><b>E1:</b> graded line step, paragraph step, graded within-line decay, within-paragraph decay.</p>
 <p><b>Tolerance:</b> |G − V| ≤ 2√(SE<sub>V</sub>² + SD<sub>G</sub>²) + 0.01|V|. SE<sub>V</sub> is a leave-one-quire-out jackknife over the test half; SD<sub>G</sub> is taken over three generator seeds. T4 passes if at most one seed shows a peak.</p>
 
-<h2>S8. Implementation notes</h2>
+<h2>S9. Implementation notes</h2>
 <ul>
 <li><b>Page-conditional T1 estimator.</b> Per page, the excess plug-in MI over 200 within-page re-pairings, for the break pairs and for consecutive blocks of within-line pairs of the same size, averaged over pages with weights equal to the number of break pairs. The pooled estimators failed a known-truth simulation in which each page of Latin received a different letter substitution; this estimator returned identical values with and without substitution.</li>
 <li><b>E1 expectations.</b> Position classes: offset from the line start (1 or ≥ 2), offset from the line end (1 or ≥ 2), paragraph-final line or not. The binary expectation is the exact mean over pairs of distinct eligible tokens of the page in the same class pair.</li>
 <li><b>E5 null.</b> For each type, the expected same-page pairs are Σ<sub>g</sub> C(n<sub>tg</sub>, 2) · Σ<sub>p∈g</sub> N<sub>p</sub>(N<sub>p</sub> − 1) / (N<sub>g</sub>(N<sub>g</sub> − 1)), with groups g = hand × section.</li>
 <li><b>E7 coder.</b> 32-bit Witten–Neal–Cleary arithmetic coding over integer transition counts. The end-of-line suppression below 60% of the target length and the stop at 140% are deterministic and replicated by the receiver.</li>
+<li><b>E8 coder.</b> The same coder drives the observable choices of the E3 generator. Floating-point probabilities are quantised to integer counts (resolution 2<sup>−16</sup>, minimum 1) identically in all conditions. The latent choices come from a key PRNG shared by sender and receiver: page tilt, line drift, route, exact or near reuse, final-word candidates, slips, and the intended form of slipped tokens. The receiver re-runs the generator with the key and re-encodes each observed choice. A token reached at the maximum length ends without a choice, which leaves the output distribution unchanged.</li>
 </ul>
 </body></html>

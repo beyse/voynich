@@ -212,11 +212,35 @@ v.update(e7_bpg=f(np.mean([r['bits_per_glyph'] for r in lz]), 2), e7_bpt=f(np.me
          e7_tm_a=f(E7C['prng_mean'], 3), e7_tm_asd=f(E7C['prng_sd'], 3), e7_tm_b=f(E7C['lzma_mean'], 3), e7_tm_bsd=f(E7C['lzma_sd'], 3), e7_tm_p=f(E7C['welch_p'], 2),
          e7_latin_chars=f"{int(rec['lzma:LAT']['plaintext_bytes_carried'] * os.path.getsize('data/ref/la_caesar.txt') / (rec['lzma:LAT']['bits_available'] / 8) / 1000):,}")
 
+# ---------------------------------------------------------------- revision analyses (mechanism/REVISION_PLAN.md)
+RV = lambda n: json.load(open(f'{R}/revision/{n}.json'))
+R1, R2, R3 = RV('r1'), RV('r2'), RV('r3')
+E7B, E8R = L('e7b/report.json'), L('e8/report.json')
+v.update(r1_n=R1['n_writers'], r1_below=R1['below_p05'], r1_min=f(R1['writer_t3b']['min'], 2), r1_max=f(R1['writer_t3b']['max'], 2),
+         r1_vmed=rng([w['v_t3b_median'] for w in R1['writers']], 2), r1_vp05=rng([w['v_t3b_p05'] for w in R1['writers']], 2),
+         r1_rho=sum(1 for w in R1['writers'] if w['t3a_pct_ge'] is not None and w['t3a_pct_ge'] < 0.05))
+_dev = max(abs(R2['R2c']['shares'][t] - R2['R2c']['expected'][t]) for t in R2['R2c']['shares'])
+v.update(r2_uni=f(R2['R2a']['unigram_share'], 3), r2_valid=pc(R2['R2b']['share_valid'], 1), r2_ntok=f"{R2['R2b']['aligned']:,}",
+         r2_dev=f(_dev, 3), r2_pass=R2['R2d']['n_pass'], r2_n=R2['R2d']['n'],
+         r2_hap_a=f(R2['R2d']['rows']['hapax']['author'], 3), r2_hap_o=f(R2['R2d']['rows']['hapax']['ours_mean'], 3),
+         r3_t6a=f(R3['T6a_near'], 3), r3_edge=f(R3['edge_mi'], 4), r3_page=f(R3['page_mi'], 3), r3_hap=f(R3['hapax'], 2),
+         r3_S=sg(R3['E4']['S'], 4), r3_rec=pc(R3['T7b_rec']), r3_ok=R3['exclusion_holds'], r3_tok=f"{R3['tokens']:,}")
+
+
+def mimic(rep, kind='lzma'):
+    k, r = rep[kind], rep['recovery'][kind]
+    return dict(runs=k['n_runs'], base=rep['n_base'], holm=len(k['holm_significant']), unadj=len(k['unadjusted_p05']), n=k['n_stats'],
+                tol=k['tolerance_agree'], minp=f(k['min_p'], 3), mism=r['total_mismatches'], bpg=f(r['bits_per_glyph_mean'], 2),
+                kb=f(r['bits_consumed_mean'] / 8 / 1000, 0))
+
+
+v['e7b'], v['e7b_raw'], v['e8'] = mimic(E7B), mimic(E7B, 'raw'), mimic(E8R)
+
 # ---------------------------------------------------------------- table and figure numbers (order of first appearance)
-MAIN_T = ['p_mech_small', 'framework', 'calib', 'battery', 'e1', 'gen', 'e45', 'cls', 'excl', 'e7', 'redteam']
+MAIN_T = ['p_mech_small', 'framework', 'calib', 'battery', 'e1', 'gen', 'e45', 'cls', 'excl', 'e7', 'e78', 'redteam']
 SUPP_T = ['p_basic', 'p_proj', 'p_lineunit', 'p_spaces', 'p_lexicon', 'p_entropy', 'p_mech', 'p_hier', 'p_naibbe_var', 'p_transcr', 'p_robust', 'p_jack',
           'p_drift', 'p_hand', 'p_tvi', 'p_pc', 'p_feat', 'p_sect', 'p_labels', 'p_agree', 'p_direction', 'p_vertical', 'p_pmi', 'p_pos', 'p_combo', 'p_bpe',
-          's_dev', 's_prereg', 's_fits', 's_e2', 's_e3', 's_e6', 's_e5', 's_e4']
+          's_dev', 's_prereg', 's_fits', 's_e2', 's_e3', 's_e6', 's_e5', 's_e4', 's_r1', 's_r2', 's_r3', 's_mimic']
 TN = {k: str(i + 1) for i, k in enumerate(MAIN_T)}
 TN.update({k: f'S{i + 1}' for i, k in enumerate(SUPP_T)})
 FN = {k: str(i + 1) for i, k in enumerate(['profile', 'constraints', 'line_endings', 'recency', 'heldout', 'drift', 'e7'])}
@@ -243,7 +267,7 @@ T['framework'] = table(
      ['Transmission', 'D', 'composed directly on the page', 'line-aware forms tied to the page\'s own lines'],
      ['', 'K-reflow', 'copied from a draft with different line breaks', 'no line-final forms; breaks as transparent as word boundaries'],
      ['', 'K-same', 'copied from a draft with the same line breaks', 'not separable from D by the transliteration (stated in advance)']],
-    f'Table {TN["framework"]}. Hypotheses and their operational definitions as preregistered. The two axes are independent.')
+    f'Table {TN["framework"]}. Hypotheses and their operational definitions as pre-specified. The two axes are independent.')
 T['calib'] = table(
     ['Test', 'Calibration requirement', 'Outcome'],
     [['T1 break coupling', 'greedily wrapped Latin R ≥ 0.5', f"R = {v['t1_latw']} (SE {v['t1_latw_se']}): met, very noisy"],
@@ -271,7 +295,7 @@ T['battery'] = table(
      ['T6a recency (near)', f"{v['t6a_v']} {v['t6a_v_ci']}", v['t6a_it'], f"stationary 99th pct ≤ {v['t6a_p99']}; copy-and-modify {v['t6a_ts']}; English {v['t6a_eng']}", 'stationary procedures falsified'],
      ['T6b within-page drift', f"{v['t6b_v']} {v['t6b_v_ci']}", f(PH['it2a']['t4c']['slope_1_8'], 4), f"automaton {v['t6b_mk']}; languages {v['t6b_lang']}", 'drift of natural-language strength'],
      ['T7b deviant recurrence', f"{v['t7b_rec']} (slip share {v['t7b_slip']})", pc(PH['it2a']['t7b']['recurrence_share']), f"languages {v['t7b_lang']}; copy-and-modify {v['t7b_ts']}; automata {v['t7b_mk']}; Naibbe {v['t7b_naib']}", 'rare forms not reused']],
-    f'Table {TN["battery"]}. The preregistered battery on the Voynich text (Stage B) with the controls that calibrate each reading. Intervals are 95%.',
+    f'Table {TN["battery"]}. The pre-specified battery on the Voynich text (Stage B) with the controls that calibrate each reading. Intervals are 95%.',
     'Takahashi values are post hoc replications with identical code.')
 m1 = lambda nm, st, d=3: f(np.mean(e1c(nm, st)), d)
 T['e1'] = table(
@@ -289,15 +313,15 @@ T['gen'] = table(['Exp.', 'Generator', 'Held-out pass (primary)', 'Secondary', '
                  f'Table {TN["gen"]}. Explicit generators of the surviving class, fitted on one half of the manuscript (bifolio parity) and tested on the other against 40 statistics.',
                  'E2 was fitted on odd and tested on even bifolios. E3 and E6 were cross-fitted, and their primary direction (fit on even, test on odd) used Voynich values not computed before.')
 cls_rows = [
-    ['C1', 'Rigid slot-like word grammar; zeros consistent within short stretches', f"T3b {v['t3b_v']} vs gibberish {v['t3b_gib']}, languages {v['t3b_lang']}; T3a (250 tokens) {v['t3a_v']} vs {v['t3a_gib']}, {v['t3a_lang']}; pruning necessary (E2)", 'strong (T3b); moderate (T3a: not at full size)'],
-    ['C2', 'Glyph-level word-boundary rule within lines, strongly reduced across line breaks', f"boundary MI {v['e6_edge_v']}; T1 ratio about 0.03 (pooled) to {v['t1_v']} (page-conditional); boundary rule necessary (E6: {v['e6_d4_edge']} without)", 'strong within lines; moderate at breaks'],
-    ['C3', 'Final word adapted to the margin; different at paragraph ends', f"T2a {v['t2a_m']} vs {v['t2a_p']}, difference {v['t2a_diff']} {v['t2a_diff_ci']}; stars section {v['t2a_star_m']} vs {v['t2a_star_p']}; necessary in E3", 'strong'],
-    ['C4', 'Continuous short-range recency across boundaries', f"T6a {v['t6a_v']} > {v['t6a_p99']}; E1 no steps; within-line decay {v['e1_wldg']}; necessary in E2", 'strong'],
-    ['C5', 'Session and page variation in the weights of shared forms', f"T5 S = {v['t5_v']}; E5 very frequent forms clustered {v['e5_B']['VF']} vs languages {v['e5_lang_VF']}; session state necessary (E2)", 'moderate (hand 1 smooth)'],
+    ['C1', 'Rigid slot order within words; transition zeros consistent within short stretches', f"T3b {v['t3b_v']} vs gibberish {v['t3b_gib']}, languages {v['t3b_lang']}; T3a (250 tokens) {v['t3a_v']} vs {v['t3a_gib']}, {v['t3a_lang']}; pruning necessary (E2)", 'strong (T3b); moderate (T3a: not at full size)'],
+    ['C2', 'Cross-token boundary dependency within lines (last glyph of a token, first glyph of the next), strongly reduced across line breaks', f"boundary MI {v['e6_edge_v']}; T1 ratio about 0.03 (pooled) to {v['t1_v']} (page-conditional); boundary rule necessary (E6: {v['e6_d4_edge']} without)", 'strong within lines; moderate at breaks'],
+    ['C3', 'Margin-associated line-final forms, weaker at paragraph ends', f"T2a {v['t2a_m']} vs {v['t2a_p']}, difference {v['t2a_diff']} {v['t2a_diff_ci']}; stars section {v['t2a_star_m']} vs {v['t2a_star_p']}; necessary in E3", 'strong'],
+    ['C4', 'Short-range recency, continuous across line and paragraph boundaries', f"T6a {v['t6a_v']} > {v['t6a_p99']}; E1 no steps; within-line decay {v['e1_wldg']}; necessary in E2", 'strong'],
+    ['C5', 'Page- and quire-level variation in the weights of shared forms', f"T5 S = {v['t5_v']}; E5 very frequent forms clustered {v['e5_B']['VF']} vs languages {v['e5_lang_VF']} (descriptive); quire-level state necessary in the generator (E2)", 'moderate (hand 1 smooth)'],
     ['C6', 'Within-page drift of natural-language strength, mainly lexical', f"T6b {v['t6b_v']}; E4 L = {v['e4_L']}, S = {v['e4_S']}", 'strong (existence); undetermined (source)'],
-    ['C7', 'No local vocabulary: locally unique forms are not reused', f"T7b {v['t7b_rec']} vs languages {v['t7b_lang']}, copy-and-modify {v['t7b_ts']}, generators {v['gen_rec']}; page-level variant {v['t7b_page_v']}", 'strong; shared with homophonic ciphers'],
-    ['C8', 'No device periodicity', 'T4, power from mixing weight 0.2 (period 5, cycle 4)', 'moderate (tested design only)'],
-    ['C9', 'No copying signature; re-lined copying excluded', f"T2c {v['t2c_v']}; no word-level corrections among {v['t7a_n']}; T2a", 'moderate (T7a thin)']]
+    ['C7', 'Very low recurrence of locally deviant forms', f"T7b {v['t7b_rec']} vs languages {v['t7b_lang']}, copy-and-modify {v['t7b_ts']}, generators {v['gen_rec']}; page-level variant {v['t7b_page_v']}", 'strong; shared with homophonic ciphers'],
+    ['C8', 'No periodicity of the tested kind', 'T4, power from mixing weight 0.2 (period 5, cycle 4)', 'moderate (tested design only)'],
+    ['C9', 'No detected copying signature; copying from a re-lined draft excluded', f"T2c {v['t2c_v']}; no word-level corrections among {v['t7a_n']}; T2a", 'moderate (T7a thin)']]
 T['e45'] = table(['Corpus', 'Lexical drift L (E4)', 'Sublexical drift S (E4)', 'Burstiness gradient G (E5)', 'Clustering of forms ≥100 (E5)'],
                  [[name, sg(E4.get('L'), 4) if E4 else '–', sg(E4.get('S'), 4) if E4 else '–', sg(E5['G'], 2) if E5 else '–', f(E5['B']['VF'], 2) if E5 else '–']
                   for name, E4, E5 in [('Voynich', E4B, E5B)] + [(LN[n], E4A[n], E5A[n]) for n in LANGS] +
@@ -305,38 +329,48 @@ T['e45'] = table(['Corpus', 'Lexical drift L (E4)', 'Sublexical drift S (E4)', '
                    ('glyph-habit drift', E4A['GDRIFT'], None), ('vocabulary drift', E4A['LDRIFT'], E5A['LDRIFT']),
                    ('repertoire + coinage', None, E5A['REP']), ('glyph generator (E3)', None, E5A['HGR2']), ('order-3 automaton', E4A['MK-sec'], E5A['MK-sec'])]],
                  f'Table {TN["e45"]}. E4 and E5: where the within-page drift and the page clustering live. Intervals in Tables {TN["s_e5"]} and {TN["s_e4"]}.')
-T['cls'] = table(['#', 'Property', 'Evidence', 'Strength'], cls_rows, f'Table {TN["cls"]}. The nine properties that define the mechanism class, with their evidence and an explicit strength label.')
+T['cls'] = table(['#', 'Property', 'Evidence', 'Strength'], cls_rows, f'Table {TN["cls"]}. The nine properties that define the mechanism class, stated as measured, with their evidence and an explicit strength label. Causal readings of these properties are discussed in Section 9.')
 T['excl'] = table(['Status', 'Mechanism variant', 'Decisive evidence'], [
     ['Excluded', 'naive improvisation (Gaskell & Bowern-type samples)', 'T3a, T3b'],
     ['Excluded', 'stationary procedures (tables, grilles, automata, devices constant within a page)', 'T6a'],
-    ['Excluded', 'periodic devices with mixing weight ≥ 0.2', 'T4'],
+    ['Excluded', 'periodic devices of the tested design (period 5, cycle 4) with mixing weight ≥ 0.2', 'T4'],
     ['Excluded', 'improvisation with smooth drift across pages', 'T5'],
     ['Excluded', 'settings per line or paragraph as the source of the local dynamics', 'E1'],
     ['Excluded', 'copy-and-modify with propagating innovations and vertical copying', 'T7b, T2c, T4b'],
-    ['Excluded', 'word-preserving ciphers and codes; unenciphered natural language', 'T3b, T7b, E5'],
-    ['Excluded', 'the Naibbe cipher as published', 'T6a, E4, E5'],
+    ['Excluded', 'the tested natural-language controls, and systems that preserve lexical identity at the observed token boundaries', 'T3b, T7b'],
+    ['Excluded', 'the Naibbe cipher as published', 'T6a, E4; boundary MI, hapax share and page MI (Section 3.3)'],
     ['Excluded', 'copying from a draft with different line breaks', 'T2a'],
     ['Unresolved', 'explicit rule set with randomiser vs. practised habit', 'same generator describes both'],
     ['Unresolved', 'message carried by the free choices (mimic-function encoding)', 'E7: not identifiable from text'],
     ['Unresolved', 'direct composition vs. copying with identical line breaks', 'not separable by the transliteration'],
     ['Open', 'a generator reproducing C6 and C7 together', f"best explicit generator {v['e3p'][0]}/40"]],
-    f'Table {TN["excl"]}. What is excluded, and what remains open. "Unresolved" entries are shown to be undecidable from the text, or not decidable with the data used here.')
+    f'Table {TN["excl"]}. What is excluded, and what remains open. "Excluded" means that a pre-specified falsifier was triggered under calibration; it applies to the variant as defined and tested. "Unresolved" entries are shown to be undecidable from the text, or not decidable with the data used here. E5 was undetermined by its own rule and is not used as evidence here.')
 T['e7'] = table(['Condition', 'Bits consumed', 'Bits per glyph', 'Recovery mismatches', 'Statistics agreeing with random driving'],
                 [[k.replace('lzma:', 'compressed ').replace('raw:', 'raw ').replace('LAT', 'Latin').replace('ITA', 'Italian').replace('GER', 'German'),
                   f"{r['bits_consumed']:,}", f(r['bits_per_glyph'], 2), r['mismatches'],
                   (f"{E7['lzma']['agree']}/{E7['lzma']['n']}" if k.startswith('lzma') else f"{E7['raw']['agree']}/{E7['raw']['n']}")] for k, r in rec.items()],
-                f'Table {TN["e7"]}. E7: message-driven output of the order-3 glyph process. Agreement counts are per condition group (3 plaintexts against 3 random seeds).')
+                f'Table {TN["e7"]}. E7: message-driven output of the order-3 glyph process. Bits per glyph are bits consumed divided by the number of EVA characters generated, spaces excluded. Agreement counts are per condition group (3 plaintexts against 3 random seeds).')
+T['e78'] = table(['Process', 'Message', 'Runs (message / random)', 'Bits per glyph', 'Recovery errors', 'Holm-significant', 'Unadjusted p < 0.05', 'Tolerance rule'],
+                 [['order-3 automaton (E7)', 'compressed', '3 / 3', v['e7_bpg'], sum(r['mismatches'] for r in lz), '–', '–', f"{v['e7_lz_agree']}/{v['e7_n']}"],
+                  ['order-3 automaton (E7, 20 runs)', 'compressed', f"{v['e7b']['runs']} / {v['e7b']['base']}", v['e7b']['bpg'], v['e7b']['mism'], f"{v['e7b']['holm']}/{v['e7b']['n']}", f"{v['e7b']['unadj']}/{v['e7b']['n']}", f"{v['e7b']['tol']}/{v['e7b']['n']}"],
+                  ['order-3 automaton (E7, 20 runs)', 'raw text bits', f"{v['e7b_raw']['runs']} / {v['e7b_raw']['base']}", v['e7b_raw']['bpg'], v['e7b_raw']['mism'], f"{v['e7b_raw']['holm']}/{v['e7b_raw']['n']}", f"{v['e7b_raw']['unadj']}/{v['e7b_raw']['n']}", f"{v['e7b_raw']['tol']}/{v['e7b_raw']['n']}"],
+                  ['E3 generator (E8)', 'compressed', f"{v['e8']['runs']} / {v['e8']['base']}", v['e8']['bpg'], v['e8']['mism'], f"{v['e8']['holm']}/{v['e8']['n']}", f"{v['e8']['unadj']}/{v['e8']['n']}", f"{v['e8']['tol']}/{v['e8']['n']}"]],
+                 f'Table {TN["e78"]}. Message-driven against randomly driven output over the 40 statistics. Holm-significant: Welch tests (Fisher for T4) with Holm correction at α = 0.05; about 2 unadjusted p < 0.05 are expected by chance among 40. The 20-run analyses and E8 were pre-specified in mechanism/REVISION_PLAN.md (R4). E8 carries the message only in choices the receiver can observe, so its capacity is lower.')
 T['redteam'] = table(['Claim', 'Attack', 'Check', 'Result'], [
-    ['C3 margin-driven endings', 'margin and paragraph effects not actually different', 'page bootstrap of the difference', f"{v['t2a_diff']} {v['t2a_diff_ci']}"],
+    ['C3 margin-associated endings', 'margin and paragraph effects not actually different', 'page bootstrap of the difference', f"{v['t2a_diff']} {v['t2a_diff_ci']}"],
     ['C3', 'lines end at drawings, not margins', 'text-only stars section', f"margin {v['t2a_star_m']} vs paragraph {v['t2a_star_p']} (n = {v['t2a_star_mn']}, {v['t2a_star_pn']})"],
     ['C1 rigidity', 'artefact of multigraph segmentation', 'raw EVA characters', f"Voynich {v['t3a_raw_v']} / {v['t3b_raw_v']} vs gibberish {v['t3a_raw_gib']} / {v['t3b_raw_gib']}"],
     ['C1 hardness', 'depends on sample size', 'full-size zero replication', f"Voynich {v['t3a_full_v']} vs languages {v['t3a_full_lang']}: no separation at full size"],
     ['C1, C3, C4', 'driven by one scribe', 'per hand (1, 2, 3)', f"T3a {v['hand_t3a']}; T3b {v['hand_t3b']}; T6a {v['hand_t6a']}; T2a {v['hand_t2a']}"],
-    ['C7 no local vocabulary', 'depends on deviance definition', 'page-level blocks', f"Voynich {v['t7b_page_v']} vs languages {v['t7b_page_lang']}, generator {v['t7b_page_hgr']}, Naibbe {v['t7b_page_naib']}"],
+    ['C7 low recurrence of deviant forms', 'depends on deviance definition', 'page-level blocks', f"Voynich {v['t7b_page_v']} vs languages {v['t7b_page_lang']}, generator {v['t7b_page_hgr']}, Naibbe {v['t7b_page_naib']}"],
     ['C7', 'depends on double coding or on one hand', 'no double coding; per hand, whole-text reference', f"{v['t7b_rec_nodc']}; hands {v['t7b_hand']}"],
     ['E7', 'single disagreement is a real trace', '8 runs per condition', f"word-pair MI {v['e7_tm_a']} ± {v['e7_tm_asd']} vs {v['e7_tm_b']} ± {v['e7_tm_bsd']}, p = {v['e7_tm_p']}"],
-    ['All', 'transliteration choice', 'Takahashi transliteration', 'T3a, T3b, T5, T6a, T7b, T2a, E1, E5 replicate']],
-    f'Table {TN["redteam"]}. Red-team checks run before writing, all post hoc and labelled as such in the repository.')
+    ['All', 'transliteration choice', 'Takahashi transliteration', 'T3a, T3b, T5, T6a, T7b, T2a, E1, E5 replicate'],
+    ['C1 rigidity', 'mean over writers hides writers as rigid as the Voynich text', 'each writer against Voynich stretches of the same length (R1)', f"{v['r1_below']} of {v['r1_n']} writers below the 5th percentile; writers {v['r1_min']}–{v['r1_max']}"],
+    ['Naibbe exclusion', 'the reimplementation differs from the published cipher', "author's own ciphertext (R2, R3)", f"mapping {v['r2_valid']} valid, {v['r2_pass']}/{v['r2_n']} statistics agree; author's output: T6a {v['r3_t6a']}, boundary MI {v['r3_edge']}, page MI {v['r3_page']}"],
+    ['E7', 'three runs per condition are too few', '20 runs per condition (R4a)', f"Holm-significant {v['e7b']['holm']}/{v['e7b']['n']}; unadjusted p < 0.05 {v['e7b']['unadj']}/{v['e7b']['n']}"],
+    ['E7', 'only the simplest process was tested', 'message through the E3 generator (E8, R4b)', f"Holm-significant {v['e8']['holm']}/{v['e8']['n']}; recovery errors {v['e8']['mism']}"]],
+    f'Table {TN["redteam"]}. Red-team checks. The first nine were run before writing and are post hoc. The last four respond to a review: R1 is post hoc; R2–R4 were pre-specified in mechanism/REVISION_PLAN.md before computation.')
 
 # ---------------------------------------------------------------- supplement tables
 def held_table(rpt, keys, names, caption):
@@ -372,6 +406,31 @@ T['s_e4'] = table(['Corpus', 'L (lexical)', 'S (sublexical)'],
                   [[n, sg(r['L'], 4) + ' ' + ci(r['L_ci95'], 4), sg(r['S'], 4) + ' ' + ci(r['S_ci95'], 4)]
                    for n, r in [('Voynich', E4B)] + [(LN.get(k, k), E4A[k]) for k in ('LAT', 'ITA', 'GER', 'ENG', 'VB-run', 'NAIB-run', 'GDRIFT', 'LDRIFT', 'MK-sec')]],
                   f'Table {TN["s_e4"]}. E4: drift slopes of line similarity over line distance 2–8 with page-bootstrap 95% intervals.', cls='small')
+T['s_r1'] = table(['Writer', 'Tokens', 'T3b writer', 'Voynich T3b, median (5th pct.)', 'Percentile of writer', 'T3a writer', 'Voynich T3a median'],
+                  [[w['writer'], w['tokens'], f(w['t3b']), f"{f(w['v_t3b_median'])} ({f(w['v_t3b_p05'])})", pc(w['t3b_pct'], 0), f(w['t3a']), f(w['v_t3a_median'])]
+                   for w in R1['writers']],
+                  f'Table {TN["s_r1"]}. R1 (post hoc): each gibberish writer against 50 contiguous Voynich stretches of the same length within one hand. Percentile: share of Voynich stretches with slot consistency at or below the writer\'s. Verdict by the rule fixed in REVISION_PLAN.md: {R1["verdict"]}.', cls='small')
+T['s_r2'] = table(['Statistic', "Author's ciphertext", 'Our reimplementation (5 seeds)', 'Within tolerance'],
+                  [[STAT.get(k, k) if k in STAT else {'types': 'type count', 'wlen': 'mean token length', 'T3c_e1': 'final-position entropy (T3c)', 'T3c_s1': 'initial-position entropy (T3c)'}.get(k, k),
+                    (f"{r['author']:,.0f}" if k == 'types' else f(r['author'], 4)),
+                    (f"{r['ours_mean']:,.0f} ± {r['ours_sd']:.0f}" if k == 'types' else f"{f(r['ours_mean'], 4)} ± {f(r['ours_sd'], 4)}"),
+                    'yes' if r['pass'] else 'no'] for k, r in R2['R2d']['rows'].items()],
+                  f'Table {TN["s_r2"]}. R2: our Naibbe reimplementation enciphering the author\'s tokenised plaintext (Pliny, <i>Natural History</i> 16), against the author\'s published ciphertext (github.com/greshko/naibbe-cipher, commit f2675ec). Also: one-letter token share {v["r2_uni"]} (expected 0.472); {v["r2_valid"]} of {v["r2_ntok"]} ciphertext tokens are valid table outputs for their plaintext token; table shares within {v["r2_dev"]} of the deck proportions. Validated by the pre-specified rule: {"yes" if R2["validated"] else "no"}.', cls='small')
+_r3ref = R3['reference']
+T['s_r3'] = table(['Statistic', "Author's ciphertext", 'Our reimplementation', 'Voynich (95% interval)'],
+                  [['T6a near recency', f(R3['T6a_near'], 3), f(_r3ref['ours_run']['T6a_near'], 3), f"{f(_r3ref['voynich']['T6a_near'], 3)} {ci(_r3ref['voynich']['T6a_near_ci95'])}"],
+                   ['boundary MI', f(R3['edge_mi'], 4), f(_r3ref['ours_run']['edge_mi'], 4), f"{f(_r3ref['voynich']['edge_mi'], 3)} {ci(_r3ref['voynich']['edge_mi_ci95'])}"],
+                   ['page MI', f(R3['page_mi'], 3), f(_r3ref['ours_run']['page_mi'], 3), f"{f(_r3ref['voynich']['page_mi'], 3)} {ci(_r3ref['voynich']['page_mi_ci95'])}"],
+                   ['hapax share', f(R3['hapax'], 2), f(_r3ref['ours_run']['hapax'], 2), pv['vms_hap']],
+                   ['E4 sublexical drift S', sg(R3['E4']['S'], 4) + ' ' + ci(R3['E4']['S_ci95'], 4), sg(_r3ref['ours_run']['E4']['S'], 4), v['e4_S'] + ' ' + v['e4_S_ci']],
+                   ['T7b recurrence of deviant forms', pc(R3['T7b_rec']), pc(_r3ref['ours_run']['T7b_rec']), v['t7b_rec']]],
+                  f'Table {TN["s_r3"]}. R3: the statistics behind the Naibbe exclusion, computed on the author\'s own ciphertext cut as running text into the Voynich page and line shape ({v["r3_tok"]} tokens). Criterion (REVISION_PLAN.md): for T6a, boundary MI and page MI the author\'s output lies outside the Voynich interval on the same side as our reimplementation. Met: {"yes" if R3["exclusion_holds"] else "no"}.', cls='small')
+_m7, _m8 = E7B['lzma']['rows'], E8R['lzma']['rows']
+T['s_mimic'] = table(['Statistic', 'E7 random', 'E7 message', 'p (Holm)', 'E8 random', 'E8 message', 'p (Holm)'],
+                     [[STAT.get(k, k), f(_m7[k]['base_mean'], 4), f(_m7[k]['mean'], 4), f"{f(_m7[k]['p'], 3)} ({f(_m7[k]['p_holm'], 2)})",
+                       f(_m8[k]['base_mean'], 4) if k in _m8 else '–', f(_m8[k]['mean'], 4) if k in _m8 else '–',
+                       f"{f(_m8[k]['p'], 3)} ({f(_m8[k]['p_holm'], 2)})" if k in _m8 else '–'] for k in _m7],
+                     f'Table {TN["s_mimic"]}. R4: means over 20 randomly driven and 20 message-driven (lzma-compressed plaintext) runs for each statistic, with Welch p-values (Fisher for T4) and Holm-adjusted values.', cls='small')
 dev_files = [('Battery', 'mechanism/DEVIATIONS.md'), ('E1', 'mechanism/E1_DEVIATIONS.md'), ('E5', 'mechanism/E5_DEVIATIONS.md')]
 
 
@@ -384,20 +443,21 @@ def md_items(path):
 
 T['s_dev'] = table(['File', 'Deviation (all made before the corresponding Voynich statistic was computed)'],
                    [[name, '; '.join(md_items(p))] for name, p in dev_files] + [['E2–E7', 'none beyond those recorded in PROGRAM.md (E6/E7: none)']],
-                   f'Table {TN["s_dev"]}. Logged deviations from the preregistrations. Full texts in the repository.', cls='small')
+                   f'Table {TN["s_dev"]}. Logged deviations from the analysis plans. Full texts in the repository.', cls='small')
 _prereg_rows = [
-    ['Battery preregistration', 'b67bb47', 'PREREG.md frozen'], ['Battery Stage A', 'f282965', 'controls only'], ['Battery Stage B and report', '650abbd', 'Voynich'],
-    ['E1 preregistration', '889e908', ''], ['E1 calibration', 'c507641', 'before the Voynich run'], ['E2 preregistration', '0b40d28', ''],
-    ['E3 preregistration', 'ca203c4', ''], ['E4 preregistration', 'a647269', ''], ['E5 preregistration', 'bc6c840', ''],
-    ['E6 preregistration', 'aadd173', ''], ['E7 preregistration', '7b002ad', ''], ['Red-team checks', '355263d', 'post hoc']]
+    ['Battery analysis plan', 'b67bb47', 'PREREG.md frozen'], ['Battery Stage A', 'f282965', 'controls only'], ['Battery Stage B and report', '650abbd', 'Voynich'],
+    ['E1 analysis plan', '889e908', ''], ['E1 calibration', 'c507641', 'before the Voynich run'], ['E2 analysis plan', '0b40d28', ''],
+    ['E3 analysis plan', 'ca203c4', ''], ['E4 analysis plan', 'a647269', ''], ['E5 analysis plan', 'bc6c840', ''],
+    ['E6 analysis plan', 'aadd173', ''], ['E7 analysis plan', '7b002ad', ''], ['Red-team checks', '355263d', 'post hoc'],
+    ['Revision plan (R1–R4)', 'a0b0b86', 'REVISION_PLAN.md; R1 post hoc']]
 T['s_prereg'] = table(['Stage', 'Commit', 'Committed (author date)', 'Content'],
                       [[st, h, subprocess.run(['git', 'log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M %z', h], capture_output=True, text=True).stdout.strip(), c] for st, h, c in _prereg_rows],
-                      f'Table {TN["s_prereg"]}. Commits of the preregistrations and stages. Each preregistration was committed before the corresponding Voynich outcome was computed. Commit identities were rewritten once before publication to remove an e-mail address; contents and dates are unchanged (mechanism/COMMIT_MAP.md).', cls='small')
+                      f'Table {TN["s_prereg"]}. Commits of the analysis plans and stages. Each plan was committed before the corresponding Voynich outcome was computed. Commit identities were rewritten once before publication to remove an e-mail address; contents and dates are unchanged (mechanism/COMMIT_MAP.md).', cls='small')
 
 # ---------------------------------------------------------------- render
 env = Environment(loader=FileSystemLoader('paper/templates'), autoescape=False, undefined=StrictUndefined)
 CSS = open('paper/templates/style.css').read() + open('paper/templates/extra.css').read()
-for name, out, head in (('main', 'paper', 'Beyer — Constrained, not identifiable: how the Voynich manuscript text was produced'),
+for name, out, head in (('main', 'paper', 'Beyer — Constrained, not identifiable: statistical constraints on the production of the Voynich manuscript text'),
                         ('supplement', 'supplement', 'Supplementary material')):
     html = env.get_template(name + '.html').render(v=v, p=pv, T=T, TN=TN, FN=FN, STAT=STAT)
     open(f'paper/{out}.html', 'w').write(html)

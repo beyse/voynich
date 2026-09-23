@@ -223,29 +223,28 @@ def fig5():
     save(fig, 'fig_heldout_matrix')
 
 
-# ---------------------------------------------------------------- Figure 6: E7 standardized differences
+# ---------------------------------------------------------------- Figure: E7 (20 runs) and E8, Welch t per statistic
 def fig6():
-    R7 = L('e7/results.json')
-    prng = [v['phenotype'] for k, v in R7.items() if k.startswith('prng')]
-    stats = [k for k in prng[0] if k != 'T4_peak']
     fig, ax = plt.subplots(figsize=(6.6, 3.0))
-    for kind, col, mk, off in (('lzma', S1, 'o', -0.18), ('raw', S2, 's', 0.18)):
-        grp = [v['phenotype'] for k, v in R7.items() if k.startswith(kind)]
-        z = []
-        for s in stats:
-            a = [x[s] for x in prng]
-            b = [x[s] for x in grp]
-            sd = np.sqrt(np.var(a, ddof=1) + np.var(b, ddof=1))
-            z.append((np.mean(b) - np.mean(a)) / sd if sd > 0 else 0.0)
-        ax.scatter(np.arange(len(stats)) + off, z, color=col, marker=mk, s=18, zorder=3, linewidth=0,
-                   label='compressed plaintext' if kind == 'lzma' else 'raw plaintext bits')
+    series = (('e7b', 'order-3 automaton (E7, 20 + 20 runs)', S1, 'o', -0.18), ('e8', 'E3 generator (E8, 20 + 20 runs)', S2, 's', 0.18))
+    stats = None
+    for key, label, col, mk, off in series:
+        rows = L(f'{key}/report.json')['lzma']['rows']
+        if stats is None:
+            stats = [k for k in rows if k != 'T4_peak']
+        t = []
+        for k in stats:
+            r = rows[k]
+            se = np.sqrt(r['base_sd'] ** 2 / r['n'][0] + r['sd'] ** 2 / r['n'][1])
+            t.append((r['mean'] - r['base_mean']) / se if se > 0 else 0.0)
+        ax.scatter(np.arange(len(stats)) + off, t, color=col, marker=mk, s=18, zorder=3, linewidth=0, label=label)
     ax.axhspan(-2, 2, color='#eeede8', zorder=0)
     ax.axhline(0, color=INK2, lw=0.6)
     ax.set_xticks(range(len(stats)))
     ax.set_xticklabels([STAT[x] for x in stats], rotation=90, fontsize=6)
-    ax.set_ylabel('difference / √(sd²₁ + sd²₂)')
+    ax.set_ylabel('Welch t, message − random')
     ax.grid(axis='x', visible=False)
-    ax.set_ylim(-3.2, 3.2)
+    ax.set_ylim(-4.2, 4.2)
     ax.legend(loc='lower left', bbox_to_anchor=(0.0, 1.0), fontsize=7.5, ncol=2)
     save(fig, 'fig_e7')
 

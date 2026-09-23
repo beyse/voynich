@@ -1,0 +1,19 @@
+CC0 1.0 Universal — public domain dedication
+
+Copyright waived by Sebastian Beyer.
+
+To the extent possible under law, Sebastian Beyer has waived all copyright and related or neighbouring rights to the contents of this repository that he created. This covers:
+
+- the paper and supplement (paper/), including sources, templates and figures;
+- all code (voynich/, scripts/, mechanism/, paper/*.py, paper/*.sh);
+- all analysis plans, logs, reports and result files (mechanism/*.md, results/, REPORT.md, README.md).
+
+This work is published from Austria. Attribution is appreciated but not required.
+
+Full legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Exceptions. The following third-party material is not covered by this dedication. It keeps its own licence:
+
+- data/gibberish/: human gibberish transcriptions by D. E. Gaskell and C. L. Bowern (2022), under the modified MIT licence of github.com/danielgaskell/voynich, which requires the copyright notice and citation of their paper (see data/gibberish/SOURCE.md).
+- data/naibbe/naibbe_tables.csv: Naibbe cipher tables by M. A. Greshko (2025), under the modified MIT licence of github.com/greshko/naibbe-cipher, which requires the copyright notice and citation of Greshko (2025), Cryptologia, doi:10.1080/01611194.2025.2566408.
+- data/ZL3b-n.txt, data/IT2a-n.txt: transliterations by R. Zandbergen and G. Landini (ZL3b) and T. Takahashi (IT2a), distributed by voynich.nu under CC0, with a request to acknowledge the source.

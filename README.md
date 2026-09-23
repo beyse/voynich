@@ -1,14 +1,14 @@
-# Constrained, not identifiable: how the Voynich manuscript text was produced
+# Constrained, not identifiable: statistical constraints on the production of the Voynich manuscript text
 
-Code, data, preregistrations and results for the paper of the same title by Sebastian Beyer (independent researcher, Vienna; [@BeyerSebastian](https://x.com/BeyerSebastian) on X).
+Code, data, analysis plans and results for the paper of the same title by Sebastian Beyer (independent researcher, Vienna; [@BeyerSebastian](https://x.com/BeyerSebastian) on X).
 
-- **Paper:** [`paper/paper.pdf`](paper/paper.pdf), with supplement [`paper/supplement.pdf`](paper/supplement.pdf)
-- **Main result:** the production mechanism of the Voynich text is tightly constrained: nine properties define it, and named alternatives are excluded. But whether its remaining free choices carry a message cannot be identified from the text alone. Nothing here shows that the text is meaningless, and nothing decodes it.
+- **Paper:** [`paper/paper.pdf`](paper/paper.pdf), with supplement [`paper/supplement.pdf`](paper/supplement.pdf). This is a preprint, not peer reviewed, and dedicated to the public domain under CC0 1.0 ([`paper/LICENSE.md`](paper/LICENSE.md)).
+- **Main result:** a set of production constraints can be recovered from the text. Nine measured properties define a mechanism class, and named alternatives are excluded. But message-carrying and message-free processes of that class cannot be told apart from the text alone. Nothing here shows that the text is meaningless, and nothing decodes it.
 
 The paper has two parts:
 
-1. **An exploratory profile** (Section 3). It is not preregistered. It applies one information-theoretic battery to the manuscript, language controls and candidate generators, and shows that a local, low-order glyph process with drifting parameters is sufficient.
-2. **A preregistered program** (Sections 4–8). It consists of a calibrated battery T1–T7 and seven follow-up experiments E1–E7. Together they separate procedure, improvisation and plaintext-driven production, test explicit generators on held-out pages, and give a constructive non-identifiability result (E7).
+1. **An exploratory profile** (Section 3). It was not specified in advance. It applies one information-theoretic battery to the manuscript, language controls and candidate generators, and shows that a local, low-order glyph process with drifting parameters is sufficient.
+2. **A pre-specified program** (Sections 4–8). Each analysis plan was committed to this repository before its Voynich outcome was computed; this is not an external registration. The program consists of a calibrated battery T1–T7 and seven follow-up experiments E1–E7. Together they separate procedure, improvisation and plaintext-driven production, test explicit generators on held-out pages, and give a constructive non-identifiability result (E7).
 
 ## Repository layout
 
@@ -20,8 +20,8 @@ The paper has two parts:
 | `voynich/` | IVTFF parser, statistics, profile battery and generators |
 | `scripts/` | One script per profile analysis; run from the repository root |
 | `results/logs/` | Logs of the profile analyses |
-| `mechanism/` | Preregistrations (`PREREG.md`, `E1_PREREG.md` … `E7_PREREG.md`), deviation logs, code for T1–T7 and E1–E7, the experiment log `PROGRAM.md` and the synthesis `SYNTHESIS.md` |
-| `results/mechanism/` | Results of the preregistered program (JSON) |
+| `mechanism/` | Analysis plans (`PREREG.md`, `E1_PREREG.md` … `E7_PREREG.md`, `REVISION_PLAN.md`), deviation logs, code for T1–T7, E1–E7 and the revision analyses, the experiment log `PROGRAM.md`, the synthesis `SYNTHESIS.md` and the commit map `COMMIT_MAP.md` |
+| `results/mechanism/` | Results of the pre-specified program (JSON) |
 | `paper/` | Paper sources: templates, build script, figure script, number extraction |
 | `REPORT.md` | Earlier working report on the profile (German), superseded by the paper |
 
@@ -44,7 +44,7 @@ python3 scripts/scripts_jackknife.py
 python3 paper/extract_numbers.py
 ```
 
-Preregistered program (Sections 4–8):
+Pre-specified program (Sections 4–8):
 ```bash
 python3 -m mechanism.run A; python3 -m mechanism.run B      # battery: controls, then Voynich
 python3 -m mechanism.posthoc                                 # post hoc checks, labelled as such
@@ -54,6 +54,10 @@ python3 -m mechanism.e4 A; python3 -m mechanism.e4 B
 python3 -m mechanism.e5 A; python3 -m mechanism.e5 B
 python3 -m mechanism.e7 run; python3 -m mechanism.e7 tmcheck
 python3 -m mechanism.redteam                                 # red-team checks (post hoc)
+python3 -m mechanism.revision fetch                          # revision: Greshko's published Naibbe data (data only)
+python3 -m mechanism.revision r1; python3 -m mechanism.revision r2; python3 -m mechanism.revision r3
+python3 -m mechanism.e7b run                                 # R4a: E7 with 20 runs per condition
+python3 -m mechanism.e8 check; python3 -m mechanism.e8 run   # R4b: message through the E3 generator
 ```
 
 Paper. Every number in the text and tables is computed from the result files at build time:
@@ -61,14 +65,16 @@ Paper. Every number in the text and tables is computed from the result files at 
 python3 paper/make_figures.py && python3 paper/build.py
 ```
 
-## Preregistration
+## Pre-specification
 
-Each preregistration was committed to this repository before the corresponding Voynich outcome was computed. The commits are listed in Table S28 of the supplement, and deviations are logged in `mechanism/*DEVIATIONS.md`. The repository was private while the work was done and was published once it was complete. The commit timestamps are therefore the author's record, not entries in an independent registry. Before publication the author e-mail address was replaced in every commit. This changed the commit hashes but not the file contents or dates; `mechanism/COMMIT_MAP.md` maps the old hashes, which older documents may quote, to the published ones.
+Each analysis plan was committed to this repository before the corresponding Voynich outcome was computed. This is prospective specification under version control, not registration in an external registry. The commits are listed in Table S28 of the supplement, and deviations are logged in `mechanism/*DEVIATIONS.md`. The repository was private while the work was done and was published once it was complete. The commit timestamps are therefore the author's record, not entries in an independent registry. Before publication the author e-mail address was replaced in every commit. This changed the commit hashes but not the file contents or dates; `mechanism/COMMIT_MAP.md` maps the old hashes, which older documents may quote, to the published ones.
 
 ## Licences and attribution
 
+- Everything the author created in this repository is dedicated to the public domain under CC0 1.0 (see `LICENSE`): the paper, supplement and figures, all code, the analysis plans, logs and results. Attribution is appreciated but not required.
+- Third-party data keep their own licences:
 - The transliterations are the work of René Zandbergen and Gabriel Landini (ZL3b) and of T. Takahashi (IT2a). voynich.nu distributes them under CC0 ([Licences and copyright](https://www.voynich.nu/roadmap.html#cop)); please acknowledge the source.
 - The gibberish corpus and the Naibbe tables are redistributed under their own licences. Both require citation of the source papers:
   - Gaskell & Bowern 2022, CEUR-WS 3313;
   - Greshko 2025, *Cryptologia*, doi:10.1080/01611194.2025.2566408.
-- The analyses, code and drafts were prepared with the assistance of an AI system (Claude, Anthropic). The author verified the results and takes full responsibility for the content.
+- The work was carried out with Claude Opus 5.5 (Anthropic), used through Claude Code. The AI system wrote and ran the analysis code and drafted the paper under the author's direction; see the disclosure section of the paper. The author takes full responsibility for the content.

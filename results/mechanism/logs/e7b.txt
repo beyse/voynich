@@ -1,0 +1,83 @@
+prng:101:0 None
+prng:102:0 None
+prng:103:0 None
+prng:104:0 None
+prng:105:0 None
+prng:106:0 None
+prng:107:0 None
+prng:108:0 None
+prng:109:0 None
+prng:110:0 None
+prng:111:0 None
+prng:112:0 None
+prng:113:0 None
+prng:114:0 None
+prng:115:0 None
+prng:116:0 None
+prng:117:0 None
+prng:118:0 None
+prng:119:0 None
+prng:120:0 None
+lzma:LAT:0 {'bits_available': 800000, 'bits_consumed': 354487, 'bits_recovered_compared': 354487, 'mismatches': 0, 'glyphs': 186254, 'tokens': 35309, 'bits_per_glyph': 1.903, 'bits_per_token': 10.04, 'exhausted': False}
+lzma:LAT:100000 {'bits_available': 731328, 'bits_consumed': 352750, 'bits_recovered_compared': 352749, 'mismatches': 0, 'glyphs': 184614, 'tokens': 35142, 'bits_per_glyph': 1.911, 'bits_per_token': 10.038, 'exhausted': False}
+lzma:LAT:200000 {'bits_available': 631328, 'bits_consumed': 352632, 'bits_recovered_compared': 352629, 'mismatches': 0, 'glyphs': 185059, 'tokens': 35069, 'bits_per_glyph': 1.906, 'bits_per_token': 10.055, 'exhausted': False}
+lzma:LAT:300000 {'bits_available': 531328, 'bits_consumed': 352578, 'bits_recovered_compared': 352576, 'mismatches': 0, 'glyphs': 185154, 'tokens': 35051, 'bits_per_glyph': 1.904, 'bits_per_token': 10.059, 'exhausted': False}
+lzma:LAT:400000 {'bits_available': 431328, 'bits_consumed': 352250, 'bits_recovered_compared': 352250, 'mismatches': 0, 'glyphs': 184877, 'tokens': 35137, 'bits_per_glyph': 1.905, 'bits_per_token': 10.025, 'exhausted': False}
+lzma:GER:0 {'bits_available': 603712, 'bits_consumed': 351602, 'bits_recovered_compared': 351602, 'mismatches': 0, 'glyphs': 185138, 'tokens': 35044, 'bits_per_glyph': 1.899, 'bits_per_token': 10.033, 'exhausted': False}
+lzma:GER:60000 {'bits_available': 543712, 'bits_consumed': 351983, 'bits_recovered_compared': 351983, 'mismatches': 0, 'glyphs': 185447, 'tokens': 35073, 'bits_per_glyph': 1.898, 'bits_per_token': 10.036, 'exhausted': False}
+lzma:GER:120000 {'bits_available': 483712, 'bits_consumed': 353282, 'bits_recovered_compared': 353281, 'mismatches': 0, 'glyphs': 185425, 'tokens': 35234, 'bits_per_glyph': 1.905, 'bits_per_token': 10.027, 'exhausted': False}
+lzma:GER:180000 {'bits_available': 423712, 'bits_consumed': 353774, 'bits_recovered_compared': 353773, 'mismatches': 0, 'glyphs': 186106, 'tokens': 35191, 'bits_per_glyph': 1.901, 'bits_per_token': 10.053, 'exhausted': False}
+lzma:GER:240000 {'bits_available': 363712, 'bits_consumed': 355677, 'bits_recovered_compared': 355675, 'mismatches': 0, 'glyphs': 187396, 'tokens': 35386, 'bits_per_glyph': 1.898, 'bits_per_token': 10.051, 'exhausted': False}
+lzma:ITA:0 {'bits_available': 800000, 'bits_consumed': 352347, 'bits_recovered_compared': 352346, 'mismatches': 0, 'glyphs': 184952, 'tokens': 35004, 'bits_per_glyph': 1.905, 'bits_per_token': 10.066, 'exhausted': False}
+lzma:ITA:100000 {'bits_available': 800000, 'bits_consumed': 353295, 'bits_recovered_compared': 353295, 'mismatches': 0, 'glyphs': 185910, 'tokens': 35173, 'bits_per_glyph': 1.9, 'bits_per_token': 10.044, 'exhausted': False}
+lzma:ITA:200000 {'bits_available': 800000, 'bits_consumed': 353554, 'bits_recovered_compared': 353554, 'mismatches': 0, 'glyphs': 185298, 'tokens': 35143, 'bits_per_glyph': 1.908, 'bits_per_token': 10.06, 'exhausted': False}
+lzma:ITA:300000 {'bits_available': 800000, 'bits_consumed': 351410, 'bits_recovered_compared': 351409, 'mismatches': 0, 'glyphs': 184593, 'tokens': 35004, 'bits_per_glyph': 1.904, 'bits_per_token': 10.039, 'exhausted': False}
+lzma:ITA:400000 {'bits_available': 800000, 'bits_consumed': 350029, 'bits_recovered_compared': 350029, 'mismatches': 0, 'glyphs': 184242, 'tokens': 34855, 'bits_per_glyph': 1.9, 'bits_per_token': 10.042, 'exhausted': False}
+lzma:ENG:0 {'bits_available': 800000, 'bits_consumed': 354849, 'bits_recovered_compared': 354849, 'mismatches': 0, 'glyphs': 186113, 'tokens': 35362, 'bits_per_glyph': 1.907, 'bits_per_token': 10.035, 'exhausted': False}
+lzma:ENG:100000 {'bits_available': 800000, 'bits_consumed': 352914, 'bits_recovered_compared': 352912, 'mismatches': 0, 'glyphs': 185590, 'tokens': 35209, 'bits_per_glyph': 1.902, 'bits_per_token': 10.023, 'exhausted': False}
+lzma:ENG:200000 {'bits_available': 800000, 'bits_consumed': 351958, 'bits_recovered_compared': 351955, 'mismatches': 0, 'glyphs': 185451, 'tokens': 35152, 'bits_per_glyph': 1.898, 'bits_per_token': 10.012, 'exhausted': False}
+lzma:ENG:300000 {'bits_available': 800000, 'bits_consumed': 353542, 'bits_recovered_compared': 353539, 'mismatches': 0, 'glyphs': 185883, 'tokens': 35176, 'bits_per_glyph': 1.902, 'bits_per_token': 10.051, 'exhausted': False}
+lzma:ENG:400000 {'bits_available': 800000, 'bits_consumed': 352989, 'bits_recovered_compared': 352989, 'mismatches': 0, 'glyphs': 184424, 'tokens': 35028, 'bits_per_glyph': 1.914, 'bits_per_token': 10.077, 'exhausted': False}
+raw:LAT:0 {'bits_available': 800000, 'bits_consumed': 350690, 'bits_recovered_compared': 350688, 'mismatches': 0, 'glyphs': 184783, 'tokens': 35015, 'bits_per_glyph': 1.898, 'bits_per_token': 10.015, 'exhausted': False}
+raw:LAT:100000 {'bits_available': 800000, 'bits_consumed': 356043, 'bits_recovered_compared': 356043, 'mismatches': 0, 'glyphs': 186537, 'tokens': 35404, 'bits_per_glyph': 1.909, 'bits_per_token': 10.057, 'exhausted': False}
+raw:LAT:200000 {'bits_available': 800000, 'bits_consumed': 353929, 'bits_recovered_compared': 353922, 'mismatches': 0, 'glyphs': 185774, 'tokens': 35302, 'bits_per_glyph': 1.905, 'bits_per_token': 10.026, 'exhausted': False}
+raw:LAT:300000 {'bits_available': 800000, 'bits_consumed': 349498, 'bits_recovered_compared': 349498, 'mismatches': 0, 'glyphs': 183942, 'tokens': 34872, 'bits_per_glyph': 1.9, 'bits_per_token': 10.022, 'exhausted': False}
+raw:LAT:400000 {'bits_available': 800000, 'bits_consumed': 351781, 'bits_recovered_compared': 351781, 'mismatches': 0, 'glyphs': 184771, 'tokens': 35059, 'bits_per_glyph': 1.904, 'bits_per_token': 10.034, 'exhausted': False}
+raw:GER:0 {'bits_available': 800000, 'bits_consumed': 354204, 'bits_recovered_compared': 354202, 'mismatches': 0, 'glyphs': 185770, 'tokens': 35152, 'bits_per_glyph': 1.907, 'bits_per_token': 10.076, 'exhausted': False}
+raw:GER:60000 {'bits_available': 800000, 'bits_consumed': 354050, 'bits_recovered_compared': 354050, 'mismatches': 0, 'glyphs': 185463, 'tokens': 35270, 'bits_per_glyph': 1.909, 'bits_per_token': 10.038, 'exhausted': False}
+raw:GER:120000 {'bits_available': 800000, 'bits_consumed': 354151, 'bits_recovered_compared': 354151, 'mismatches': 0, 'glyphs': 185776, 'tokens': 35243, 'bits_per_glyph': 1.906, 'bits_per_token': 10.049, 'exhausted': False}
+raw:GER:180000 {'bits_available': 800000, 'bits_consumed': 350243, 'bits_recovered_compared': 350242, 'mismatches': 0, 'glyphs': 183856, 'tokens': 34869, 'bits_per_glyph': 1.905, 'bits_per_token': 10.045, 'exhausted': False}
+raw:GER:240000 {'bits_available': 800000, 'bits_consumed': 354613, 'bits_recovered_compared': 354613, 'mismatches': 0, 'glyphs': 186597, 'tokens': 35288, 'bits_per_glyph': 1.9, 'bits_per_token': 10.049, 'exhausted': False}
+raw:ITA:0 {'bits_available': 800000, 'bits_consumed': 351787, 'bits_recovered_compared': 351786, 'mismatches': 0, 'glyphs': 185324, 'tokens': 35227, 'bits_per_glyph': 1.898, 'bits_per_token': 9.986, 'exhausted': False}
+raw:ITA:100000 {'bits_available': 800000, 'bits_consumed': 349684, 'bits_recovered_compared': 349683, 'mismatches': 0, 'glyphs': 183440, 'tokens': 34763, 'bits_per_glyph': 1.906, 'bits_per_token': 10.059, 'exhausted': False}
+raw:ITA:200000 {'bits_available': 800000, 'bits_consumed': 352012, 'bits_recovered_compared': 352011, 'mismatches': 0, 'glyphs': 185082, 'tokens': 34967, 'bits_per_glyph': 1.902, 'bits_per_token': 10.067, 'exhausted': False}
+raw:ITA:300000 {'bits_available': 800000, 'bits_consumed': 354332, 'bits_recovered_compared': 354331, 'mismatches': 0, 'glyphs': 186320, 'tokens': 35373, 'bits_per_glyph': 1.902, 'bits_per_token': 10.017, 'exhausted': False}
+raw:ITA:400000 {'bits_available': 800000, 'bits_consumed': 354122, 'bits_recovered_compared': 354120, 'mismatches': 0, 'glyphs': 186073, 'tokens': 35171, 'bits_per_glyph': 1.903, 'bits_per_token': 10.069, 'exhausted': False}
+raw:ENG:0 {'bits_available': 800000, 'bits_consumed': 353671, 'bits_recovered_compared': 353670, 'mismatches': 0, 'glyphs': 185507, 'tokens': 35301, 'bits_per_glyph': 1.907, 'bits_per_token': 10.019, 'exhausted': False}
+raw:ENG:100000 {'bits_available': 800000, 'bits_consumed': 352975, 'bits_recovered_compared': 352975, 'mismatches': 0, 'glyphs': 185425, 'tokens': 35199, 'bits_per_glyph': 1.904, 'bits_per_token': 10.028, 'exhausted': False}
+raw:ENG:200000 {'bits_available': 800000, 'bits_consumed': 350959, 'bits_recovered_compared': 350958, 'mismatches': 0, 'glyphs': 184248, 'tokens': 34788, 'bits_per_glyph': 1.905, 'bits_per_token': 10.089, 'exhausted': False}
+raw:ENG:300000 {'bits_available': 800000, 'bits_consumed': 351194, 'bits_recovered_compared': 351192, 'mismatches': 0, 'glyphs': 184479, 'tokens': 34899, 'bits_per_glyph': 1.904, 'bits_per_token': 10.063, 'exhausted': False}
+raw:ENG:400000 {'bits_available': 800000, 'bits_consumed': 353533, 'bits_recovered_compared': 353530, 'mismatches': 0, 'glyphs': 186755, 'tokens': 35508, 'bits_per_glyph': 1.893, 'bits_per_token': 9.956, 'exhausted': False}
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Users/sebastianbeyer/git/voynich/mechanism/e7b.py", line 148, in <module>
+    report(f'{OUT}/results.json', f'{OUT}/report.json')
+  File "/Users/sebastianbeyer/git/voynich/mechanism/e7b.py", line 135, in report
+    json.dump(s, open(out_path, 'w'), indent=1)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+EXIT 1
