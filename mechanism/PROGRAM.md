@@ -16,6 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
+| E6 | Does a two-route process (drifting repertoire + one-off coinage) pass the full phenotype where glyph-by-glyph construction fails? | E6_PREREG.md | preregistered | – |
 | E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
 | E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
 | E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
