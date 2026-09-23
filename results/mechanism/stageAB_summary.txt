@@ -1,0 +1,116 @@
+T1 line-break transparency (page-conditional): R_LB, jackknife SE, excess break / within (bits)
+  VOYNICH     R=0.218 se=0.255 break=0.0233 within=0.1068
+  GIB         R=1.099 se=0.318 break=0.0408 within=0.0371
+  LATW        R=2.442 se=2.749 break=0.0255 within=0.0104
+  LAT         R=0.18 se=2.938 break=0.0012 within=0.0065
+  ITA         R=1.841 se=2.163 break=0.0376 within=0.0204
+  GER         R=0.393 se=0.256 break=0.009 within=0.0229
+  ENG         R=1.135 se=0.42 break=0.0387 within=0.0341
+  MK-sec      R=-0.137 se=0.116 break=-0.0126 within=0.0918
+  MK-page     R=0.071 se=0.067 break=0.0078 within=0.1101
+  RUGG        R=0.964 se=2.375 break=0.0068 within=0.007
+  TS          R=1.101 se=0.131 break=0.0637 within=0.0578
+  NAIB-lines  R=nan se=nan break=-0.0025 within=-0.0065
+  NAIB-run    R=nan se=nan break=-0.0035 within=-0.0025
+T2a final-form effect: excess JSD, p (margin-bound | paragraph-final)
+  VOYNICH     margin 0.0854 p=0.005 n=3373 | para 0.0394 p=0.005 n=728
+  GIB         margin 0.0033 p=0.02 n=1459 | para 0.0339 p=0.01 n=100
+  LATW        margin -0.0 p=0.458 n=1800 | para -
+T2b slack tightness T (95% CI)
+  VOYNICH     T=2.09 ci=[1.881, 2.318] pages=25 lines=832 W=67.0
+  GIB         T=3.904 ci=[3.11, 4.806] pages=38 lines=1494 W=49.0
+  LATW        T=0.994 ci=[0.948, 1.037] pages=60 lines=1800 W=54.7
+T2c dittography at line breaks: token ratio obs/null, p; bigram repeats, p
+  VOYNICH     ratio=0.799 p=0.766 bigrams=0 p=1.0
+  GIB         ratio=0.769 p=0.831 bigrams=0 p=1.0
+  LATW        ratio=0.0 p=1.0 bigrams=0 p=1.0
+  LAT         ratio=0.0 p=1.0 bigrams=0 p=1.0
+  ITA         ratio=0.033 p=1.0 bigrams=3 p=0.065
+  GER         ratio=0.232 p=1.0 bigrams=3 p=0.075
+  ENG         ratio=0.179 p=1.0 bigrams=2 p=0.801
+  MK-sec      ratio=0.927 p=0.637 bigrams=0 p=1.0
+  MK-page     ratio=1.556 p=0.06 bigrams=0 p=1.0
+  RUGG        ratio=1.826 p=0.289 bigrams=0 p=1.0
+  TS          ratio=1.377 p=0.01 bigrams=4 p=0.189
+  NAIB-lines  ratio=0.784 p=0.846 bigrams=0 p=1.0
+  NAIB-run    ratio=0.576 p=0.96 bigrams=0 p=1.0
+T3a zero replication rho (matched 250-token chunks; full size) | T3b slot consistency, monotone share
+  VOYNICH     rho=0.04 ci=[0.038, 0.043] full=0.004 | cons=0.868 ci=[0.863, 0.873] mono=0.554 ci=[0.538, 0.57]
+  GIB         rho=0.093 ci=[0.077, 0.115] full=- | cons=0.671 ci=[0.657, 0.686] mono=0.24 ci=[0.206, 0.275]
+  LAT         rho=0.101 ci=[0.095, 0.107] full=0.002 | cons=0.663 ci=[0.661, 0.665] mono=0.119 ci=[0.114, 0.124]
+  ITA         rho=0.075 ci=[0.068, 0.081] full=0.003 | cons=0.688 ci=[0.686, 0.691] mono=0.325 ci=[0.319, 0.332]
+  GER         rho=0.097 ci=[0.088, 0.106] full=0.004 | cons=0.697 ci=[0.693, 0.7] mono=0.31 ci=[0.301, 0.319]
+  ENG         rho=0.104 ci=[0.079, 0.138] full=0.004 | cons=0.702 ci=[0.694, 0.711] mono=0.349 ci=[0.334, 0.367]
+  MK-sec      rho=0.052 ci=[0.048, 0.055] full=- | cons=0.861 ci=[0.856, 0.865] mono=0.561 ci=[0.549, 0.572]
+  MK-page     rho=0.052 ci=[0.049, 0.055] full=- | cons=0.864 ci=[0.859, 0.868] mono=0.567 ci=[0.555, 0.579]
+  RUGG        rho=0.13 ci=[0.122, 0.139] full=- | cons=0.834 ci=[0.832, 0.837] mono=0.366 ci=[0.36, 0.372]
+  TS          rho=0.027 ci=[0.025, 0.029] full=- | cons=0.844 ci=[0.838, 0.851] mono=0.359 ci=[0.337, 0.381]
+  NAIB-lines  rho=0.037 ci=[0.034, 0.039] full=- | cons=0.857 ci=[0.854, 0.86] mono=0.601 ci=[0.593, 0.608]
+  NAIB-run    rho=0.039 ci=[0.037, 0.042] full=- | cons=0.861 ci=[0.858, 0.864] mono=0.611 ci=[0.604, 0.618]
+T3c positional entropy (share of unit entropy)
+  VOYNICH     {'H_unit': 3.87, 'e1': 0.63, 'e2': 0.79, 'e3': 0.88, 's1': 0.88, 's2': 0.86, 's3': 0.94}
+  GIB         {'H_unit': 4.4, 'e1': 0.98, 'e2': 0.99, 'e3': 1.0, 's1': 1.04, 's2': 0.91, 's3': 0.99}
+  LAT         {'H_unit': 3.99, 'e1': 0.82, 'e2': 0.82, 'e3': 0.99, 's1': 1.02, 's2': 0.91, 's3': 1.03}
+  ITA         {'H_unit': 4.12, 'e1': 0.78, 'e2': 0.97, 'e3': 0.98, 's1': 0.99, 's2': 0.85, 's3': 0.97}
+  GER         {'H_unit': 4.19, 'e1': 0.83, 'e2': 0.87, 'e3': 0.99, 's1': 0.99, 's2': 0.84, 's3': 0.95}
+  ENG         {'H_unit': 4.22, 'e1': 0.91, 'e2': 0.91, 'e3': 0.94, 's1': 0.99, 's2': 0.87, 's3': 0.96}
+  MK-sec      {'H_unit': 3.87, 'e1': 0.67, 'e2': 0.8, 'e3': 0.88, 's1': 0.88, 's2': 0.86, 's3': 0.94}
+  MK-page     {'H_unit': 3.87, 'e1': 0.67, 'e2': 0.8, 'e3': 0.88, 's1': 0.88, 's2': 0.86, 's3': 0.94}
+  RUGG        {'H_unit': 3.98, 'e1': 0.76, 'e2': 0.87, 'e3': 0.94, 's1': 0.87, 's2': 0.88, 's3': 0.91}
+  TS          {'H_unit': 4.07, 'e1': 0.81, 'e2': 0.93, 'e3': 0.97, 's1': 0.9, 's2': 0.96, 's3': 0.97}
+  NAIB-lines  {'H_unit': 3.84, 'e1': 0.65, 'e2': 0.74, 'e3': 0.83, 's1': 0.87, 's2': 0.91, 's3': 0.91}
+  NAIB-run    {'H_unit': 3.84, 'e1': 0.65, 'e2': 0.74, 'e3': 0.83, 's1': 0.87, 's2': 0.91, 's3': 0.91}
+T4 periodicity: T4a peaks (final, initial), T4b z (d=1,2,3), T4c peaks, T6b slope
+  VOYNICH     t4a=[],[] t4b=[1.0, 1.7, -0.5] t4c=[] slope=-0.0083 ci=[-0.0096, -0.0073]
+  GIB         t4a=[],[] t4b=[0.9, 0.6, 0.1] t4c=[] slope=-0.0021 ci=[-0.0062, 0.0017]
+  LAT         t4a=[],[] t4b=[-1.8, -1.2, 0.6] t4c=[] slope=-0.0038 ci=[-0.005, -0.0027]
+  ITA         t4a=[],[] t4b=[2.0, -0.9, -0.3] t4c=[2] slope=-0.0119 ci=[-0.0134, -0.0103]
+  GER         t4a=[],[] t4b=[1.5, 0.1, -0.4] t4c=[] slope=-0.0096 ci=[-0.0111, -0.008]
+  ENG         t4a=[],[] t4b=[-0.3, 0.7, 1.6] t4c=[] slope=-0.003 ci=[-0.0045, -0.0011]
+  MK-sec      t4a=[],[] t4b=[0.3, 1.6, 2.4] t4c=[] slope=-0.0004 ci=[-0.0013, 0.0005]
+  MK-page     t4a=[],[] t4b=[-0.2, -1.4, -0.8] t4c=[] slope=-0.0001 ci=[-0.001, 0.0009]
+  RUGG        t4a=[],[] t4b=[-2.4, 1.0, 0.2] t4c=[] slope=0.0 ci=[-0.0017, 0.0019]
+  TS          t4a=[],[] t4b=[16.2, 6.4, 2.3] t4c=[] slope=-0.0617 ci=[-0.0673, -0.0568]
+  NAIB-lines  t4a=[],[] t4b=[0.6, 1.6, -1.7] t4c=[] slope=-0.0013 ci=[-0.0025, -0.0002]
+  NAIB-run    t4a=[],[] t4b=[-1.2, 0.2, -0.1] t4c=[] slope=-0.0011 ci=[-0.0022, -0.0]
+T4 power (device control, 10 seeds)
+  w=0.1: T4a 2/10  T4b 0/10  T4c 0/10
+  w=0.2: T4a 10/10  T4b 5/10  T4c 10/10
+  w=0.4: T4a 10/10  T4b 10/10  T4c 10/10
+T5 drift shape: S = MSE(step)/MSE(smooth); per hand (pages, S, Gini, top-decile-on-boundary, base)
+  VOYNICH      S=0.761 {'1': (27, 1.07, 0.31, 0.5, 0.27), '2': (35, 0.59, 0.3, 1.0, 0.24), '3': (25, 0.68, 0.34, 1.0, 0.08)}
+  LAT          S=0.841 {'1': (27, 0.97, 0.37, 1.0, 0.27), '2': (35, 0.72, 0.43, 0.67, 0.24), '3': (25, 1.03, 0.21, 0.5, 0.08)}
+  MK-sec       S=0.615 {'1': (36, 0.92, 0.52, 1.0, 0.29), '2': (40, 0.58, 0.56, 1.0, 0.26), '3': (27, 0.28, 0.62, 1.0, 0.08)}
+  MK-page      S=0.61 {'1': (39, 0.83, 0.26, 0.33, 0.26), '2': (39, 0.54, 0.33, 1.0, 0.21), '3': (26, 0.42, 0.4, 1.0, 0.08)}
+  TS           S=1.016 {'1': (27, 1.01, 0.08, 0.0, 0.27), '2': (35, 1.06, 0.11, 0.0, 0.24), '3': (25, 0.92, 0.1, 0.5, 0.08)}
+  NAIB-run     S=0.969 {'1': (25, 1.08, 0.54, 0.5, 0.29), '2': (35, 0.87, 0.5, 0.33, 0.24), '3': (25, 1.08, 0.47, 0.0, 0.08)}
+  DRIFT-smooth S=1.659 {'1': (39, 1.24, 0.46, 0.0, 0.29), '2': (38, 2.71, 0.5, 0.0, 0.27), '3': (25, 2.92, 0.35, 0.0, 0.08)}
+  DRIFT-step   S=0.283 {'1': (45, 0.28, 0.46, 0.75, 0.23), '2': (38, 0.23, 0.64, 0.33, 0.27), '3': (26, 0.43, 0.69, 0.0, 0.08)}
+T6a recency: DI exact, DI near (95% CI, 99th pct)
+  VOYNICH     exact=0.217 ci=[0.131, 0.303] near=0.153 ci=[0.112, 0.198] p99=0.203
+  GIB         exact=-0.236 ci=[-0.337, -0.146] near=0.071 ci=[-0.099, 0.235] p99=0.275
+  LAT         exact=-0.055 ci=[-0.169, 0.08] near=-0.147 ci=[-0.24, -0.069] p99=-0.051
+  ITA         exact=-0.015 ci=[-0.089, 0.066] near=-0.054 ci=[-0.079, -0.03] p99=-0.02
+  GER         exact=0.423 ci=[0.3, 0.544] near=0.05 ci=[-0.011, 0.113] p99=0.126
+  ENG         exact=-0.049 ci=[-0.097, -0.005] near=0.1 ci=[0.019, 0.197] p99=0.213
+  MK-sec      exact=0.046 ci=[-0.036, 0.128] near=0.022 ci=[-0.017, 0.061] p99=0.065
+  MK-page     exact=0.019 ci=[-0.051, 0.094] near=-0.022 ci=[-0.057, 0.011] p99=0.018
+  RUGG        exact=-0.784 ci=[-1.137, -0.38] near=-0.059 ci=[-0.148, 0.023] p99=0.036
+  TS          exact=0.561 ci=[0.437, 0.675] near=0.34 ci=[0.266, 0.415] p99=0.429
+  NAIB-lines  exact=-0.107 ci=[-0.211, -0.005] near=0.012 ci=[-0.034, 0.06] p99=0.069
+  NAIB-run    exact=0.028 ci=[-0.079, 0.13] near=-0.021 ci=[-0.061, 0.017] p99=0.022
+  DEV-0.1-0   exact=0.013 ci=[-0.098, 0.113] near=0.009 ci=[-0.033, 0.049] p99=0.054
+  DEV-0.2-0   exact=0.076 ci=[-0.03, 0.176] near=-0.003 ci=[-0.05, 0.033] p99=0.046
+  DEV-0.4-0   exact=0.137 ci=[0.023, 0.245] near=0.051 ci=[-0.002, 0.108] p99=0.116
+T7b deviant tokens: rate/1000, recurrence share, clustering ratio, slip share
+  VOYNICH     rate=14.7 rec=0.011 clust=0.028 slip=0.332 types=262
+  LAT         rate=12.8 rec=0.117 clust=0.444 slip=0.046 types=350
+  ITA         rate=16.1 rec=0.055 clust=0.291 slip=0.063 types=488
+  GER         rate=28.0 rec=0.065 clust=0.097 slip=0.015 types=774
+  ENG         rate=23.3 rec=0.161 clust=0.163 slip=0.104 types=553
+  MK-sec      rate=23.6 rec=0.077 clust=0.916 slip=0.301 types=740
+  MK-page     rate=26.0 rec=0.092 clust=0.28 slip=0.287 types=813
+  RUGG        rate=51.9 rec=0.39 clust=1.237 slip=0.174 types=1007
+  TS          rate=104.0 rec=0.323 clust=0.015 slip=0.327 types=1971
+  NAIB-lines  rate=10.0 rec=0.026 clust=0.905 slip=0.174 types=308
+  NAIB-run    rate=10.6 rec=0.037 clust=0.719 slip=0.212 types=320

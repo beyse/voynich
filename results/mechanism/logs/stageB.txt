@@ -1,0 +1,2 @@
+VOYNICH {'class': 'V', 'note': '', 'tokens': 32428, 'pages': 207, 'seconds': 18.1}
+written results/mechanism/stageB.json

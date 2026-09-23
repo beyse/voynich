@@ -44,3 +44,15 @@ zsh paper/run_chain1.sh; zsh paper/run_chain2.sh        # alle Analysen, Logs na
 python3 scripts/scripts_jackknife.py                     # Konfidenzintervalle (Leave-one-quire-out)
 python3 paper/make_figures.py && python3 paper/extract_numbers.py && python3 paper/build_paper.py
 ```
+
+## Mechanismus-Identifikation (präregistriert, Branch `mechanism-identification`)
+- Frage: Prozedur, geübte Improvisation oder klartextgesteuerte Prozedur; getrennt davon direkt auf der Seite komponiert oder aus einer Vorlage kopiert.
+- `mechanism/PREREG.md`: eingefrorene Hypothesen, Tests T1–T7, Vorhersagen, Falsifikatoren, Urteilsregeln (Commit `28ae510`). `mechanism/DEVIATIONS.md`: alle Abweichungen mit Zeitpunkt. `mechanism/REPORT.md`: Ergebnis.
+- Kontrolle für menschliche Improvisation: Gibberish-Korpus von Gaskell & Bowern (2022) in `data/gibberish/` (Lizenzhinweis in `SOURCE.md`).
+- Ergebnis in einem Satz: begrenzte, unentschiedene Konkurrenz. Naive Improvisation, stationäre Prozeduren, periodische Geräte (ab Effektstärke 0,2), glatte Drift, propagierende Innovationen, wortbewahrende Chiffren und die Naibbe-Chiffre in der veröffentlichten Form sind ausgeschlossen; Umbruch einer fortlaufenden Vorlage (K-reflow) ist ausgeschlossen.
+```bash
+python3 -m mechanism.run A        # Stufe A: nur Kontrollen -> results/mechanism/stageA.json
+python3 -m mechanism.run B        # Stufe B: Voynich -> results/mechanism/stageB.json
+python3 -m mechanism.posthoc      # als post hoc markierte Robustheitsprüfungen
+python3 -m mechanism.summarize AB # Tabellen
+```
