@@ -1,0 +1,37 @@
+
+== VMS all: 739 adjacent inner pairs with ED=1
+edit (a->b)               a->b  b->a      z
+ins t @mid                  14     6    1.8
+sub r>l @end                36    23    1.7
+del d @mid                  30    20    1.4
+ins i @mid                  16    10    1.2
+del e @mid                  50    40    1.1
+sub c>s @start              17    13    0.7
+del o @start                18    14    0.7
+sub t>k @mid                27    24    0.4
+ins q @start                37    35    0.2
+share of ED=1 pairs in strongly directional edits: 0.18
+edit position: {'end': 134, 'mid': 338, 'start': 267}
+edit kind: {'del': 214, 'sub': 313, 'ins': 212}
+
+== VMS A: 237 adjacent inner pairs with ED=1
+edit (a->b)               a->b  b->a      z
+sub r>l @end                21    12    1.6
+del e @mid                  15    10    1.0
+share of ED=1 pairs in strongly directional edits: 0.42
+edit position: {'end': 74, 'mid': 93, 'start': 70}
+edit kind: {'del': 55, 'sub': 109, 'ins': 73}
+
+== VMS B: 490 adjacent inner pairs with ED=1
+edit (a->b)               a->b  b->a      z
+del d @mid                  29    19    1.4
+sub r>l @end                14    11    0.6
+del e @mid                  34    30    0.5
+del o @start                12    11    0.2
+sub t>k @mid                22    22    0.0
+sub k>t @mid                22    22    0.0
+ins q @start                33    33    0.0
+del q @start                33    33    0.0
+share of ED=1 pairs in strongly directional edits: 0.16
+edit position: {'mid': 240, 'end': 56, 'start': 194}
+edit kind: {'del': 158, 'sub': 198, 'ins': 134}

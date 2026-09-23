@@ -1,0 +1,18 @@
+relation                          pairs  meanED  P(ED=0)  P(ED<=1)  P(ED<=2)
+prev word                         30756    4.44    0.009     0.046     0.126
+word above (i-1..i+1, min)        31008    3.42    0.026     0.108     0.280
+word above (same index)           29512    4.50    0.010     0.044     0.125
+random same page                  34859    4.61    0.012     0.038     0.107
+random same lang                  34859    4.75    0.005     0.025     0.085
+2 lines above (same index)        27584    4.54    0.010     0.043     0.119
+min over 3 random same page       33042    3.34    0.037     0.109     0.280
+
+language A:
+  prev word                        9689    4.29    0.010     0.052     0.145
+  word above (same index)          9300    4.38    0.009     0.044     0.130
+  random same page                11239    4.44    0.019     0.046     0.122
+
+language B:
+  prev word                       20613    4.51    0.009     0.043     0.117
+  word above (same index)         19795    4.56    0.010     0.045     0.122
+  random same page                23076    4.66    0.010     0.038     0.107

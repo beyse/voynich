@@ -1,0 +1,21 @@
+variant collapse  types  zipf | excess MI:  within  inner across    d=2
+none         6863 -0.78 |              0.195  0.203  0.008  0.070
+light        4328 -0.92 |              0.303  0.309  0.017  0.126
+heavy        2932 -1.10 |              0.295  0.295  0.020  0.136
+la none      8335 -0.75 |              0.308  0.252  0.087  0.054
+la stem4     2058 -0.68 |              0.396  0.337  0.124  0.104
+it none      6618 -0.94 |              0.462  0.428  0.178  0.094
+it stem4     2794 -0.85 |              0.512  0.473  0.206  0.104
+
+variant features by line position (share of words having the feature):
+feature            first  second  middle    last
+starts q           0.129   0.136   0.171   0.086
+starts y           0.146   0.030   0.038   0.039
+starts s           0.149   0.183   0.113   0.081
+starts gallows     0.221   0.056   0.065   0.050
+starts ch/sh       0.080   0.393   0.266   0.176
+ends m/g           0.005   0.008   0.011   0.175
+ends y             0.323   0.416   0.424   0.390
+ends n             0.199   0.141   0.164   0.155
+has sh             0.163   0.198   0.112   0.052
+has iii            0.003   0.005   0.005   0.006

@@ -1,0 +1,20 @@
+body { font-family: serif; font-size: 10.2pt; line-height: 1.36; color: #000; }
+h1 { font-size: 16pt; font-weight: bold; line-height: 1.25; margin: 0 0 6pt 0; }
+h2 { font-size: 12pt; font-weight: bold; margin: 14pt 0 4pt 0; }
+h3 { font-size: 10.5pt; font-weight: bold; margin: 10pt 0 3pt 0; }
+p { margin: 0 0 6pt 0; text-align: justify; }
+p.author { font-size: 11pt; margin: 2pt 0; text-align: left; }
+p.affil { font-size: 9.5pt; margin: 0 0 8pt 0; text-align: left; color: #222; }
+p.abstract { font-size: 9.6pt; text-align: justify; margin: 4pt 0 4pt 0; }
+p.keywords { font-size: 9.2pt; margin: 0 0 10pt 0; }
+p.tabnote { font-size: 8.4pt; margin: 2pt 0 8pt 0; }
+p.cap { font-size: 8.8pt; text-align: justify; margin: 2pt 0 10pt 0; }
+p.ref { font-size: 9pt; text-align: left; margin: 0 0 4pt 0; }
+table.tab { border-collapse: collapse; font-size: 8.4pt; margin: 6pt 0 4pt 0; }
+table.small { font-size: 7.4pt; }
+table.tab caption { font-size: 8.8pt; text-align: left; margin-bottom: 3pt; }
+table.tab th { border-top: 1pt solid #000; border-bottom: 0.6pt solid #000; padding: 2pt 4pt; text-align: left; font-weight: bold; }
+table.tab td { border-bottom: 0.3pt solid #999; padding: 1.6pt 4pt; text-align: left; }
+ul, ol { margin: 0 0 6pt 14pt; }
+li { margin: 0 0 3pt 0; text-align: justify; }
+.box { border: 0.6pt solid #000; padding: 6pt 8pt; margin: 6pt 0 8pt 0; font-size: 9.4pt; }

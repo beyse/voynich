@@ -1,0 +1,33 @@
+VMS: 4109 lines, 201246 glyphs incl. spaces
+VMS all              h1= 2.18 h2= 1.91 h3= 1.82 h4= 1.72 h5= 1.57  lzma= 2.40
+  twin order-1       h1= 2.23 h2= 2.22 h3= 2.17 h4= 2.04 h5= 1.80  lzma= 2.87   excess(real-twin): -0.05 -0.31 -0.35 -0.32 -0.23
+  twin order-2       h1= 2.23 h2= 1.95 h3= 1.91 h4= 1.82 h5= 1.67  lzma= 2.62   excess(real-twin): -0.05 -0.04 -0.09 -0.10 -0.10
+  twin order-3       h1= 2.23 h2= 1.95 h3= 1.85 h4= 1.78 h5= 1.63  lzma= 2.58   excess(real-twin): -0.05 -0.05 -0.03 -0.06 -0.06
+VMS A                h1= 2.23 h2= 1.95 h3= 1.83 h4= 1.68 h5= 1.46  lzma= 2.62
+  twin order-1       h1= 2.28 h2= 2.25 h3= 2.15 h4= 1.92 h5= 1.56  lzma= 3.05   excess(real-twin): -0.05 -0.30 -0.32 -0.25 -0.10
+  twin order-2       h1= 2.28 h2= 1.99 h3= 1.92 h4= 1.76 h5= 1.52  lzma= 2.81   excess(real-twin): -0.05 -0.04 -0.08 -0.09 -0.06
+  twin order-3       h1= 2.29 h2= 2.00 h3= 1.84 h4= 1.71 h5= 1.49  lzma= 2.76   excess(real-twin): -0.06 -0.05 -0.01 -0.04 -0.04
+VMS B                h1= 2.06 h2= 1.78 h3= 1.70 h4= 1.60 h5= 1.46  lzma= 2.33
+  twin order-1       h1= 2.10 h2= 2.09 h3= 2.03 h4= 1.90 h5= 1.68  lzma= 2.75   excess(real-twin): -0.05 -0.31 -0.33 -0.31 -0.22
+  twin order-2       h1= 2.10 h2= 1.82 h3= 1.78 h4= 1.69 h5= 1.54  lzma= 2.51   excess(real-twin): -0.04 -0.04 -0.08 -0.10 -0.08
+  twin order-3       h1= 2.10 h2= 1.82 h3= 1.72 h4= 1.64 h5= 1.51  lzma= 2.46   excess(real-twin): -0.04 -0.04 -0.02 -0.04 -0.05
+Latin                h1= 3.38 h2= 2.72 h3= 2.11 h4= 1.66 h5= 1.33  lzma= 2.58
+  twin order-1       h1= 3.40 h2= 3.38 h3= 3.22 h4= 2.48 h5= 1.23  lzma= 4.04   excess(real-twin): -0.02 -0.66 -1.11 -0.82 +0.10
+  twin order-2       h1= 3.40 h2= 2.74 h3= 2.66 h4= 2.34 h5= 1.67  lzma= 3.53   excess(real-twin): -0.02 -0.02 -0.56 -0.68 -0.35
+  twin order-3       h1= 3.40 h2= 2.73 h3= 2.11 h4= 1.96 h5= 1.63  lzma= 3.11   excess(real-twin): -0.02 -0.02 +0.00 -0.29 -0.30
+Italian              h1= 3.27 h2= 2.77 h3= 2.31 h4= 1.88 h5= 1.43  lzma= 3.04
+  twin order-1       h1= 3.29 h2= 3.26 h3= 3.06 h4= 2.34 h5= 1.27  lzma= 4.05   excess(real-twin): -0.03 -0.49 -0.75 -0.45 +0.16
+  twin order-2       h1= 3.29 h2= 2.79 h3= 2.68 h4= 2.28 h5= 1.57  lzma= 3.67   excess(real-twin): -0.02 -0.02 -0.36 -0.40 -0.14
+  twin order-3       h1= 3.28 h2= 2.79 h3= 2.29 h4= 2.07 h5= 1.61  lzma= 3.38   excess(real-twin): -0.02 -0.02 +0.02 -0.18 -0.18
+German               h1= 3.29 h2= 2.63 h3= 2.10 h4= 1.71 h5= 1.38  lzma= 2.88
+  twin order-1       h1= 3.31 h2= 3.27 h3= 3.00 h4= 2.23 h5= 1.24  lzma= 4.06   excess(real-twin): -0.02 -0.65 -0.90 -0.52 +0.14
+  twin order-2       h1= 3.30 h2= 2.65 h3= 2.52 h4= 2.16 h5= 1.56  lzma= 3.56   excess(real-twin): -0.02 -0.02 -0.42 -0.44 -0.18
+  twin order-3       h1= 3.30 h2= 2.64 h3= 2.09 h4= 1.90 h5= 1.55  lzma= 3.22   excess(real-twin): -0.01 -0.01 +0.01 -0.18 -0.17
+Hebrew               h1= 3.63 h2= 2.90 h3= 2.22 h4= 1.60 h5= 1.05  lzma= 3.41
+  twin order-1       h1= 3.64 h2= 3.54 h3= 2.91 h4= 1.69 h5= 0.75  lzma= 4.76   excess(real-twin): -0.01 -0.64 -0.70 -0.09 +0.31
+  twin order-2       h1= 3.65 h2= 2.89 h3= 2.58 h4= 1.87 h5= 1.11  lzma= 4.22   excess(real-twin): -0.02 +0.01 -0.37 -0.27 -0.05
+  twin order-3       h1= 3.63 h2= 2.88 h3= 2.13 h4= 1.73 h5= 1.20  lzma= 3.83   excess(real-twin): -0.00 +0.02 +0.09 -0.13 -0.15
+Latin rule-spaced    h1= 3.21 h2= 2.75 h3= 2.25 h4= 1.83 h5= 1.39  lzma= 2.64
+  twin order-1       h1= 3.25 h2= 3.23 h3= 3.04 h4= 2.38 h5= 1.42  lzma= 3.89   excess(real-twin): -0.04 -0.48 -0.80 -0.56 -0.03
+  twin order-2       h1= 3.24 h2= 2.78 h3= 2.68 h4= 2.32 h5= 1.68  lzma= 3.53   excess(real-twin): -0.03 -0.03 -0.43 -0.49 -0.28
+  twin order-3       h1= 3.24 h2= 2.78 h3= 2.24 h4= 2.07 h5= 1.69  lzma= 3.21   excess(real-twin): -0.03 -0.03 +0.00 -0.24 -0.30

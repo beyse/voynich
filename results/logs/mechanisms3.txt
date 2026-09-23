@@ -1,0 +1,26 @@
+VMS done
+markov3+drift done
+markov4+drift done
+latin done
+latin rule-sp done
+latin indep lines done
+rugg grille done
+timm-schinner v2 done
+verbose+indep done
+autokey 1g/letter done
+autokey 2g/letter done
+
+mechanism            edge_mi  token_mi  break_mi adj_mi_sa space_gai     hapax      zipf      wlen  lex_real lex_synth        h2        h4      lzma lzma_resi  h3_resid   page_mi
+VMS                    0.146     0.078     0.005     0.051     73.7%      0.71     -0.75      5.34      0.79      0.75      1.91      1.72      2.40    -0.039    -0.002     0.232
+markov3+drift          0.167     0.050     0.005     0.030     73.8%      0.71     -0.77      5.28      0.79      0.76      1.92      1.75      2.44    +0.033    +0.012     0.134
+markov4+drift          0.149     0.069    -0.001     0.025     74.1%      0.64     -0.74      5.27      0.81      0.76      1.92      1.69      2.38    -0.030    +0.009     0.138
+latin                  0.034     0.245     0.076     0.079     38.9%      0.59     -0.76      6.06      0.80      0.20      2.72      1.65      2.59    -0.397    +0.016     0.062
+latin rule-sp          0.134     0.198     0.067     0.071     72.8%      0.77     -0.55      6.19      0.62      0.29      2.75      1.82      2.65    -0.429    +0.019     0.043
+latin indep lines      0.035     0.646     0.159     0.204     38.7%      0.35     -0.76      5.85      0.86      0.22      2.70      1.57      1.99    -0.993    +0.008     0.050
+rugg grille            0.006     0.613     0.041     0.157     62.8%      0.41     -0.51      5.35      0.73      0.55      2.58      1.98      2.25    -0.766    +0.031     0.049
+timm-schinner v2       0.010     0.022     0.042     0.042     46.7%      0.62     -0.41      6.36      0.57      0.23      2.69      1.97      1.88    -1.030    +0.022     0.912
+verbose+indep          0.409     1.237     0.136     0.411     47.4%      0.30     -0.77      4.44      0.93      0.64      2.20      1.58      1.53    -0.950    -0.007     0.015
+autokey 1g/letter      0.649     0.160     0.006     0.067     36.5%      0.78     -0.41      5.76      0.39      0.27      3.37      1.66      3.49    -0.310    +0.131     0.003
+autokey 2g/letter      0.615     0.305     0.009     0.123     38.6%      0.70     -0.49      5.97      0.54      0.32      2.63      1.45      2.67    -0.424    +0.043     0.007
+
+samples: autokey1: zeoajckn jlhy sljdkal nhd*d*awr vfn o*sl hwgm byc | autokey2: zdn rdoal iztn wrm som rcn vagl rmszoey | T&S v2: sokaly cheedy eedydy qscthy sqscthy shcheedy qscthy dqscthy

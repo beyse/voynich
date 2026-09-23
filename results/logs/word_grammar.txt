@@ -1,0 +1,93 @@
+glyph  total  %init  %final  %medial   (share of the glyph's occurrences by position)
+   o   22325    0.32    0.05     0.63
+   e   18107    0.01    0.00     0.99
+   h   16298    0.00    0.00     1.00
+   y   16094    0.11    0.88     0.03
+   a   12854    0.14    0.00     0.85
+   c   12045    0.53    0.00     0.47
+   d   11872    0.28    0.05     0.68
+   i   10955    0.00    0.00     1.00
+   k    9948    0.12    0.01     0.87
+   l    9483    0.15    0.57     0.30
+   r    6545    0.07    0.79     0.16
+   s    6511    0.65    0.17     0.22
+   t    5931    0.16    0.01     0.83
+   n    5803    0.00    0.99     0.01
+   q    5343    0.99    0.00     0.01
+   p    1471    0.36    0.02     0.62
+   m     934    0.01    0.97     0.03
+   f     404    0.27    0.04     0.70
+   g     121    0.12    0.94     0.04
+   '      24    0.00    0.12     0.88
+   x      21    0.29    0.33     0.38
+   b      15    0.00    1.00     0.00
+   j      10    0.10    0.30     0.60
+   u       7    0.00    1.00     0.00
+   z       4    0.25    0.00     0.75
+   v       1    1.00    0.00     0.00
+
+slot-grammar coverage: 0.712 of tokens, 0.287 of types
+most frequent non-matching: ['lchedy', 'qokchy', 'qotchy', 'cheky', 'lchey', 'qokchdy', 'opchedy', 'checkhy', 'lkaiin', 'chodaiin', 'olkeedy', 'otchy', 'lshedy', 'qokchedy', 'lkeey', 'olkeey', 'lkeedy', 'choty', 'olchedy', 'pchedy', 'choky', 'kchy', 'tchedy', 'olkain', 'lkain', 'chedaiin', 'otchedy', 'sheckhy', 'chedar', 'sheky']
+
+within-word bigram counts (rows=first glyph, cols=second):
+        o    e    h    y    a    c    d    i    k    l    r    s    t    n    q    p    m    f    g    '
+  o    70  326    0  149  232  484 1988  264 5555 5133 2474  420 3210    5   18  513  162  127   19    6
+  e  2880 4665    0 3759  409  360 4832    6  400    5   15  367  168    3    0   69    2   41   19    7
+  h  3732 7666    2 2038  714  565  982    4  198   64   19  109   90    0    0   27    1    6    6    0
+  y    38    6    1    2   16  240  153    0  622   27   17  116  528    0   12   77    3   21    0    2
+  a     6    9    0   35    4   11   37 6239   34 2642 2852   71    9  106    0    6  703    0   18    3
+  c     0    010101    0    0    0    0    0  837    0    0    0  855    0    0  189    0   62    0    0
+  d   447  109    0 6410 3691  307   20    4   27   69    8  173    5    0    0    8    2    0   11    0
+  i    11    7    0   12    3    7   25 4399    9   47  644   32    4 5685    0    4   50    0    7    0
+  k   655 3592  835  685 2871  969    9   10    0   32    1  207    0    0    0    0    1    0    1    0
+  l   496   39    0  386  324  716  416    0 1017   24   26  419   95    0    2   41    2   36   12    0
+  r   324   10    0  208  570  118   35   13    9   11    3   49    2    1    0    4    0    1    6    0
+  s   334   43 4253   96  515   65   17    4   16    4    1   31    1    0    1    2    0    1    4    0
+  t   600 1431  855  434 1434  913   16    3    1   11    0  167    1    0    0    0    0    0    0    0
+  n    23    0    0   13   12    3    6    0    1    3    0    2    0    0    0    1    0    0    1    0
+  q  5219   60    0   11    7   17    1    0   17    0    0    3    0    0    0    1    0    1    0    6
+  p   222    5  189   65  161  697   29    0    0    0    0   74    0    0    0    0    0    0    0    0
+  m     9    0    0    4    5    3    6    0    0    0    0    1    0    0    0    0    0    0    2    0
+  f    54    1   62   23   57  171    3    0    0    0    0   17    0    0    0    0    0    0    0    0
+  g     3    0    0    0    2    0    0    1    0    0    0    0    0    0    0    0    1    0    0    0
+  '     6    2    0    1    1    1    3    2    2    3    0    0    0    0    0    0    0    0    0    0
+
+line-initial word's first glyph vs mid-line words' first glyph (share):
+  o first=0.137 mid=0.213 ratio=0.64
+  c first=0.036 mid=0.209 ratio=0.17
+  q first=0.130 mid=0.166 ratio=0.78
+  s first=0.148 mid=0.124 ratio=1.19
+  d first=0.155 mid=0.074 ratio=2.10
+  y first=0.146 mid=0.037 ratio=3.95
+  a first=0.004 mid=0.054 ratio=0.07
+  l first=0.017 mid=0.041 ratio=0.41
+  k first=0.026 mid=0.037 ratio=0.70
+  t first=0.097 mid=0.019 ratio=5.11
+  p first=0.093 mid=0.005 ratio=17.78
+  r first=0.002 mid=0.014 ratio=0.18
+
+line-final word's last glyph vs mid-line words' last glyph:
+  y last=0.390 mid=0.422 ratio=0.92
+  n last=0.153 mid=0.161 ratio=0.95
+  l last=0.111 mid=0.164 ratio=0.68
+  r last=0.087 mid=0.150 ratio=0.58
+  s last=0.034 mid=0.031 ratio=1.08
+  o last=0.014 mid=0.032 ratio=0.42
+  m last=0.155 mid=0.009 ratio=16.33
+  d last=0.026 mid=0.015 ratio=1.69
+  g last=0.022 mid=0.001 ratio=25.60
+  k last=0.000 mid=0.003 ratio=0.10
+  e last=0.000 mid=0.003 ratio=0.20
+  h last=0.001 mid=0.002 ratio=0.59
+
+paragraph-initial word's first glyph vs other line-initial words:
+  p par=0.350 other=0.072
+  f par=0.049 other=0.005
+  t par=0.205 other=0.087
+  k par=0.148 other=0.016
+  q par=0.035 other=0.135
+  o par=0.095 other=0.139
+  d par=0.025 other=0.165
+  s par=0.028 other=0.158
+  y par=0.021 other=0.156
+  c par=0.011 other=0.037

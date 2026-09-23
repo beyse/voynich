@@ -1,0 +1,16 @@
+
+Herbal-A, hand 1: 85 pages, 3237 pairs with folio distance >= 3 folios
+  text(words) vs image: r=-0.055 (p=0.789, null sd 0.068) | all pairs r=-0.055 (p=0.783) | text vs folio distance r=+0.115 (p=0.001)
+  text(glyph bigrams) vs image: r=-0.070 (p=0.877, null sd 0.061) | all pairs r=-0.067 (p=0.865) | text vs folio distance r=+0.032 (p=0.177)
+  image vs folio distance: r=+0.071 (p=0.043)
+
+Herbal-B (hands 2/3/5): 25 pages, 251 pairs with folio distance >= 3 folios
+  text(words) vs image: r=+0.223 (p=0.046, null sd 0.128) | all pairs r=+0.250 (p=0.031) | text vs folio distance r=+0.163 (p=0.044)
+  text(glyph bigrams) vs image: r=+0.083 (p=0.219, null sd 0.112) | all pairs r=+0.151 (p=0.090) | text vs folio distance r=+0.177 (p=0.023)
+  image vs folio distance: r=+0.090 (p=0.161)
+
+Positive control (Herbal-A): add k content tokens per page derived from the image features
+  k= 2 description tokens per page (of ~77 words): r=-0.036 (p=0.711)
+  k= 5 description tokens per page (of ~77 words): r=+0.053 (p=0.209)
+  k=10 description tokens per page (of ~77 words): r=+0.195 (p=0.001)
+  k=20 description tokens per page (of ~77 words): r=+0.366 (p=0.001)

@@ -1,0 +1,5 @@
+paragraphs: 283 lines: 4103
+Latin        n= 3488 | across= 0.077 | within(same n)= 0.070±0.008 | inner(same n)= 0.067±0.003 | across-inner(d3)= 0.008 | within d=3 (same n)= 0.007±0.004
+Latin stem4  n= 3488 | across= 0.100 | within(same n)= 0.103±0.012 | inner(same n)= 0.098±0.007 | across-inner(d3)= 0.016 | within d=3 (same n)= 0.012±0.006
+Italian      n= 3488 | across= 0.166 | within(same n)= 0.171±0.012 | inner(same n)= 0.166±0.018 | across-inner(d3)= 0.000 | within d=3 (same n)= 0.009±0.004
+German       n= 3079 | across= 0.055 | within(same n)= 0.060±0.010 | inner(same n)= 0.062±0.009 | across-inner(d3)= 0.012 | within d=3 (same n)= 0.001±0.006

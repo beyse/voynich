@@ -1,0 +1,26 @@
+VMS c=jn         k=1  boundary rate=0.167  H(b)=0.651  H(b|ctx)=0.171  info gain=73.7%  P=0.85 R=0.84 F1=0.85
+VMS c=jn         k=2  boundary rate=0.167  H(b)=0.651  H(b|ctx)=0.148  info gain=77.2%  P=0.89 R=0.88 F1=0.89
+VMS c=jn         k=3  boundary rate=0.167  H(b)=0.651  H(b|ctx)=0.259  info gain=60.2%  P=0.93 R=0.69 F1=0.79
+VMS-A c=jn       k=2  boundary rate=0.173  H(b)=0.666  H(b|ctx)=0.197  info gain=70.4%  P=0.88 R=0.84 F1=0.86
+VMS-B c=jn       k=2  boundary rate=0.166  H(b)=0.647  H(b|ctx)=0.133  info gain=79.5%  P=0.90 R=0.88 F1=0.89
+VMS c=sp         k=1  boundary rate=0.182  H(b)=0.684  H(b|ctx)=0.178  info gain=74.0%  P=0.86 R=0.87 F1=0.86
+VMS c=sp         k=2  boundary rate=0.182  H(b)=0.684  H(b|ctx)=0.157  info gain=77.1%  P=0.91 R=0.87 F1=0.89
+VMS c=sp         k=3  boundary rate=0.182  H(b)=0.684  H(b|ctx)=0.272  info gain=60.2%  P=0.94 R=0.69 F1=0.80
+VMS-A c=sp       k=2  boundary rate=0.189  H(b)=0.699  H(b|ctx)=0.213  info gain=69.6%  P=0.91 R=0.81 F1=0.86
+VMS-B c=sp       k=2  boundary rate=0.180  H(b)=0.680  H(b|ctx)=0.141  info gain=79.2%  P=0.92 R=0.88 F1=0.90
+Latin            k=1  boundary rate=0.147  H(b)=0.603  H(b|ctx)=0.370  info gain=38.7%  P=0.81 R=0.42 F1=0.55
+Latin            k=2  boundary rate=0.147  H(b)=0.603  H(b|ctx)=0.232  info gain=61.6%  P=0.88 R=0.72 F1=0.79
+Latin            k=3  boundary rate=0.147  H(b)=0.603  H(b|ctx)=0.392  info gain=35.0%  P=0.97 R=0.37 F1=0.54
+Italian          k=1  boundary rate=0.232  H(b)=0.781  H(b|ctx)=0.445  info gain=43.1%  P=0.76 R=0.54 F1=0.63
+Italian          k=2  boundary rate=0.232  H(b)=0.781  H(b|ctx)=0.362  info gain=53.6%  P=0.89 R=0.67 F1=0.76
+Italian          k=3  boundary rate=0.232  H(b)=0.781  H(b|ctx)=0.627  info gain=19.7%  P=0.97 R=0.22 F1=0.36
+German           k=1  boundary rate=0.189  H(b)=0.699  H(b|ctx)=0.386  info gain=44.9%  P=0.76 R=0.58 F1=0.66
+German           k=2  boundary rate=0.189  H(b)=0.699  H(b|ctx)=0.295  info gain=57.8%  P=0.87 R=0.70 F1=0.77
+German           k=3  boundary rate=0.189  H(b)=0.699  H(b|ctx)=0.487  info gain=30.4%  P=0.96 R=0.38 F1=0.54
+Hebrew           k=1  boundary rate=0.206  H(b)=0.734  H(b|ctx)=0.440  info gain=40.1%  P=0.82 R=0.44 F1=0.57
+Hebrew           k=2  boundary rate=0.206  H(b)=0.734  H(b|ctx)=0.423  info gain=42.3%  P=0.88 R=0.52 F1=0.65
+Hebrew           k=3  boundary rate=0.206  H(b)=0.734  H(b|ctx)=0.603  info gain=17.8%  P=0.95 R=0.22 F1=0.36
+(rule-spaced Latin: 34342 'words', mean len 6.19)
+Latin rule-spaced k=1  boundary rate=0.145  H(b)=0.598  H(b|ctx)=0.160  info gain=73.2%  P=0.76 R=0.95 F1=0.84
+Latin rule-spaced k=2  boundary rate=0.145  H(b)=0.598  H(b|ctx)=0.160  info gain=73.3%  P=0.86 R=0.88 F1=0.87
+Latin rule-spaced k=3  boundary rate=0.145  H(b)=0.598  H(b|ctx)=0.340  info gain=43.2%  P=0.97 R=0.52 F1=0.68

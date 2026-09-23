@@ -1,0 +1,23 @@
+=== basic_stats 00:38:59
+=== bpe 00:39:00
+=== boundary 00:39:06
+=== spaces 00:39:15
+=== lexicon 00:39:18
+=== lexicon_chunks 00:39:23
+=== entropy_rate 00:39:27
+=== agreement 00:39:45
+=== direction 00:39:50
+=== vertical 00:39:50
+=== lineunit 00:39:53
+FAILED lineunit
+=== lineunit_nat 00:39:56
+=== edges 00:39:57
+=== nullmodels2 00:39:58
+=== pmi_similarity 00:40:04
+=== labels 00:40:08
+=== selfcitation 00:40:08
+=== word_grammar 00:40:11
+=== wordorder 00:40:11
+=== template 00:40:14
+=== families 00:40:16
+=== done 00:40:19

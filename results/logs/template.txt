@@ -1,0 +1,16 @@
+K=150 top families + OTHER; excess MI in bits
+VMS raw        I(word;position)=0.092  I(word;prev)=0.144  I(word;prev | middle only)=0.153   H(word)=4.51
+VMS light      I(word;position)=0.115  I(word;prev)=0.228  I(word;prev | middle only)=0.242   H(word)=5.33
+VMS heavy      I(word;position)=0.098  I(word;prev)=0.216  I(word;prev | middle only)=0.220   H(word)=5.60
+Latin (chunks) I(word;position)=-0.001  I(word;prev)=0.187  I(word;prev | middle only)=0.170   H(word)=3.56
+Latin stem4    I(word;position)=0.000  I(word;prev)=0.248  I(word;prev | middle only)=0.227   H(word)=4.88
+Italian        I(word;position)=0.000  I(word;prev)=0.512  I(word;prev | middle only)=0.484   H(word)=4.59
+Dante verse lines I(word;position)=0.231  I(word;prev)=0.589  I(word;prev | middle only)=0.652   H(word)=4.57
+
+top heavy-families by line position:
+  first   [('doin', 0.055), ('okey', 0.04), ('chey', 0.031), ('oin', 0.03), ('or', 0.027), ('okoin', 0.025), ('ol', 0.024), ('kchey', 0.022)]
+  second  [('chey', 0.094), ('okey', 0.055), ('ol', 0.036), ('chol', 0.035), ('or', 0.031), ('okoin', 0.03), ('oin', 0.028), ('chor', 0.027)]
+  middle  [('okey', 0.074), ('chey', 0.067), ('okoin', 0.047), ('ol', 0.03), ('okol', 0.028), ('doin', 0.028), ('oin', 0.028), ('or', 0.025)]
+  last    [('doin', 0.056), ('okoin', 0.042), ('oin', 0.037), ('y', 0.037), ('oky', 0.026), ('chey', 0.025), ('ol', 0.023), ('okey', 0.02)]
+
+'o'-initial share: single-word text lines 0.19 (n=26), labels 0.54, line-first words 0.13, middle words 0.22

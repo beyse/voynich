@@ -1,0 +1,16 @@
+=== mechanisms3 00:38:59
+=== naibbe 00:39:21
+=== naibbe_stateful 00:39:32
+=== markov_hier 00:39:38
+=== markov_hi 00:39:53
+=== oos 00:40:01
+=== takahashi 00:40:05
+=== drift 00:40:12
+=== hand_vs_section 00:40:15
+=== hand_by_distance 00:40:18
+=== zodiac_labels 00:40:19
+=== page_colors 00:40:19
+=== text_vs_image 00:40:20
+=== text_vs_image2 00:40:30
+=== section_within_hand 00:40:45
+=== done 00:40:47

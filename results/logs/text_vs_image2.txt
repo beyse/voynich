@@ -1,0 +1,19 @@
+Herbal-B pages by hand: Counter({'2': 20, '5': 5})
+  Herbal-B, permutation within hand: text(words) vs image r=+0.223 p=0.076 | all pairs r=+0.250 p=0.039
+  Herbal-B, permutation within hand: text(glyph bigrams) vs image r=+0.083 p=0.445 | all pairs r=+0.151 p=0.211
+  Herbal-B, same-hand pairs only, within-hand permutation: text(words) vs image r=+0.144 p=0.139
+  Herbal-B, same-hand pairs only, within-hand permutation: text(glyph bigrams) vs image r=-0.057 p=0.687
+  Herbal-B hand 2 only (20 pages): text(words) vs image r=+0.143 p=0.144 | all pairs r=+0.156 p=0.120
+  Herbal-B hand 2 only (20 pages): text(glyph bigrams) vs image r=-0.036 p=0.584 | all pairs r=-0.005 p=0.491
+  Herbal-A (85 pages, 10000 perms): text(words) vs image r=-0.055 p=0.788
+  Herbal-A (85 pages, 10000 perms): text(glyph bigrams) vs image r=-0.070 p=0.874
+    feature green         r=-0.102 p=0.977
+    feature blue          r=-0.049 p=0.754
+    feature red           r=+0.000 p=0.487
+    feature green_y       r=-0.085 p=0.945
+    feature green_x       r=-0.006 p=0.543
+    feature red_y         r=+0.035 p=0.218
+    feature green_hue     r=-0.020 p=0.643
+    feature blue_frac     r=-0.059 p=0.800
+    feature red_frac      r=-0.014 p=0.571
+    feature colour_total  r=-0.120 p=0.994

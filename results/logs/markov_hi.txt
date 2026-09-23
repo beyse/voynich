@@ -1,0 +1,6 @@
+real: share of word bigrams in half B attested in half A: 0.137
+mechanism          edge_mi  token_mi adj_mi_sa     d2_mi     hapax  lex_real lex_synth lzma_resi   page_mi  lines_copied  bigrams_attested
+markov3+drift        0.167     0.050     0.030     0.026      0.71      0.79      0.76    +0.033     0.134        0.000             0.164
+markov4+drift        0.149     0.069     0.025     0.028      0.64      0.81      0.76    -0.030     0.138        0.000             0.175
+markov5+drift        0.163     0.106     0.047     0.031      0.55      0.83      0.75    -0.105     0.134        0.003             0.223
+markov6+drift        0.160     0.173     0.078     0.045      0.48      0.84      0.74    -0.173     0.144        0.008             0.325

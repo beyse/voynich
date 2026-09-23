@@ -1,0 +1,32 @@
+pages per (language, section, hand):
+   ('A', 'H', '1') 51
+   ('A', 'P', '1') 16
+   ('A', 'S', '3') 2
+   ('A', 'T', '1') 1
+   ('B', 'B', '2') 19
+   ('B', 'C', '2') 2
+   ('B', 'H', '2') 19
+   ('B', 'H', '3') 5
+   ('B', 'H', '5') 5
+   ('B', 'S', '3') 22
+   ('B', 'T', '2') 4
+   ('B', 'T', '5') 1
+
+mean JSD between pages (n pairs):
+  diff lang diff sect  diff hand  0.2384  (n=7704)
+  diff lang diff sect  same hand  0.1771  (n=20)
+  diff lang same sect  diff hand  0.2282  (n=2968)
+  diff lang same sect  same hand  0.1948  (n=88)
+  same lang diff sect  diff hand  0.1736  (n=3062)
+  same lang diff sect  same hand  0.1802  (n=3190)
+  same lang same sect  diff hand  0.1516  (n=438)
+  same lang same sect  same hand  0.1489  (n=3992)
+
+within same Currier language:
+  lang A: diff sect diff hand  0.2217 (n=136)
+  lang A: diff sect same hand  0.1876 (n=883)
+  lang A: same sect same hand  0.1546 (n=1396)
+  lang B: diff sect diff hand  0.1682 (n=1395)
+  lang B: diff sect same hand  0.1720 (n=712)
+  lang B: same sect diff hand  0.1527 (n=219)
+  lang B: same sect same hand  0.1353 (n=600)

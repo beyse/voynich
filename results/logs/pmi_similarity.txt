@@ -1,0 +1,18 @@
+VMS raw      total excess= 0.203 | ED=0:  0.027 ED=1:  0.105 ED=2:  0.146 ED>=3: -0.075
+   top: s aiin(49), or aiin(48), o l(17), r aiin(20), r ain(12), chol chol(22), ar aiin(22), shedy qokedy(19), shey qokain(16), chedy qokeey(19), qokedy qokedy(15), ol shedy(22)
+VMS light    total excess= 0.309 | ED=0:  0.041 ED=1:  0.079 ED=2:  0.135 ED>=3:  0.055
+   top: or ain(67), s ain(57), qokedy qokedy(78), chedy qokedy(90), chedy qokain(80), r ain(34), ar ain(38), chey qokain(60), ol chedy(52), qol chedy(31), chol chol(37), chedy qokey(48)
+VMS heavy    total excess= 0.292 | ED=0:  0.052 ED=1:  0.062 ED=2:  0.114 ED>=3:  0.064
+   top: okey okey(348), or oin(117), chey okey(264), ol chey(143), chey okoin(182), s oin(64), okoin chey(131), r oin(35), okol chey(89), okoin chckhy(48), o l(21), chol chol(39)
+VMS-A light  total excess= 0.150 | ED=0:  0.040 ED=1:  0.080 ED=2:  0.150 ED>=3: -0.120
+   top: s ain(22), chol chol(35), o l(7), chey key(9), d ain(6), or ain(8), s oin(6), okain okain(6), y kain(5), chol dain(29), chy dain(18), y ky(5)
+VMS-B light  total excess= 0.299 | ED=0:  0.029 ED=1:  0.060 ED=2:  0.115 ED>=3:  0.095
+   top: or ain(58), s ain(35), qokedy qokedy(78), chedy qokedy(90), r ain(31), chedy qokain(80), chey qokain(60), ar ain(34), ol chedy(52), qol chedy(31), chedy qokey(48), qokain chckhy(32)
+Latin        total excess= 0.262 | ED=0: -0.003 ED=1: -0.000 ED=2:  0.022 ED>=3:  0.243
+   top: populi romani(29), ad eum(35), milia passuum(18), ad caesarem(23), certior factus(11), populo romano(11), his rebus(18), milibus passuum(10), a caesare(12), postero die(9), omnibus copiis(12), in gallia(19)
+Latin stem4  total excess= 0.347 | ED=0: -0.003 ED=1: -0.001 ED=2:  0.022 ED>=3:  0.329
+   top: popu roma(54), mili pass(31), ad eum(35), his rebu(18), cert fact(14), in gall(30), c ivli(7), ab iis(13), in cast(26), flum tran(11), ad se(24), supr demo(7)
+Italian      total excess= 0.406 | ED=0:  0.002 ED=1:  0.014 ED=2:  0.126 ED>=3:  0.265
+   top: ch i(54), de la(59), a me(49), li occhi(34), inferno canto(24), e l(95), l altro(37), che l(85), ch io(42), ed elli(20), li altri(24), se tu(28)
+German       total excess= 0.210 | ED=0:  0.009 ED=1: -0.002 ED=2:  0.021 ED>=3:  0.182
+   top: aus dem(21), hab ich(22), das ist(34), hast du(16), die hexe(15), ich bin(19), es ist(23), die welt(16), in der(25), wenn ich(20), bist du(12), bin ich(16)

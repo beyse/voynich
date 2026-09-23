@@ -1,0 +1,9 @@
+zodiac      pages= 12 label tokens= 330 types= 271  recurrence across pages: 0.276   null (text words of same pages/section): 0.363
+astro       pages=  5 label tokens= 142 types= 136  recurrence across pages: 0.028   null (text words of same pages/section): 0.273
+pharma      pages= 15 label tokens= 234 types= 219  recurrence across pages: 0.090   null (text words of same pages/section): 0.364
+biological  pages= 11 label tokens= 122 types= 111  recurrence across pages: 0.115   null (text words of same pages/section): 0.342
+cosmo       pages=  5 label tokens= 196 types= 181  recurrence across pages: 0.020   null (text words of same pages/section): 0.277
+herbal      pages=  6 label tokens=  30 types=  19  recurrence across pages: 0.000   null (text words of same pages/section): 0.042
+
+zodiac labels on >=2 sign pages: [('oky', 4), ('otal', 4), ('otaly', 4), ('okeey', 4), ('am', 3), ('ar', 3), ('otar', 3), ('okal', 3), ('okeody', 3), ('okeoly', 2), ('okaram', 2), ('okydy', 2), ('otaldar', 2), ('arar', 2), ('chy', 2), ('okealar', 2), ('araly', 2), ('otalaiin', 2), ('otaiin', 2), ('shar', 2), ('char', 2), ('otaraldy', 2), ('ary', 2), ('okalar', 2), ('okam', 2)]
+zodiac pages: ['f70v1', 'f70v2', 'f71r', 'f71v', 'f72r1', 'f72r2', 'f72r3', 'f72v1', 'f72v2', 'f72v3', 'f73r', 'f73v']

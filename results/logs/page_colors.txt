@@ -1,0 +1,9 @@
+green: mean 0.082 sd 0.047 min 0.000 max 0.234
+blue: mean 0.003 sd 0.006 min 0.000 max 0.031
+red: mean 0.049 sd 0.024 min 0.004 max 0.137
+colour_total: mean 0.133 sd 0.052 min 0.008 max 0.285
+f1r {'green': 0.0, 'blue': 0.0, 'red': 0.063, 'green_y': 0.5, 'green_x': 0.5, 'red_y': 0.669, 'blue_y': 0.5, 'green_hue': 0.0, 'blue_frac': 0.0, 'red_frac': 1.0, 'colour_total': 0.063}
+f2r {'green': 0.102, 'blue': 0.0, 'red': 0.076, 'green_y': 0.456, 'green_x': 0.536, 'red_y': 0.524, 'blue_y': 0.5, 'green_hue': 98.36, 'blue_frac': 0.0, 'red_frac': 0.426, 'colour_total': 0.178}
+f26r {'green': 0.102, 'blue': 0.0, 'red': 0.03, 'green_y': 0.51, 'green_x': 0.481, 'red_y': 0.746, 'blue_y': 0.062, 'green_hue': 147.111, 'blue_frac': 0.003, 'red_frac': 0.228, 'colour_total': 0.132}
+f27r {'green': 0.169, 'blue': 0.0, 'red': 0.023, 'green_y': 0.446, 'green_x': 0.629, 'red_y': 0.712, 'blue_y': 0.5, 'green_hue': 147.154, 'blue_frac': 0.0, 'red_frac': 0.118, 'colour_total': 0.192}
+f58r {'green': 0.0, 'blue': 0.0, 'red': 0.008, 'green_y': 0.5, 'green_x': 0.5, 'red_y': 0.356, 'blue_y': 0.5, 'green_hue': 0.0, 'blue_frac': 0.0, 'red_frac': 1.0, 'colour_total': 0.008}

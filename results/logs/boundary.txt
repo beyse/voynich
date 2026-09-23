@@ -1,0 +1,48 @@
+excess MI (bits) of adjacent inner pairs over within-line shuffle, for various projections:
+VMS c=jn       word= 0.076 last1|first1= 0.146 last2|first2= 0.184 last1|word_b= 0.138 word_a|first1= 0.142 last2|word_b= 0.150 word_a|first2= 0.152 len_a|len_b= 0.015
+VMSA c=jn      word= 0.047 last1|first1= 0.082 last2|first2= 0.109 last1|word_b= 0.076 word_a|first1= 0.077 last2|word_b= 0.078 word_a|first2= 0.091 len_a|len_b= 0.013
+VMSB c=jn      word= 0.081 last1|first1= 0.187 last2|first2= 0.227 last1|word_b= 0.159 word_a|first1= 0.172 last2|word_b= 0.172 word_a|first2= 0.183 len_a|len_b= 0.016
+VMS c=sp       word= 0.127 last1|first1= 0.182 last2|first2= 0.235 last1|word_b= 0.174 word_a|first1= 0.191 last2|word_b= 0.177 word_a|first2= 0.202 len_a|len_b= 0.020
+VMSA c=sp      word= 0.087 last1|first1= 0.121 last2|first2= 0.157 last1|word_b= 0.103 word_a|first1= 0.111 last2|word_b= 0.093 word_a|first2= 0.121 len_a|len_b= 0.012
+VMSB c=sp      word= 0.131 last1|first1= 0.230 last2|first2= 0.288 last1|word_b= 0.202 word_a|first1= 0.230 last2|word_b= 0.207 word_a|first2= 0.237 len_a|len_b= 0.025
+Latin          word= 0.242 last1|first1= 0.037 last2|first2= 0.212 last1|word_b= 0.234 word_a|first1= 0.167 last2|word_b= 0.308 word_a|first2= 0.234 len_a|len_b= 0.005
+Italian        word= 0.409 last1|first1= 0.152 last2|first2= 0.422 last1|word_b= 0.337 word_a|first1= 0.356 last2|word_b= 0.469 word_a|first2= 0.421 len_a|len_b= 0.031
+German         word= 0.216 last1|first1= 0.056 last2|first2= 0.173 last1|word_b= 0.191 word_a|first1= 0.156 last2|word_b= 0.199 word_a|first2= 0.217 len_a|len_b= 0.017
+Hebrew         word= 0.178 last1|first1= 0.047 last2|first2= 0.332 last1|word_b= 0.212 word_a|first1= 0.218 last2|word_b= 0.278 word_a|first2= 0.257 len_a|len_b= 0.002
+
+VMS (comma joined): word-pair excess over within-line null by ED bucket, and top over-represented adjacent pairs
+  ED=0:  0.004 ED=1:  0.030 ED=2:  0.012 ED>=3:  0.030
+  top pairs by (obs-null)/sqrt(null):
+           s aiin     obs= 23 null=  2.6 z=10.7
+          or aiin     obs= 24 null=  4.6 z= 8.2
+           r aiin     obs=  8 null=  1.1 z= 4.7
+       chedy qokeey   obs= 19 null=  6.9 z= 4.3
+      sheedy qokeedy  obs=  8 null=  1.4 z= 4.3
+       qokar shedy    obs=  9 null=  1.9 z= 4.2
+           s or       obs=  9 null=  2.1 z= 3.9
+          ol shedy    obs= 15 null=  5.6 z= 3.6
+         qol chedy    obs= 11 null=  3.8 z= 3.3
+       chedy qokain   obs= 16 null=  6.9 z= 3.3
+          ar aiin     obs= 11 null=  3.9 z= 3.2
+          ol chedy    obs= 15 null=  6.5 z= 3.1
+        shey qokain   obs= 13 null=  5.2 z= 3.1
+       chedy qokar    obs= 10 null=  3.5 z= 3.1
+      qokain chckhy   obs=  8 null=  2.4 z= 3.1
+      qokeey qokedy   obs=  8 null=  2.5 z= 2.9
+       shedy qokaiin  obs= 14 null=  6.4 z= 2.8
+      qokeey daiin    obs= 10 null=  4.2 z= 2.5
+       shedy qokeedy  obs= 13 null=  6.4 z= 2.4
+          or ol       obs= 11 null=  5.1 z= 2.4
+  most UNDER-represented (obs<<null):
+       daiin daiin    obs=  8 null= 12.8 z=-1.3
+       chedy qokeedy  obs=  9 null=  9.4 z=-0.1
+      qokedy chedy    obs=  9 null=  8.5 z= 0.2
+      qokain shedy    obs=  8 null=  7.2 z= 0.3
+      qokedy qokedy   obs= 14 null= 13.0 z= 0.3
+      qokedy shedy    obs=  9 null=  7.8 z= 0.4
+     qokaiin shedy    obs=  8 null=  6.6 z= 0.5
+      qokain chedy    obs= 11 null=  8.8 z= 0.7
+      qokeey qokeedy  obs=  9 null=  6.4 z= 1.0
+       qokal chedy    obs=  8 null=  5.5 z= 1.0
+
+P(ED<=1) for random word pairs: same line 0.036, same page 0.038, same language 0.020

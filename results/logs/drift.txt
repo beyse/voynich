@@ -1,0 +1,8 @@
+VMS              lang A (70 pages): same page (halves): 0.1465 (n=57)  d=1-2: 0.1242 (n=72)  d=3-6: 0.1448 (n=106)  d=7-14: 0.1499 (n=124)  d=15-40: 0.1504 (n=361)  d>40: 0.1608 (n=733)  other section: 0.1928 (n=1019)
+VMS              lang B (78 pages): same page (halves): 0.1539 (n=74)  d=1-2: 0.1255 (n=100)  d=3-6: 0.1368 (n=147)  d=7-14: 0.1341 (n=201)  d=15-40: 0.1470 (n=226)  d>40: 0.1469 (n=167)  other section: 0.1687 (n=2162)
+markov3+drift    lang A (82 pages): same page (halves): 0.1402 (n=66)  d=1-2: 0.0928 (n=99)  d=3-6: 0.0935 (n=145)  d=7-14: 0.0943 (n=196)  d=15-40: 0.0935 (n=594)  d>40: 0.0942 (n=1040)  other section: 0.1485 (n=1247)
+markov3+drift    lang B (77 pages): same page (halves): 0.1303 (n=74)  d=1-2: 0.0855 (n=95)  d=3-6: 0.0851 (n=148)  d=7-14: 0.0853 (n=199)  d=15-40: 0.0921 (n=225)  d>40: 0.0921 (n=146)  other section: 0.1225 (n=2113)
+markov4+drift    lang A (77 pages): same page (halves): 0.1356 (n=62)  d=1-2: 0.0930 (n=78)  d=3-6: 0.0930 (n=127)  d=7-14: 0.0937 (n=172)  d=15-40: 0.0942 (n=501)  d>40: 0.0925 (n=939)  other section: 0.1495 (n=1109)
+markov4+drift    lang B (78 pages): same page (halves): 0.1298 (n=75)  d=1-2: 0.0852 (n=100)  d=3-6: 0.0868 (n=147)  d=7-14: 0.0871 (n=201)  d=15-40: 0.0898 (n=226)  d>40: 0.0926 (n=167)  other section: 0.1235 (n=2162)
+latin (chunk)    lang A (89 pages): same page (halves): 0.2600 (n=73)  d=1-2: 0.1833 (n=110)  d=3-6: 0.1883 (n=177)  d=7-14: 0.1949 (n=256)  d=15-40: 0.1921 (n=717)  d>40: 0.1916 (n=1276)  other section: 0.1931 (n=1380)
+latin (chunk)    lang B (78 pages): same page (halves): 0.2613 (n=76)  d=1-2: 0.1817 (n=100)  d=3-6: 0.1865 (n=147)  d=7-14: 0.1861 (n=201)  d=15-40: 0.1893 (n=226)  d>40: 0.1925 (n=167)  other section: 0.1890 (n=2162)

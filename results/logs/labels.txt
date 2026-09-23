@@ -1,0 +1,17 @@
+labels total: 1164 distinct: 833
+by section: Counter({'Z': 344, 'P': 241, 'C': 212, 'A': 148, 'B': 126, 'T': 62, 'H': 31})
+label tokens that also occur in paragraph text: 0.608
+  section H: 0.77 in text; mean len 2.13; first-glyph [('o', 7), ('y', 6), ('e', 4), ('d', 3), ('k', 3)]
+  section C: 0.62 in text; mean len 5.22; first-glyph [('o', 115), ('d', 29), ('a', 16), ('s', 13), ('c', 13)]
+  section T: 0.81 in text; mean len 2.32; first-glyph [('s', 11), ('d', 8), ('o', 8), ('y', 7), ('r', 5)]
+  section A: 0.59 in text; mean len 5.47; first-glyph [('o', 68), ('y', 18), ('d', 18), ('c', 15), ('s', 10)]
+  section Z: 0.59 in text; mean len 5.58; first-glyph [('o', 232), ('y', 32), ('a', 30), ('c', 21), ('s', 10)]
+  section B: 0.74 in text; mean len 5.13; first-glyph [('o', 75), ('d', 21), ('s', 11), ('l', 6), ('y', 4)]
+  section P: 0.49 in text; mean len 5.83; first-glyph [('o', 122), ('d', 27), ('c', 27), ('s', 26), ('y', 14)]
+
+label first glyph overall: [('o', 627), ('d', 114), ('y', 93), ('s', 82), ('c', 80), ('a', 67), ('k', 16), ('l', 16), ('r', 15), ('e', 15)]
+text first glyph overall : [('o', 7188), ('c', 6398), ('q', 5310), ('s', 4252), ('d', 3294), ('a', 1817), ('y', 1757), ('l', 1408), ('k', 1203), ('t', 963)]
+
+label duplicates: [('o', 15), ('y', 14), ('s', 12), ('otedy', 10), ('otaly', 9), ('d', 8), ('oky', 8), ('ar', 8), ('okal', 7), ('otar', 7), ('okol', 7), ('otal', 7), ('l', 6), ('am', 6), ('dy', 6)]
+
+Zodiac labels sample: [('f70v2', 'otalalg'), ('f70v2', 'ykary'), ('f70v2', 'oty'), ('f70v2', 'oky'), ('f70v2', 'ody'), ('f70v2', 'oty'), ('f70v2', 'ar'), ('f70v2', 'okala'), ('f70v2', 'otody'), ('f70v2', 'otald'), ('f70v2', 'otaldar'), ('f70v2', 'okody'), ('f70v2', 'opysam'), ('f70v2', 'chy'), ('f70v2', 'otaly'), ('f70v2', 'otal'), ('f70v2', 'arar'), ('f70v2', 'otaldy'), ('f70v2', 'okeoly'), ('f70v2', 'okydy'), ('f70v2', 'okees'), ('f70v2', 'otar'), ('f70v2', 'am'), ('f70v2', 'otar'), ('f70v2', 'al'), ('f70v2', 'otalar'), ('f70v2', 'otalam'), ('f70v2', 'dolaram'), ('f70v2', 'okaram'), ('f70v2', 'oteosal')]

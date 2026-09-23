@@ -1,0 +1,15 @@
+
+hand 1: {'H': 95, 'P': 16} pages; majority baseline 0.86
+  exclude |folio diff|<= 0 folios: words 0.79  glyph-bigrams 0.75  nearest-folio-only 0.97  (n=111)
+  exclude |folio diff|<= 5 folios: words 0.79  glyph-bigrams 0.75  nearest-folio-only 0.84  (n=111)
+  exclude |folio diff|<=15 folios: words 0.81  glyph-bigrams 0.80  nearest-folio-only 0.85  (n=86)
+
+hand 2: {'H': 20, 'B': 19} pages; majority baseline 0.51
+  exclude |folio diff|<= 0 folios: words 0.74  glyph-bigrams 0.95  nearest-folio-only 1.00  (n=39)
+  exclude |folio diff|<= 5 folios: words 0.68  glyph-bigrams 0.89  nearest-folio-only 0.95  (n=37)
+  exclude |folio diff|<=15 folios: words 0.42  glyph-bigrams 0.79  nearest-folio-only 0.49  (n=19)
+
+hand 3: {'S': 24, 'H': 7} pages; majority baseline 0.77
+  exclude |folio diff|<= 0 folios: words 0.81  glyph-bigrams 0.77  nearest-folio-only 0.97  (n=31)
+  exclude |folio diff|<= 5 folios: words 0.77  glyph-bigrams 0.77  nearest-folio-only 0.71  (n=31)
+  exclude |folio diff|<=15 folios: words 0.77  glyph-bigrams 0.65  nearest-folio-only 0.03  (n=31)

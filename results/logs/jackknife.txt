@@ -1,0 +1,29 @@
+quires: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'M', 'N', 'O', 'Q', 'S', 'T']
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+M
+N
+O
+Q
+S
+T
+edge_mi          0.1459  jackknife SE 0.0241  95% CI [0.0987, 0.1932]
+token_mi         0.0806  jackknife SE 0.0236  95% CI [0.0343, 0.1270]
+break_mi         0.0042  jackknife SE 0.0104  95% CI [-0.0161, 0.0245]
+adj_mi_same_n    0.0577  jackknife SE 0.0220  95% CI [0.0146, 0.1007]
+space_gain       0.7368  jackknife SE 0.0179  95% CI [0.7016, 0.7719]
+hapax            0.7099  jackknife SE 0.0061  95% CI [0.6979, 0.7219]
+zipf            -0.7531  jackknife SE 0.0337  95% CI [-0.8192, -0.6870]
+lex_real         0.7923  jackknife SE 0.0257  95% CI [0.7419, 0.8427]
+lex_synth        0.7536  jackknife SE 0.0251  95% CI [0.7044, 0.8028]
+lex_gap          0.0387  jackknife SE 0.0212  95% CI [-0.0029, 0.0803]
+h2               1.9053  jackknife SE 0.0474  95% CI [1.8123, 1.9982]
+h4               1.7172  jackknife SE 0.0245  95% CI [1.6692, 1.7652]

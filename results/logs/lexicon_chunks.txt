@@ -1,0 +1,25 @@
+corpus                  tokens  types    TTR  hapax   wlen  alph     h1     h2   zipf
+VMS                      32428   7846  0.242   0.71   5.34    27   3.89   2.12  -0.75
+Latin words              32428   7926  0.244   0.59   6.06    24   4.02   3.30  -0.76
+Latin 3-chunks           32428   2694  0.083   0.21   3.00    24   3.80   3.41  -0.41
+Latin 4-chunks           32428   9596  0.296   0.47   4.00    24   3.91   3.51  -0.37
+Latin 5-chunks           32428  17660  0.545   0.69   5.00    24   3.98   3.57  -0.36
+Latin 3-7 var            32428  22659  0.699   0.83   4.99    24   3.97   3.57  -0.39
+Latin rule msty          32428  13494  0.416   0.77   6.19    24   4.02   3.13  -0.55
+Latin rule vowels        32428  13526  0.417   0.63   4.81    24   3.97   3.26  -0.41
+Latin bisyl              32428  12968  0.400   0.63   5.12    24   3.98   3.41  -0.44
+Latin trisyl             32428  24958  0.770   0.87   7.68    24   4.05   3.50  -0.42
+Italian bisyl            32428  14652  0.452   0.66   4.73    36   4.07   3.40  -0.43
+
+lexicon test (k=2 glyph context): attested share of synthetic vs real held-out
+VMS            k=2  bits/glyph: real= 1.90 synth= 1.89  | attested-in-train share: real tokens 0.79, synth tokens 0.76 | types: real 0.36, synth 0.30 | mean len real 5.34 synth 5.31
+Latin words    k=2  bits/glyph: real= 2.67 synth= 2.67  | attested-in-train share: real tokens 0.80, synth tokens 0.20 | types: real 0.48, synth 0.03 | mean len real 6.04 synth 5.90
+Latin 3-chunks k=2  bits/glyph: real= 3.15 synth= 3.07  | attested-in-train share: real tokens 0.96, synth tokens 0.26 | types: real 0.82, synth 0.25 | mean len real 3.00 synth 2.99
+Latin 4-chunks k=2  bits/glyph: real= 3.26 synth= 3.19  | attested-in-train share: real tokens 0.77, synth tokens 0.10 | types: real 0.57, synth 0.14 | mean len real 4.00 synth 3.99
+Latin 5-chunks k=2  bits/glyph: real= 3.30 synth= 3.23  | attested-in-train share: real tokens 0.50, synth tokens 0.03 | types: real 0.35, synth 0.04 | mean len real 5.00 synth 4.95
+Latin 3-7 var  k=2  bits/glyph: real= 3.30 synth= 3.23  | attested-in-train share: real tokens 0.34, synth tokens 0.23 | types: real 0.21, synth 0.16 | mean len real 4.99 synth 4.89
+Latin rule msty k=2  bits/glyph: real= 2.74 synth= 2.76  | attested-in-train share: real tokens 0.62, synth tokens 0.28 | types: real 0.28, synth 0.09 | mean len real 6.20 synth 5.95
+Latin rule vowels k=2  bits/glyph: real= 3.00 synth= 2.96  | attested-in-train share: real tokens 0.64, synth tokens 0.12 | types: real 0.42, synth 0.14 | mean len real 4.81 synth 4.78
+Latin bisyl    k=2  bits/glyph: real= 2.99 synth= 2.94  | attested-in-train share: real tokens 0.65, synth tokens 0.09 | types: real 0.42, synth 0.09 | mean len real 5.13 synth 5.07
+Latin trisyl   k=2  bits/glyph: real= 3.08 synth= 3.05  | attested-in-train share: real tokens 0.25, synth tokens 0.00 | types: real 0.16, synth 0.00 | mean len real 7.68 synth 6.93
+Italian bisyl  k=2  bits/glyph: real= 3.12 synth= 3.04  | attested-in-train share: real tokens 0.60, synth tokens 0.27 | types: real 0.40, synth 0.14 | mean len real 4.72 synth 4.69

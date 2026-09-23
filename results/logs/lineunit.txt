@@ -1,0 +1,14 @@
+paragraphs: 283 lines: 4103
+VMS none     n= 3820 | across= 0.005 | within(same n)= 0.062±0.007 | inner(same n)= 0.071±0.006 | across-inner(d3)= 0.025 | within d=3 (same n)= 0.019±0.005
+VMS light    n= 3820 | across= 0.022 | within(same n)= 0.145±0.015 | inner(same n)= 0.162±0.012 | across-inner(d3)= 0.051 | within d=3 (same n)= 0.051±0.009
+VMS heavy    n= 3820 | across= 0.029 | within(same n)= 0.198±0.011 | inner(same n)= 0.195±0.015 | across-inner(d3)= 0.100 | within d=3 (same n)= 0.081±0.010
+VMS-A light  n= 1408 | across= 0.019 | within(same n)= 0.052±0.016 | inner(same n)= 0.058±0.015 | across-inner(d3)= 0.013 | within d=3 (same n)= 0.010±0.013
+VMS-B light  n= 2348 | across= 0.017 | within(same n)= 0.145±0.020 | inner(same n)= 0.165±0.010 | across-inner(d3)= 0.016 | within d=3 (same n)= 0.039±0.015
+Traceback (most recent call last):
+  File "/Users/sebastianbeyer/git/voynich/scripts/scripts_lineunit.py", line 76, in <module>
+    run(chunk(la),lambda x:x,'Latin'); run(chunk(la),lambda x:x[:4],'Latin stem4')
+  File "/Users/sebastianbeyer/git/voynich/scripts/scripts_lineunit.py", line 34, in run
+    across=[(f(p[k][-1]),f(p[k+1][0])) for p in paras for k in range(len(p)-1)]
+  File "/Users/sebastianbeyer/git/voynich/scripts/scripts_lineunit.py", line 34, in <listcomp>
+    across=[(f(p[k][-1]),f(p[k+1][0])) for p in paras for k in range(len(p)-1)]
+IndexError: list index out of range

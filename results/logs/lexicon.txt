@@ -1,0 +1,17 @@
+VMS            k=1  bits/glyph: real= 2.12 synth= 2.15  | attested-in-train share: real tokens 0.79, synth tokens 0.63 | types: real 0.36, synth 0.16 | mean len real 5.34 synth 5.27
+VMS            k=2  bits/glyph: real= 1.90 synth= 1.89  | attested-in-train share: real tokens 0.79, synth tokens 0.76 | types: real 0.36, synth 0.30 | mean len real 5.34 synth 5.31
+VMS            k=3  bits/glyph: real= 1.91 synth= 1.85  | attested-in-train share: real tokens 0.79, synth tokens 0.79 | types: real 0.36, synth 0.38 | mean len real 5.34 synth 5.31
+VMS            k=2  bits/glyph: real= 1.90 synth= 1.89  | attested-in-train share: real tokens 0.79, synth tokens 0.76 | types: real 0.36, synth 0.30 | mean len real 5.34 synth 5.31
+   synthetic VMS words (k=2): shy cheey daiin okcheochy chdy okain oty olo chedy okeey dar raiin oky ykeeody shey sheody keedy s otedy qokeoaram chorcheosaiin oteedy otal pcheol qokeey
+VMS A          k=2  bits/glyph: real= 1.95 synth= 1.93  | attested-in-train share: real tokens 0.71, synth tokens 0.70 | types: real 0.34, synth 0.32 | mean len real 5.10 synth 5.09
+VMS B          k=2  bits/glyph: real= 1.80 synth= 1.79  | attested-in-train share: real tokens 0.79, synth tokens 0.75 | types: real 0.36, synth 0.31 | mean len real 5.46 synth 5.42
+Latin          k=2  bits/glyph: real= 2.68 synth= 2.67  | attested-in-train share: real tokens 0.81, synth tokens 0.20 | types: real 0.48, synth 0.03 | mean len real 6.06 synth 5.96
+Latin          k=3  bits/glyph: real= 2.21 synth= 2.12  | attested-in-train share: real tokens 0.81, synth tokens 0.44 | types: real 0.48, synth 0.11 | mean len real 6.06 synth 5.98
+Italian        k=2  bits/glyph: real= 2.75 synth= 2.70  | attested-in-train share: real tokens 0.84, synth tokens 0.52 | types: real 0.44, synth 0.09 | mean len real 3.92 synth 3.95
+Italian        k=3  bits/glyph: real= 2.52 synth= 2.36  | attested-in-train share: real tokens 0.84, synth tokens 0.69 | types: real 0.44, synth 0.22 | mean len real 3.92 synth 3.95
+German         k=2  bits/glyph: real= 2.61 synth= 2.55  | attested-in-train share: real tokens 0.83, synth tokens 0.34 | types: real 0.44, synth 0.07 | mean len real 4.78 synth 4.78
+German         k=3  bits/glyph: real= 2.31 synth= 2.13  | attested-in-train share: real tokens 0.83, synth tokens 0.63 | types: real 0.44, synth 0.22 | mean len real 4.78 synth 4.81
+Hebrew         k=2  bits/glyph: real= 3.00 synth= 2.81  | attested-in-train share: real tokens 0.68, synth tokens 0.36 | types: real 0.40, synth 0.14 | mean len real 4.40 synth 4.45
+Hebrew         k=3  bits/glyph: real= 2.82 synth= 2.41  | attested-in-train share: real tokens 0.68, synth tokens 0.72 | types: real 0.40, synth 0.46 | mean len real 4.40 synth 4.38
+Latin          k=2  bits/glyph: real= 2.68 synth= 2.67  | attested-in-train share: real tokens 0.81, synth tokens 0.20 | types: real 0.48, synth 0.03 | mean len real 6.06 synth 5.96
+   synthetic Latin words (k=2): etis incist ilibi manum dixacris coructunt finciparmagio renopter illibus hocenavit intibus eo que vitatis conas histum greferat nonfertu sus cognique fin exerissublacive dis opias cri

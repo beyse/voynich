@@ -1,0 +1,11 @@
+excess MI (bits) of middle-segment pairs vs. marginal-preserving nulls
+VMS raw       n(d=1)=14724 | d=1: line  0.080 page  0.091 glob  0.110 | d=2: line -0.000 page -0.028 glob -0.021 | d=3: line -0.026 page -0.113 glob -0.118 |
+VMS light     n(d=1)=14724 | d=1: line  0.141 page  0.169 glob  0.234 | d=2: line  0.007 page  0.011 glob  0.054 | d=3: line -0.023 page -0.061 glob -0.048 |
+VMS heavy     n(d=1)=14724 | d=1: line  0.129 page  0.161 glob  0.237 | d=2: line  0.001 page  0.019 glob  0.076 | d=3: line -0.014 page -0.029 glob  0.007 |
+VMS-A light   n(d=1)= 3735 | d=1: line  0.055 page  0.035 glob  0.075 | d=2: line  0.023 page -0.022 glob  0.004 | d=3: line  0.015 page -0.132 glob -0.118 |
+VMS-B light   n(d=1)=10820 | d=1: line  0.150 page  0.182 glob  0.231 | d=2: line  0.001 page  0.020 glob  0.081 | d=3: line -0.030 page -0.045 glob  0.041 |
+Latin         n(d=1)=14724 | d=1: line  0.187 page  0.205 glob  0.214 | d=2: line  0.000 page  0.022 glob  0.029 | d=3: line  0.009 page  0.007 glob  0.042 |
+Latin stem4   n(d=1)=14724 | d=1: line  0.232 page  0.264 glob  0.271 | d=2: line  0.029 page  0.061 glob  0.061 | d=3: line  0.002 page  0.018 glob  0.019 |
+Italian       n(d=1)=14724 | d=1: line  0.304 page  0.318 glob  0.322 | d=2: line  0.036 page  0.025 glob  0.036 | d=3: line  0.028 page  0.015 glob  0.016 |
+German        n(d=1)=12797 | d=1: line  0.181 page  0.186 glob  0.178 | d=2: line  0.045 page  0.051 glob  0.031 | d=3: line  0.033 page  0.027 glob  0.014 |
+Dante verse   n(d=1)=27561 | d=1: line  0.522 page  0.529 glob  0.530 | d=2: line  0.084 page -0.027 glob -0.050 | d=3: line  0.045 page -0.464 glob -0.533 |

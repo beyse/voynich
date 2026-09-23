@@ -1,0 +1,56 @@
+
+VMS raw: I(word;page) and diversity, n=3896 per position
+  first   I(word;page)=0.098   types/n=0.446  H=9.66
+  second  I(word;page)=0.134   types/n=0.332  H=8.98
+  middle  I(word;page)=0.113   types/n=0.347  H=9.14
+  penult  I(word;page)=0.106   types/n=0.361  H=9.18
+  last    I(word;page)=0.055   types/n=0.437  H=9.59
+  excess MI between words of consecutive lines (same page):
+    mid_k -> mid_k+1       n= 3689  0.013
+    last_k -> first_k+1    n= 3689  0.003
+    mid_k -> first_k+1     n= 3689  0.009
+    last_k -> mid_k+1      n= 3689  0.007
+    first_k -> first_k+1   n= 3689  0.018
+    last_k -> last_k+1     n= 3689  0.022
+
+VMS light: I(word;page) and diversity, n=3896 per position
+  first   I(word;page)=0.142   types/n=0.317  H=8.82
+  second  I(word;page)=0.212   types/n=0.216  H=7.92
+  middle  I(word;page)=0.183   types/n=0.230  H=8.13
+  penult  I(word;page)=0.187   types/n=0.246  H=8.22
+  last    I(word;page)=0.075   types/n=0.342  H=8.86
+  excess MI between words of consecutive lines (same page):
+    mid_k -> mid_k+1       n= 3689  0.051
+    last_k -> first_k+1    n= 3689  0.014
+    mid_k -> first_k+1     n= 3689  0.033
+    last_k -> mid_k+1      n= 3689  0.033
+    first_k -> first_k+1   n= 3689  0.052
+    last_k -> last_k+1     n= 3689  0.042
+
+Latin (chunked): I(word;page) and diversity, n=3896 per position
+  first   I(word;page)=0.011   types/n=0.504  H=10.04
+  second  I(word;page)=0.006   types/n=0.508  H=10.02
+  middle  I(word;page)=0.014   types/n=0.495  H=9.93
+  penult  I(word;page)=0.018   types/n=0.496  H=10.00
+  last    I(word;page)=0.017   types/n=0.501  H=9.97
+  excess MI between words of consecutive lines (same page):
+    mid_k -> mid_k+1       n= 3689  -0.002
+    last_k -> first_k+1    n= 3689  0.065
+    mid_k -> first_k+1     n= 3689  -0.007
+    last_k -> mid_k+1      n= 3689  -0.002
+    first_k -> first_k+1   n= 3689  0.003
+    last_k -> last_k+1     n= 3689  -0.007
+
+Italian (chunked): I(word;page) and diversity, n=3896 per position
+  first   I(word;page)=0.014   types/n=0.380  H=8.97
+  second  I(word;page)=0.006   types/n=0.388  H=9.03
+  middle  I(word;page)=0.017   types/n=0.369  H=8.93
+  penult  I(word;page)=0.003   types/n=0.385  H=9.04
+  last    I(word;page)=0.001   types/n=0.368  H=8.96
+  excess MI between words of consecutive lines (same page):
+    mid_k -> mid_k+1       n= 3689  -0.006
+    last_k -> first_k+1    n= 3689  0.178
+    mid_k -> first_k+1     n= 3689  0.006
+    last_k -> mid_k+1      n= 3689  0.002
+    first_k -> first_k+1   n= 3689  0.004
+    last_k -> last_k+1     n= 3689  -0.002

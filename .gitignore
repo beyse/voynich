@@ -1,0 +1,5 @@
+Voynich_Manuscript.pdf
+data/ref/
+__pycache__/
+*.pyc
+paper/figures/_render_*
