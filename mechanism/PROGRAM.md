@@ -16,7 +16,7 @@ Transmission: K-reflow excluded. Direct composition (D) versus copying with iden
 
 | # | Question | Preregistration | Status | Outcome |
 |---|---|---|---|---|
-| E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md | preregistered | – |
+| E5 | Do rare types cluster like content words (frequency-resolved burstiness)? | E5_PREREG.md (f3bb895), E5_DEVIATIONS.md | done | Undetermined by the rule: gradient +0.25 (−0.10, 0.59), between content (+0.66 to +1.08) and drift controls (−0.19, −0.60). Page clustering in every frequency band, including the most frequent forms, unlike natural language. |
 | E4 | Is the within-page drift lexical (which words) or sublexical (how words are built)? | E4_PREREG.md (ce8bb45) | done | Lexical-type drift with a small sublexical part, as in plain Latin or German. No separation of content from habit drift. The two tested ciphers erase the sublexical part; the Voynich text keeps it. |
 | E3 | Does the revised generator (margin-driven endings, slow drift, one-off slips) pass on unseen pages? | E3_PREREG.md (0f50303); fits frozen before test | done | Failure, 33/40 primary (28/31 unfitted), 28/40 secondary. Margin-driven endings confirmed necessary; glyph-level drift and slips cannot produce the within-page drift, hard-yet-diverse grammar or non-reuse of rare forms. |
 | E2 | Does an explicit hard-grammar + recency + session + slip generator reproduce the full phenotype on held-out bifolios, and which components are necessary? | E2_PREREG.md (6b109a4), fits frozen before test | done | Failure, 32/40. Recency, hard pruning and session state are necessary; the class lacks margin-driven line endings, slow within-page drift and one-off irregular forms. |
@@ -127,3 +127,32 @@ Slopes of line similarity over line distance 2–8 (95% CI):
 - The magnitudes of the synthetic drift controls were not tuned to the Voynich text, so their slopes show directions only.
 
 Next (E5): frequency-resolved burstiness. Content drift makes rare words the burstiest; a drifting repertoire with one-off coinages does not.
+
+## E5 result and red team
+
+Page-clustering index B by frequency band (observed / expected same-page pairs, null within hand × section) and gradient G = ln B_R − ln B_F, with quire-jackknife 95% intervals:
+
+| Corpus | G | B rare (2–4) | B mid (5–19) | B frequent (20–99) | B very frequent (≥100) |
+|---|---|---|---|---|---|
+| Voynich | +0.245 (−0.099, 0.588) | 2.02 | 1.83 | 1.58 | 1.36 (1.17, 1.56) |
+| Voynich IT2a (post hoc) | +0.189 (−0.282, 0.659) | 1.91 | 1.87 | 1.58 | 1.34 |
+| LAT / ITA / GER / ENG | +0.74 / +0.78 / +1.06 / +1.08 | 2.6–5.1 | 1.6–3.0 | 1.2–1.7 | 1.02–1.22 |
+| VB-run (deterministic cipher) | +0.66 | 2.23 | 1.48 | 1.15 | 1.03 |
+| NAIB-run (Naibbe) | +0.07 | 1.09 | 1.04 | 1.02 | 1.00 |
+| LDRIFT (vocabulary walk) | −0.19 | 2.22 | 3.02 | 2.67 | 2.12 |
+| REP (repertoire walk + coinage) | −0.60 | 1.53 | 2.06 | 2.77 | 2.40 |
+| HGR2 (E3 glyph generator) | +0.97 | 3.68 | 1.70 | 1.40 | 1.31 |
+| MK-sec | +0.03 | 1.10 | 1.15 | 1.07 | 1.03 |
+
+- **Preregistered verdict: undetermined.** The lower bound of G is below 0 and its upper bound overlaps LAT and ITA.
+- **Descriptive (not a preregistered decision):**
+  - The Voynich point estimate lies below the lower bound of every content control. Its rare forms cluster less, relative to its frequent forms, than content words do.
+  - The Voynich text clusters by page in all bands. Its most frequent forms are page-clustered (1.36) beyond three of the four languages. That is a page-level production effect on the familiar forms, which natural-language content drift does not produce.
+  - The glyph generator reproduces clustering through page tilts, but it overshoots on rare forms (3.68 against 2.02). The repertoire model spreads clustering over the familiar forms but undershoots the rare ones.
+- **Red team:** the page bootstrap was invalid for this statistic (duplication) and was replaced by the quire jackknife before the Voynich run (E5_DEVIATIONS.md).
+
+## Hypothesis space after E5
+
+The data now point to a two-route production process: whole familiar forms retrieved from a repertoire whose preferences vary by session, page and line (with short-range recency), plus one-off forms coined from the hard grammar and never reused. The single-route glyph automaton of E2/E3 builds every word glyph by glyph and fails on exactly the properties that separate the two routes: hardness together with diversity, non-reuse of rare forms, and lexical drift.
+
+Next (E6): test the two-route generator against the full phenotype, cross-fitted like E3, with the single-route HGR2 as the direct comparison.
