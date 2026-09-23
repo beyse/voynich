@@ -1,0 +1,350 @@
+<html><head><meta charset="utf-8"><title>Constrained, not identifiable</title></head>
+<body>
+<h1>Constrained, not identifiable: preregistered tests of how the Voynich manuscript text was produced</h1>
+<p class="author">Sebastian Beyer</p>
+<p class="affil">[Affiliation to be added]. Correspondence: [e-mail to be added]. Manuscript version of {{ v.date }}, built from repository commit {{ v.commit }}.</p>
+
+<p class="abstract"><b>Abstract.</b> The text of the Voynich manuscript (Beinecke MS 408) has resisted decipherment. Earlier statistical work has shown that simple local processes reproduce many of its properties. Such sufficiency results do not identify how the text was made, because very different mechanisms produce the same statistics. We therefore ask two narrower questions: which production mechanisms remain compatible with the text, and can text statistics decide whether its free choices carry a message? We preregistered a battery of calibrated tests that separates a fixed procedure, skilled improvisation and a plaintext-driven procedure, and separately direct composition from copying. Its controls are handwritten human gibberish (Gaskell and Bowern 2022), four natural languages, historical-style ciphers including the Naibbe cipher, and synthetic generators with known mechanisms. Seven further preregistered experiments followed. Nine properties survive as constraints on the mechanism: a rigid slot-like word grammar; a glyph-level word-boundary rule within lines; final words adapted to the margin; continuous short-range recency across line and paragraph boundaries; session- and page-level variation in the weights of shared forms; within-page drift of natural-language strength; the absence of local vocabulary; no device periodicity; and no copying signature. These properties exclude naive improvisation, stationary tables and grilles, periodic devices, settings that switch per line or paragraph, copy-and-modify with propagating innovations, word-preserving ciphers, the Naibbe cipher as published, and copying from a re-lined draft. Explicit generators of the surviving class, fitted on half of the manuscript, reproduce up to {{ v.e3p[0] }} of 40 statistics on the other half; none reproduces the absence of local vocabulary together with the within-page drift. Finally, we show constructively that the free choices of a Voynich-like process can carry about {{ v.e7_kb }} KB of compressed plaintext per manuscript, recoverable without error, while none of the 40 statistics changes beyond run-to-run variation. The production mechanism is tightly constrained, but whether its remaining free choices carry a message is not identifiable from the text alone.</p>
+<p class="keywords"><b>Keywords:</b> Voynich manuscript; preregistration; mechanism identification; human gibberish; steganography; mimic functions; non-identifiability</p>
+
+<h2>1. Introduction</h2>
+<p>The Voynich manuscript is a codex on vellum radiocarbon-dated to the early fifteenth century (Zandbergen n.d.). It contains about 38,000 word tokens in an unidentified script, written by several scribes (Currier 1976; Davis 2020). A century of decipherment attempts has not produced an accepted reading (D'Imperio 1978; Bowern and Lindemann 2021). Quantitative work has described its unusual properties: two statistical "languages" (Currier 1976), low conditional glyph entropy and a rigid word structure (Stolfi 2000; Lindemann and Bowern 2020; Zattera 2022), strong coupling between the last glyph of one word and the first of the next (Rozanova and Temerev 2026), and a positional entropy profile shared with some verbose ciphers (Kinnison 2026). Constructive proposals have shown that such properties can arise from a table and grille (Rugg 2004), from copying and modifying earlier words (Timm and Schinner 2020), from a historically executable cipher (Greshko 2025), or from human gibberish (Gaskell and Bowern 2022). A companion analysis showed that a local glyph process with page-level drift reproduces the measured statistics of the text, and that no lexical or image-related information is measurable beyond it (Beyer, companion manuscript).</p>
+<p>Results of this kind establish sufficiency: a mechanism <i>can</i> produce the text. They do not establish identity, because the same statistics are compatible with a procedure followed by rule, with a practised writer's habits, and with a cipher whose free choices are driven by a message. This paper replaces the question "which mechanism fits?" with two others. First, which mechanisms does the text exclude, under tests whose ability to discriminate has been shown on controls with known mechanisms? Second, is there any statistical route from the text alone to the question of whether a message is present?</p>
+<p>We answer both under preregistration. A battery of seven tests (T1–T7) was frozen before it was computed on the Voynich text. It was calibrated on controls first and then applied to the manuscript. Seven further experiments (E1–E7) were each preregistered before their Voynich outcome was computed. They were designed to separate the mechanisms the battery left standing, to build explicit generators of the surviving class and test them on held-out pages, and to test constructively whether a message can hide in the free choices.</p>
+<p>The contributions are:</p>
+<ol>
+<li>A two-axis hypothesis-separation framework: generation by fixed procedure, skilled improvisation or plaintext-driven procedure, crossed with direct composition or copying. Every discriminator has predictions and falsifiers stated in advance and a calibration requirement on controls.</li>
+<li>A mechanism class defined by nine properties, each with its evidence and an explicit strength label (Table 7). Several are new empirical findings: final words adapted to the margin but not to paragraph ends, recency that runs continuously across line and paragraph boundaries, the absence of local vocabulary, page clustering even of the most frequent forms, and within-page drift that is lexical in type.</li>
+<li>Exclusions of named mechanism variants, kept separate from the alternatives that remain open (Table 8).</li>
+<li>Held-out tests of explicit generators with ablations, which identify necessary components and the properties no tested generator reproduces.</li>
+<li>A constructive non-identifiability result. The free choices of a Voynich-like process carry about {{ v.e7_bpg }} bits per glyph of an arbitrary message, recoverable exactly, while none of the 40 statistics changes beyond run-to-run variation. For uniformly distributed message bits, none can change in principle. Text statistics therefore cannot settle the plaintext question without further assumptions about the encoder.</li>
+</ol>
+<p class="claim">The strongest conclusion the evidence supports is this: <b>the production mechanism is tightly constrained, but whether the remaining free choices carry a message is not identifiable from the text alone.</b> Nothing in this paper shows that the Voynich text is meaningless, and nothing decodes it.</p>
+
+<h2>2. Materials</h2>
+<h3>2.1 Transliterations and units</h3>
+<p>The primary transliteration is ZL3b (Zandbergen and Landini 2025) in the IVTFF format. We use paragraph text (loci of type P), join uncertain spaces (commas) as in the companion analysis, and drop tokens containing unreadable or rare-glyph codes. This leaves {{ v.v_tokens }} tokens on {{ v.v_pages }} pages. Glyphs are segmented into units, with the multigraphs <i>cth, ckh, cph, cfh, ch, sh</i> as single units. The Takahashi transliteration IT2a ({{ v.it_tokens }} tokens) is aligned by page and line. A token is <i>double-coded</i> when both transliterations read it identically in lines with equal token counts. Page metadata give the quire, the illustration section, the Currier language and the scribal hand, following Davis (2020). A line is paragraph-final if it carries the paragraph-end marker, otherwise margin-bound. Page order is the current binding order.</p>
+<h3>2.2 Controls</h3>
+<p>Every test is calibrated on corpora whose mechanism is known.</p>
+<ul>
+<li><b>Human gibberish:</b> the {{ v.gib_docs }} handwritten documents collected by Gaskell and Bowern (2022), {{ v.gib_tokens }} tokens in lowercase Latin letters with the writers' line breaks preserved. Each writer invented a different "language".</li>
+<li><b>Natural language:</b> Caesar's <i>De bello Gallico</i> (Latin), Dante's <i>Commedia</i> (Italian), Goethe's <i>Faust</i> (German) and Tolstoy's <i>War and Peace</i> in English, cut into the Voynich page and line shape. Latin is also wrapped greedily at a fixed width, as a re-lined text for the line tests.</li>
+<li><b>Ciphers:</b> the Naibbe cipher (Greshko 2025), reimplemented from the published tables and enciphering Latin as running text and as independent lines, and a verbose substitution with deterministic homophones.</li>
+<li><b>Synthetic generators:</b>
+  <ul>
+  <li>an order-3 glyph automaton per language and section, with and without page drift;</li>
+  <li>a table and grille after Rugg (2004);</li>
+  <li>copy-and-modify after Timm and Schinner (2020);</li>
+  <li>a periodic device with column and row effects of adjustable strength;</li>
+  <li>generators with smooth or stepwise parameter drift, settings per line or paragraph, explicit recency, and vocabulary or glyph-habit drift.</li>
+  </ul>
+  Generators fitted to or built from Voynich statistics are used only to show how a test responds to a known mechanism, never as evidence of fit.</li>
+</ul>
+<h3>2.3 Held-out split</h3>
+<p>For generator tests the manuscript is split by the parity of the bifolio index within each quire. Conjugate leaves stay together, and every quire and the three main hands occur in both halves. Generators see only the training half's text, plus the layout and metadata of test pages (line lengths, paragraph ends, quire, section, language).</p>
+
+<h2>3. Framework and protocol</h2>
+<h3>3.1 Hypotheses</h3>
+{{ T.framework }}
+<p>The copy-and-modify account is classed as a formalised variant of improvisation, because its source and modification choices are made by the writer. Natural language is the degenerate plaintext-driven case with an identity mapping. Tests based on the transliteration alone cannot separate direct composition from copying with identical line breaks, and none of our tests claims to.</p>
+<h3>3.2 Claims policy</h3>
+<p>Three rules were fixed before any test:</p>
+<ul>
+<li>Statistical sufficiency of a model is not historical identification of a mechanism.</li>
+<li>No result is reported as showing that the text is meaningless or contains no plaintext. The strongest admissible statement about the plaintext hypothesis is that a named variant of it makes a prediction that fails.</li>
+<li>A concrete generator is reconstructed only if the verdict rule favours a fixed procedure.</li>
+</ul>
+<h3>3.3 Preregistration and stages</h3>
+<p>Each preregistration was committed to a public git repository before the corresponding Voynich outcome was computed. The commit timestamps are listed in Table S8. The battery ran in two stages: controls only (Stage A, committed), then the Voynich text (Stage B).</p>
+<p>Deviations were logged with the reason and the time relative to the Voynich run (Table S1). All were made before the affected Voynich statistic was computed. The main ones:</p>
+<ul>
+<li><b>T1 null model.</b> The preregistered corpus-wide re-pairing null for line-break coupling was confounded by writer heterogeneity. It was replaced by a page-conditional estimator that we validated on a known-truth simulation.</li>
+<li><b>E1 expectation.</b> Position-stratified expectations were added after a control without settings showed a spurious step.</li>
+<li><b>E5 intervals.</b> A page bootstrap was replaced by a quire jackknife, because duplicated pages bias same-page pair counts.</li>
+</ul>
+<p><b>Limits of blindness.</b> The author knew several Voynich properties from the companion analysis; they are declared in the battery preregistration. While diagnosing the T1 estimator, its terms were computed once on the Voynich text; that test's outcome was already known and is reported as "prior". After E3 the Voynich values of both halves had been computed, so later generator comparisons were blind only in their fitted parameters, not in the values they were compared with.</p>
+<h3>3.4 Calibration</h3>
+<p>A test counts toward a verdict only if it separates controls of the classes it is meant to separate (Table 2). Two preregistered predictions were contradicted by their own controls and were narrowed rather than applied:</p>
+<ul>
+<li>All four natural languages drift within a page. The within-page drift test (T6b) therefore separates only stationary procedures from the rest.</li>
+<li>The Naibbe cipher reuses its rare forms as seldom as the procedures do. The deviant-token test (T7b) therefore excludes only word-preserving plaintext systems.</li>
+</ul>
+{{ T.calib }}
+
+<h2>4. The preregistered battery</h2>
+<h3>4.1 Tests</h3>
+<ul>
+<li><b>T1, line-break transparency.</b> The ratio of the excess mutual information between the last unit of a line and the first unit of the next to that between adjacent words inside lines. It is computed per page with a re-pairing null and averaged.</li>
+<li><b>T2a, final form.</b> The Jensen–Shannon divergence between the final-unit distribution of line-final words and that of line-internal words of the same length. It is computed separately for margin-bound and paragraph-final lines, against a permutation null.</li>
+<li><b>T2b, line fill.</b> Slack at the line end relative to greedy packing of the same page's words.</li>
+<li><b>T2c, dittography.</b> Repetition of words across line breaks.</li>
+<li><b>T3a, zero replication.</b> In matched 250-token chunks, how often unit bigrams that are absent in one half although expected (independence model) appear in the other half.</li>
+<li><b>T3b, slot rigidity.</b> The share of ordered unit pairs inside words that is consistent with the best single linear order of units.</li>
+<li><b>T3c, positional entropy.</b> Entropy of the unit at each position from the start and the end of the word.</li>
+<li><b>T4, periodicity.</b> Lag, column-alignment and line-cycle profiles, with power measured on a periodic device.</li>
+<li><b>T5, drift shape.</b> Step against smooth models of page-to-page distances within a hand.</li>
+<li><b>T6a, recency.</b> Exact and near (edit distance 1) repeats at short against long token distance, relative to within-page permutation.</li>
+<li><b>T6b, within-page drift.</b> The slope of line similarity over line distance.</li>
+<li><b>T7a, annotated corrections.</b></li>
+<li><b>T7b, deviant tokens.</b> Double-coded tokens whose unit trigrams occur in no other quire, and whether they recur.</li>
+</ul>
+<h3>4.2 Results</h3>
+{{ T.battery }}
+<p>Table 3 summarises the battery. Four results carry most of the weight.</p>
+<p><b>Rigidity and hardness.</b> The word grammar is far more rigid than that of any natural language or of the pooled human gibberish (Figure 1). The slot-order consistency is {{ v.t3b_v }} against {{ v.t3b_gib }} for gibberish and {{ v.t3b_lang }} for languages. Its share of words fully monotone in the best order is {{ v.t3b_v_mono }} against {{ v.t3b_gib_mono }} and {{ v.t3b_lang_mono }}.</p>
+<p>Within 250-token stretches, zeros of the unit-transition table replicate far more consistently: the zero-replication ratio is {{ v.t3a_v }} against {{ v.t3a_gib }} and {{ v.t3a_lang }}. This hardness contrast is scale-dependent. At full corpus size all corpora show hard zeros (Voynich {{ v.t3a_full_v }}, languages {{ v.t3a_full_lang }}). What distinguishes the Voynich text is that its constraints are expressed within any short stretch, not that it has more of them.</p>
+<p>Both contrasts survive raw EVA characters without multigraph merging (Voynich {{ v.t3a_raw_v }} and {{ v.t3b_raw_v }}; gibberish {{ v.t3a_raw_gib }} and {{ v.t3b_raw_gib }}) and hold in each main hand. The preregistered falsifier of naive improvisation is triggered. Skilled, long-practised improvisation cannot be falsified by this test, because no data on such writers exist.</p>
+<p><img src="paper2/figures/fig1_constraints.png" width="400"/></p>
+<p class="cap">Figure 1. Hardness of the unit-transition zeros (T3a, lower is harder) against slot-order rigidity (T3b), with 95% intervals. Generators and ciphers derived from Voynich statistics inherit its structure. Human gibberish sits with the natural languages.</p>
+<p><b>Line endings.</b> Line-final words have their own final-glyph distribution, beyond what their length explains (T2a: {{ v.t2a_m }}, p = {{ v.t2a_m_p }}, n = {{ v.t2a_m_n }}; Takahashi {{ v.t2a_it }}). Greedily re-lined Latin shows none ({{ v.t2a_latw }}), so copying a running text with new line breaks is falsified.</p>
+<p>The effect is weaker at paragraph ends ({{ v.t2a_p }}). The difference, {{ v.t2a_diff }} {{ v.t2a_diff_ci }}, was checked post hoc by a page bootstrap. On the text-only pages of the stars section, where every non-final line ends at the text block's margin, the contrast is sharper: {{ v.t2a_star_m }} against {{ v.t2a_star_p }}. The line-final forms are therefore tied to lines that end because the space is used up, not to line ends as such (Figure 2).</p>
+<p>The online gibberish writers show almost no margin effect ({{ v.t2a_gib_m }}). Line fill is more regular than theirs (T2b {{ v.t2b_v }} {{ v.t2b_v_ci }} against {{ v.t2b_gib }}). Glyph count is, however, a noisier proxy for the width of handwritten Latin letters than for Voynich glyphs, so we read T2b only as "more regular fill".</p>
+<p><img src="paper2/figures/fig2_line_endings.png" width="440"/></p>
+<p class="cap">Figure 2. Final-form excess for lines that end at the margin and lines that end a paragraph. The E2 generator has a single end model and makes every line end special. E3 separates the two kinds of line end. Generator values are on the held-out half.</p>
+<p><b>Recency.</b> Near repeats are more frequent at short token distance than at long distance within the page (T6a: {{ v.t6a_v }} {{ v.t6a_v_ci }}; exact repeats {{ v.t6a_ve }} {{ v.t6a_ve_ci }}). This is above the highest 99th percentile of six stationary procedures ({{ v.t6a_p99 }}), so stationary procedures are falsified. It is about half the strength of the copy-and-modify model ({{ v.t6a_ts }}) and similar to the strongest language control (English, {{ v.t6a_eng }}).</p>
+<p>The human gibberish does not show significant recency ({{ v.t6a_gib }} {{ v.t6a_gib_ci }}). Its documents average about 265 tokens, so the improvisation prediction is calibrated mainly by the formal copy-and-modify model.</p>
+<p><b>Deviant forms.</b> Double-coded words containing a unit trigram found in no other quire occur at {{ v.t7b_rate }} per thousand and recur in {{ v.t7b_rec }} of cases ({{ v.t7b_rec_nodc }} without double coding). The corresponding values are {{ v.t7b_lang }} in the languages, {{ v.t7b_ts }} for copy-and-modify and {{ v.t7b_mk }} for the automata. One third of them lie at edit distance 1 from a common form of the same quire, as slips would.</p>
+<p>The result holds with page instead of quire as the block ({{ v.t7b_page_v }} against {{ v.t7b_page_lang }} in the languages) and in each hand ({{ v.t7b_hand }}). The Naibbe cipher is equally low ({{ v.t7b_naib }}; page level {{ v.t7b_page_naib }}). This property therefore excludes natural language and word-preserving codes, not homophonic ciphers.</p>
+<p><b>Other tests.</b></p>
+<ul>
+<li><b>Periodicity:</b> no peak in any profile. The device control is detected in 10 of 10 seeds from mixing weight 0.2 (Table 2).</li>
+<li><b>Drift shape:</b> step-like (S = {{ v.t5_v }}; calibration {{ v.t5_smooth }} smooth, {{ v.t5_step }} step). Per hand it is {{ v.t5_h['1'] }}, {{ v.t5_h['2'] }} and {{ v.t5_h['3'] }}, so hand 1 alone is smooth-like. In hand 2 the largest jumps fall at quire changes (mean excess {{ v.t5_h2_q }}) rather than section-only changes ({{ v.t5_h2_s }}, like no change at {{ v.t5_h2_n }}). This decomposition is post hoc and rests on few boundaries.</li>
+<li><b>Within-page drift:</b> as strong as in the languages ({{ v.t6b_v }} against {{ v.t6b_lang }}).</li>
+<li><b>Line breaks:</b> the break ratio is {{ v.t1_v }} (SE {{ v.t1_v_se }}); the gibberish writers are transparent across breaks ({{ v.t1_gib }}).</li>
+<li><b>Dittography:</b> none (T2c).</li>
+<li><b>Annotated corrections (T7a):</b> the {{ v.t7a_n }} flagged in the transliteration are all glyph-level. The preregistered position test turned out to measure an annotation convention (comments follow the corrected word), so it is uninformative.</li>
+</ul>
+<h3>4.3 Verdict of the battery</h3>
+<p>Under the preregistered scoring the fixed procedure collected the most support. It was vetoed by the recency test, because the text shows local dynamics no stationary procedure produces. Improvisation was supported by recency and contradicted by the drift shape and the deviant forms. The tested plaintext variants each failed a test. The verdict was therefore a bounded, unresolved competition among three classes:</p>
+<ul>
+<li>a procedure with state below the page level;</li>
+<li>a practised improviser with an internalised hard grammar;</li>
+<li>a plaintext-driven procedure with rigid tables and recency-dependent choices.</li>
+</ul>
+<p>The experiments of Section 5 were designed to separate them.</p>
+
+<h2>5. Experiments that followed the battery</h2>
+<h3>5.1 E1: settings or continuous recency?</h3>
+<p>Local dynamics can arise from settings that stay fixed within a line or paragraph and change at its boundary. They can also arise from continuous recency, in which a form becomes more likely after a similar form a few words earlier. The first predicts steps in pair similarity at boundaries and no decay inside a segment; the second predicts the reverse.</p>
+<p>E1 compares pairs of line-internal words at matched distance within a line, across a line break, and across a paragraph break. Expectations are stratified by position class. Settings controls were tuned to the known Voynich recency index (line settings σ = {{ v.e1_sig_l }}, paragraph settings σ = {{ v.e1_sig_p }}, recency ρ, τ, e = {{ v.e1_rec }}).</p>
+<p>Those controls produce clear steps (line {{ v.e1_setl_lsg }} graded, paragraph {{ v.e1_setp_ps }}). The Voynich text shows none (Table 4, Figure 3b). Its graded line step is {{ v.e1_lsg }} {{ v.e1_lsg_ci }}; line settings are excluded because the lower bound lies above the preregistered threshold of {{ v.e1_thr_l }}. Its paragraph step is {{ v.e1_ps }} {{ v.e1_ps_ci }}; paragraph settings are excluded, marginally, because the lower bound lies above the threshold of {{ v.e1_thr_p }}. Decay inside lines exceeds every control ({{ v.e1_wldg }} {{ v.e1_wldg_ci }} against {{ v.e1_wldg_ctrl }}). Both transliterations agree.</p>
+<p>Settings that switch per line or per paragraph, at the magnitude needed for the observed recency, are excluded. The dynamics are continuous: memory spans line breaks, while the glyph-level boundary coupling resets at each line. A small paragraph effect on top of recency, such as a pause or a change of topic, is not excluded.</p>
+{{ T.e1 }}
+<p><img src="paper2/figures/fig3_recency.png" width="460"/></p>
+<p class="cap">Figure 3. (a) Near-repeat rate relative to within-page permutation by token distance (three-point smoothing). (b) Steps in pair similarity at line and paragraph boundaries. Settings controls step and the Voynich text does not. Small dots are single control seeds.</p>
+
+<h3>5.2 E2, E3 and E6: explicit generators on held-out pages</h3>
+<p>E2 built a generator of the surviving class:</p>
+<ul>
+<li>a hard-pruned order-3 character automaton per group, restarted at each line;</li>
+<li>a quire-level session weight and a page-level tilt of glyph preferences;</li>
+<li>continuous recency;</li>
+<li>slips.</li>
+</ul>
+<p>It was fitted on the odd bifolios against five targets and tested on the even bifolios against 40 statistics. These are the companion analysis's battery, T1–T7 and E1. A statistic passes if the generator's mean lies within 2√(SE² + SD²) + 1% of the Voynich value, with SE from a quire jackknife and SD over three seeds.</p>
+<p>E3 added the three components whose absence E2's failures pointed to:</p>
+<ul>
+<li>separate line-end models for margin-bound and paragraph-final lines, with tight length control and a final word chosen so the line can end there;</li>
+<li>a random walk of glyph preferences from line to line;</li>
+<li>slips that are never reused, with memory keeping the intended form, plus a choice temperature.</li>
+</ul>
+<p>E3 was cross-fitted: its primary direction was fitted on the even half and tested on the odd half, whose Voynich values for 35 of the 40 statistics had not been computed. E6 tested a two-route alternative motivated by E4 and E5: whole familiar forms retrieved from a drifting repertoire, plus one-off coinages from the grammar.</p>
+{{ T.gen }}
+<p><img src="paper2/figures/fig5_heldout_matrix.png" width="400"/></p>
+<p class="cap">Figure 4. Held-out pass (blue) and failure (×) for each statistic and generator. † marks statistics used as fitting targets on the training half. Totals are at the bottom.</p>
+<p><b>What the generators established (Figure 4).</b> The best generator (E3) passes {{ v.e3p[0] }} of 40 statistics ({{ v.e3p_unf }} of the 31 that were not fitting targets). In the secondary direction it passes {{ v.e3s[0] }}. The ablations identify necessary components:</p>
+<ul>
+<li><b>Recency:</b> without it, conditional entropies and the recency indices fail.</li>
+<li><b>Hard pruning:</b> without it, zero replication and distance-2 MI fail.</li>
+<li><b>Session state:</b> without it, zero replication, distance-2 MI and near recency fail.</li>
+<li><b>Margin-driven endings:</b> without them, the final-form statistics fail, and line-fill slack rises from {{ v.e3_t2b }} to {{ v.e3_b1_t2b }} (Voynich {{ v.e3_t2b_v }}).</li>
+<li><b>Glyph-level boundary rule:</b> without it, a word-retrieving generator loses the boundary coupling entirely (edge MI {{ v.e6_d4_edge }} against {{ v.e6_edge_v }}).</li>
+</ul>
+<p>Two properties defeated every generator:</p>
+<ul>
+<li><b>Rare forms are not reused.</b> Deviant forms recur in {{ v.e3_rec_v }} of cases in the Voynich half and in {{ v.gen_rec }} across all generators.</li>
+<li><b>Within-page drift.</b> Voynich {{ v.e3_t6b_v }} against {{ v.gen_t6b }}.</li>
+</ul>
+<p>A glyph-level random walk of preferences, strong enough to matter, degrades other statistics before it reaches the observed drift. Slips raise lexical diversity to the observed level but soften the zeros (T3a {{ v.e3_t3a }} against {{ v.e3_t3a_v }}). The text is diverse while staying hard, which suggests that its novel forms are grammatical constructions rather than errors.</p>
+<p>The two-route generator failed clearly ({{ v.e6[0] }}/40). Retrieval from a drifting repertoire collapses lexical diversity (type-token ratio {{ v.e6_ttr }} against {{ v.e6_ttr_v }}). This prediction, derived from E4 and E5, is not supported.</p>
+
+<h3>5.3 E4 and E5: where the drift and the page effects live</h3>
+<p>E4 decomposes the within-page drift into a lexical part, meaning which word types two lines share, and a sublexical part, meaning how the remaining words are built. For the sublexical part, words within edit distance 2 of each other are removed from the comparison. Slopes are taken over line distances 2–8, which excludes token-level recency.</p>
+<p>The Voynich drift is lexical in type (L = {{ v.e4_L }} {{ v.e4_L_ci }}) with a small sublexical part (S = {{ v.e4_S }} {{ v.e4_S_ci }}). That is the profile of plain Latin ({{ v.e4_lang_S['LAT'] }}) and German ({{ v.e4_lang_S['GER'] }}). The preregistered bar for "sublexical beyond content drift" was set by Dante's terza rima ({{ v.e4_ita_lo }}), and it was not met, so E4 does not separate content drift from vocabulary or habit drift.</p>
+<p>A comparison of preregistered statistics adds one point. Both ciphers of Latin remove the sublexical drift that their plaintext has (deterministic verbose cipher {{ v.e4_vb_S }} {{ v.e4_vb_S_ci }}; Naibbe {{ v.e4_naib_S }}). The Voynich interval lies below the deterministic cipher's, so letter-level ciphers of the tested kinds are poor sources of the observed drift.</p>
+<p>E5 asks whether the page clustering of word types is content-like. Content drift makes rare content words the burstiest (Church and Gale 1995): a name or term clusters on the pages about its subject. E5 compares observed same-page pairs with their expectation under permutation within hand × section, by frequency band. The gradient G contrasts rare (2–4) with frequent (20–99) types.</p>
+<p>The languages give G = {{ v.e5_lang_G }}, the deterministic cipher {{ v.e5_vb_G }} and Naibbe {{ v.e5_naib_G }}. The Voynich value is {{ v.e5_G }} {{ v.e5_G_ci }} (Takahashi {{ v.e5_it_G }}), which is undetermined by the preregistered rule. Its point estimate lies below the lower bound of every content control. It clusters by page in every band, including forms occurring at least 100 times ({{ v.e5_B['VF'] }} {{ v.e5_VF_ci }} against {{ v.e5_lang_VF }} in the languages).</p>
+<p>So the page effect sits in the familiar forms, which natural-language content drift leaves nearly uniform. A glyph-level generator with page tilts reproduces the clustering of frequent forms but overshoots on rare ones (B = {{ v.e5_hgr_R }} for rare forms, against {{ v.e5_B['R'] }}). Part of what earlier work read as keyword clustering (Montemurro and Zanette 2013) may be this production-level page effect. Our test measures clustering by page within hand and section, not their section-level measure, so the two are not directly comparable.</p>
+{{ T.e45 }}
+<p><img src="paper2/figures/fig4_drift_burstiness.png" width="460"/></p>
+<p class="cap">Figure 5. (a) Lexical against sublexical drift slopes (95% intervals). (b) Page clustering by frequency band: observed same-page pairs relative to permutation within hand × section.</p>
+
+<h2>6. The mechanism class</h2>
+<p>We define the mechanism class as the set of stochastic processes that, on the manuscript's layout, produce token sequences satisfying the nine properties in Table 7, as measured by the stated statistics. The class is defined by necessary conditions.</p>
+<p>It is not yet shown to have a member that reproduces all 40 statistics: the best explicit member reaches {{ v.e3p[0] }}, and the two open specifics are the absence of local vocabulary together with the within-page drift. The strength labels in Table 7 reflect the red-team checks of Table 10: robustness to transliteration, segmentation, deviance definition, hand and sample size.</p>
+{{ T.cls }}
+<p>Table 8 separates three kinds of outcome.</p>
+<ul>
+<li><b>Exclusions</b> are variants with a named falsifier triggered under calibration.</li>
+<li><b>Unresolved alternatives</b> are variants the text cannot decide between. For two of them this is shown in principle; for the third, the transliteration lacks the information.</li>
+<li><b>Open specifics</b> are properties no tested generator reproduces jointly.</li>
+</ul>
+{{ T.excl }}
+<p>Taken together, the class describes a writer or procedure that:</p>
+<ul>
+<li>produces words from a strict slot grammar;</li>
+<li>links each word's first glyph to the previous word's last glyph within a line;</li>
+<li>reuses recent forms continuously across boundaries;</li>
+<li>varies its preferences among shared forms by session and page, and drifts within a page as fast as topic drift in prose;</li>
+<li>chooses the last word of a line to fit the margin;</li>
+<li>never lets a locally unique form become part of a local vocabulary.</li>
+</ul>
+<p>Each component was either required by a calibrated test or shown necessary by ablation on held-out pages.</p>
+
+<h2>7. The message is not identifiable from the text (E7)</h2>
+<h3>7.1 Construction</h3>
+<p>Every production process in the class makes free choices: at each glyph, several continuations are allowed with some probability. A message can be carried by making those choices depend on it.</p>
+<p>The rate-optimal way to do this is arithmetic decoding, a mimic function in the sense of Wayner (1992). The message bits are read as a binary fraction. At each choice the current interval is divided in proportion to the process's probabilities, and the sub-interval that contains the fraction is taken. A receiver who knows the process re-encodes the observed choices and obtains the bits.</p>
+<p>We implemented this with the 32-bit coder of Witten, Neal and Cleary (1987), applied to the order-3 glyph automaton of the battery on the Voynich layout. Three conditions were compared, each through the full 40-statistic phenotype:</p>
+<ul>
+<li>random driving (3 seeds);</li>
+<li>compressed plaintexts: Latin, Italian and German, compressed with lzma;</li>
+<li>the same plaintexts as raw UTF-8 bits.</li>
+</ul>
+<p class="prop"><b>Proposition.</b> Let a process emit a sequence of categorical choices with probabilities p<sub>t</sub>(· | history) known to sender and receiver. Let the choices be made by arithmetic decoding of a bit sequence U.</p>
+<ol>
+<li>If U consists of independent, uniformly distributed bits, the output has the distribution of the process itself, up to the coder's finite precision. Hence every statistic of the text has the same distribution with and without a message.</li>
+<li>A receiver who knows the p<sub>t</sub> recovers U over the consumed length.</li>
+<li>The number of bits carried equals the log-loss of the generated text under the process, whose expectation is the process's entropy.</li>
+</ol>
+<p class="prop"><i>Sketch.</i> Arithmetic decoding partitions [0, 1) into intervals whose lengths are the probabilities of the corresponding choice sequences. A uniformly distributed fraction falls into each with exactly that probability (Witten et al. 1987). Recovery follows because encoding is the inverse map on the consumed prefix. With a 32-bit range and the model counts used here, the per-choice probability error is far below the sampling noise of any statistic. Compressed data are close to independent uniform bits. The same principle underlies information-theoretic and complexity-theoretic definitions of secure steganography: a message encoded to be indistinguishable from uniform randomness can drive the random choices of a known channel without changing its distribution (Cachin 2004; Hopper, Langford and von Ahn 2002).</p>
+<h3>7.2 Results</h3>
+<p>All six message-driven runs returned their plaintext with {{ v.e7_mism }} bit errors (Table 9). The process consumed about {{ v.e7_bits }} bits per manuscript-sized output, or {{ v.e7_bpg }} bits per glyph and {{ v.e7_bpt }} bits per word. That is about {{ v.e7_kb }} KB of compressed plaintext, roughly {{ v.e7_latin_chars }} thousand characters of Latin prose.</p>
+<p>For compressed plaintexts, {{ v.e7_lz_agree }} of {{ v.e7_n }} statistics agreed with random driving. The single disagreement ({{ v.e7_lz_dis }}, three runs per condition) disappeared with eight runs per condition: {{ v.e7_tm_a }} ± {{ v.e7_tm_asd }} against {{ v.e7_tm_b }} ± {{ v.e7_tm_bsd }}, Welch p = {{ v.e7_tm_p }}. Even raw, uncompressed plaintext bits agreed on {{ v.e7_raw_agree }} of {{ v.e7_n }} ({{ v.e7_raw_dis }} differed; Figure 6).</p>
+{{ T.e7 }}
+<p><img src="paper2/figures/fig6_e7.png" width="460"/></p>
+<p class="cap">Figure 6. Standardised difference between message-driven and randomly driven output for each statistic (3 runs per condition). The shaded band is ±2.</p>
+<h3>7.3 What this does and does not show</h3>
+<p>E7 does not show that the Voynich text carries a message. It shows that the question cannot be settled from the text, for this class of encoders. Any process in the class can be driven by a message without changing the distribution of any statistic computable from the text. A message is identifiable only under a restriction on the encoder.</p>
+<p>Within the restrictions tested here, the evidence is negative:</p>
+<ul>
+<li>word-preserving systems create local vocabulary, which the text lacks;</li>
+<li>the Naibbe cipher lacks the recency, the drift and the page effects;</li>
+<li>the two tested letter-level ciphers remove the sublexical drift that the text keeps.</li>
+</ul>
+<p>Arithmetic coding is a twentieth-century technique. An encoder of equivalent effect in the fifteenth century would be a historical claim requiring historical evidence. Untested historical encoders may exist.</p>
+<p>The same argument covers the other unresolved alternative. A written rule set with a randomiser and a practised writer's habits are described by the same generator, and no text statistic separates them.</p>
+
+<h2>8. Discussion</h2>
+<h3>8.1 What is new</h3>
+<p>Relative to earlier work, the contributions are these:</p>
+<ol>
+<li>A preregistered, calibrated separation of production hypotheses, with human gibberish as the improvisation control at the level of constraints and line structure. Gaskell and Bowern (2022) compared low-level statistics and noted that their samples were too short for page structure.</li>
+<li>Line endings adapted to the margin but not to paragraph ends. Currier (1976) already described the line as a functional unit; the margin/paragraph contrast and its persistence on text-only pages are new.</li>
+<li>Continuous recency across line and paragraph boundaries, which excludes settings that switch per line or paragraph. It is weaker than, and structurally different from, the copying of Timm and Schinner (2020): there are no propagating innovations and no vertical copying.</li>
+<li>The absence of local vocabulary, which separates the text from natural language and from every generator we built.</li>
+<li>Page clustering that extends to the most frequent forms, with a rare-type gradient below every content control.</li>
+<li>Held-out generator tests with ablations that turn "sufficient" into "necessary components plus two open specifics".</li>
+<li>A constructive non-identifiability result for the plaintext question.</li>
+</ol>
+<p>The rigidity measure quantifies the slot structure described by Stolfi (2000) and Zattera (2022). The boundary coupling confirms Rozanova and Temerev (2026). The positional entropy collapse (T3c: Voynich {{ v.t3c_v }}, Naibbe {{ v.t3c_naib }}, automaton {{ v.t3c_mk }}, languages {{ v.t3c_lang }}, gibberish {{ v.t3c_gib }}) is reproduced by verbose ciphers, as Kinnison (2026) reported. It separates the text from natural language and naive gibberish, not procedure from cipher.</p>
+<h3>8.2 Why text statistics cannot settle the plaintext question</h3>
+<p>The debate between "meaningless" and "cipher" readings has often been conducted with statistics: entropy, Zipf's law, word lengths, keyword clustering. The proposition in Section 7 explains why no statistic of this kind can end it. A message compressed and carried by arithmetic decoding leaves the text distribution unchanged. The only statistics that can reveal a message are those that detect a departure of the text from the distribution of the message-free process, and such a test presupposes a model of the encoder.</p>
+<p>Evidence for or against a message must therefore take one of three forms:</p>
+<ul>
+<li>tests against a specific, historically motivated encoder class, as done here for word-preserving and Naibbe-type systems;</li>
+<li>external information, such as a key, a bilingual passage, or a demonstrable link between text and image, which the companion analysis did not find;</li>
+<li>physical and historical evidence about how the manuscript was made.</li>
+</ul>
+<p>This is not special to the Voynich manuscript. It is a property of every text produced by a stochastic process with free choices.</p>
+<h3>8.3 Rule, habit or message</h3>
+<p>Within the class, three considerations weigh without deciding.</p>
+<ul>
+<li><b>No device.</b> There is no device footprint at the power we could test.</li>
+<li><b>Human production plausibility.</b> Recency, session variation, margin adaptation and drift are what one expects of a human writer, and a rule set would have to specify each explicitly, including a continuously drifting preference. Our own human control is too short to show recency or drift, so this consideration rests on general grounds, not on our data.</li>
+<li><b>No tested cipher fits.</b> Every historical-style cipher we tested leaves traces that the text lacks.</li>
+</ul>
+<p>The most parsimonious reading is writers composing on the page within a strict learned grammar, choosing forms under short-term recency and session-dependent preferences, and fitting each line's last word to the margin. We label this a parsimony judgement, not a finding. Whether a message rode on those choices remains undecidable from the text.</p>
+<h3>8.4 Transmission</h3>
+<p>Copying from a re-lined draft is excluded (T2a). No copying signature was found: no dittography, and no word-level corrections among the annotated ones. The final forms depend on whether a line ends at the margin, so the last word was chosen knowing where that line ends. The simplest reading is composition on the page. Copying from a draft with identical lines and margins cannot be excluded from the transliteration.</p>
+<h3>8.5 Red-team checks</h3>
+{{ T.redteam }}
+<p>Two checks changed the paper. The hardness contrast (T3a) holds at matched short-stretch size but not at full size, so C1 rests mainly on rigidity. The absence of local vocabulary is shared by the Naibbe cipher, so it excludes word-preserving systems, not homophonic ones.</p>
+
+<h2>9. Limitations</h2>
+<ul>
+<li><b>Blindness is procedural, not epistemic.</b> The author knew many Voynich properties before designing the tests, and both halves' values were known before E4–E6.</li>
+<li><b>Two transliterations, one source.</b> ZL3b and IT2a are independent readings of the same images; transliteration conventions (spaces, ligatures) remain a shared source of error.</li>
+<li><b>Controls.</b>
+  <ul>
+  <li>The human gibberish is short, modern and in the Latin alphabet; no data exist on long-practised improvisation in an invented script, which is the main reason the executor question stays open.</li>
+  <li>The language controls are modern editions.</li>
+  <li>Most generator controls were fitted to the Voynich text.</li>
+  <li>The Vulgate control was lost to an empty file.</li>
+  </ul></li>
+<li><b>Estimator dependence.</b>
+  <ul>
+  <li>The line-break ratio ranges from about 0.03 (pooled estimator) to {{ v.t1_v }} (page-conditional estimator, the only one valid under writer heterogeneity).</li>
+  <li>The hardness contrast depends on sample size.</li>
+  <li>T4's power is known only for the tested device design (period 5, cycle 4).</li>
+  </ul></li>
+<li><b>Page order</b> is the binding order, which departs from the writing order in places. This weakens T5 and T4c.</li>
+<li><b>Corrections</b> rest on {{ v.t7a_n }} annotations made for reading purposes; line fill uses glyph counts, not physical widths.</li>
+<li><b>Sufficiency of the class</b> is not demonstrated: the best generator reproduces {{ v.e3p[0] }} of 40 statistics.</li>
+<li><b>E7</b> uses the order-3 automaton rather than the best generator. The proposition covers any process with known choice probabilities, but its empirical check covers one.</li>
+<li><b>The 40 statistics are correlated</b> and assessed with a tolerance rule, not a joint test.</li>
+<li><b>Analysis changes after calibration.</b> Several estimators were changed after their calibration failed: the T1 null model, the E1 expectations and the E5 intervals (Table S1). Every change was made before the affected Voynich statistic was computed. The T1 terms were computed once on the Voynich text during the diagnosis.</li>
+<li><b>Undetermined results.</b> E5 was undetermined by its preregistered rule, and E4 did not separate content drift from habit drift. The paper uses them only descriptively.</li>
+<li><b>AI assistance.</b> The analyses and drafts were prepared with the assistance of an AI system. The author takes responsibility for the content.</li>
+</ul>
+
+<h2>10. Conclusion</h2>
+<p>Preregistered, calibrated tests narrow the production of the Voynich text to a class defined by nine properties. The text excludes:</p>
+<ul>
+<li>naive improvisation;</li>
+<li>stationary tables and grilles;</li>
+<li>periodic devices;</li>
+<li>settings that switch per line or paragraph;</li>
+<li>copy-and-modify with propagating innovations;</li>
+<li>word-preserving ciphers and the Naibbe cipher as published;</li>
+<li>copying from a re-lined draft.</li>
+</ul>
+<p>It leaves three alternatives that it cannot decide between: an explicit rule set, a practised writer's habits, and a message carried by the free choices. For the last, we showed constructively that a message can be present without leaving any trace in the statistics used here. For uniformly distributed message bits, it leaves a trace in no statistic that can be computed from the text.</p>
+<p>The production mechanism is tightly constrained, but whether its remaining free choices carry a message is not identifiable from the text alone. Progress beyond this point requires evidence the text does not contain:</p>
+<ul>
+<li>long-term improvisation and rule-execution experiments with human writers;</li>
+<li>physical examination of the manuscript for session boundaries and corrections;</li>
+<li>historical sources describing a procedure of this kind.</li>
+</ul>
+
+<h2>Data and code availability</h2>
+<p>All code, preregistrations, deviation logs, results and the build scripts for this paper are in the accompanying repository [URL to be added on submission]. The experiments are in <tt>mechanism/</tt>, the results in <tt>results/mechanism/</tt> and the paper sources in <tt>paper2/</tt>. The transliterations are those of voynich.nu (Zandbergen and Landini 2025; Takahashi 1999). The gibberish corpus is that of Gaskell and Bowern (2022), under its licence, which requires citation. The Naibbe tables are those of Greshko (2025).</p>
+
+<h2>Acknowledgements</h2>
+<p>The author thanks René Zandbergen and Gabriel Landini for the transliteration, Daniel Gaskell and Claire Bowern for publishing their gibberish corpus, and Michael Greshko for the Naibbe tables. The analyses, code and drafts were prepared with the assistance of an AI system (Claude, Anthropic); the author verified the results and takes full responsibility for the content.</p>
+
+<h2>References</h2>
+<p class="ref">Beyer, S. Companion manuscript. A local glyph process suffices: An information-theoretic mechanism comparison for the Voynich manuscript.</p>
+<p class="ref">Bowern, C. L., and L. Lindemann. 2021. The linguistics of the Voynich manuscript. Annual Review of Linguistics 7:285–308.</p>
+<p class="ref">Cachin, C. 2004. An information-theoretic model for steganography. Information and Computation 192 (1):41–56.</p>
+<p class="ref">Church, K. W., and W. A. Gale. 1995. Poisson mixtures. Natural Language Engineering 1 (2):163–190.</p>
+<p class="ref">Currier, P. 1976. Papers on the Voynich manuscript. In M. E. D'Imperio (ed.), New research on the Voynich manuscript: Proceedings of a seminar. Washington, DC.</p>
+<p class="ref">D'Imperio, M. E. 1978. The Voynich manuscript: An elegant enigma. Fort George G. Meade, MD: National Security Agency.</p>
+<p class="ref">Davis, L. F. 2020. How many glyphs and how many scribes? Digital paleography and the Voynich manuscript. Manuscript Studies 5 (1):164–180.</p>
+<p class="ref">Gaskell, D. E., and C. L. Bowern. 2022. Gibberish after all? Voynichese is statistically similar to human-produced samples of meaningless text. CEUR Workshop Proceedings 3313, International Conference on the Voynich Manuscript 2022. Data: https://github.com/danielgaskell/voynich.</p>
+<p class="ref">Greshko, M. A. 2025. The Naibbe cipher: A substitution cipher that encrypts Latin and Italian as Voynich Manuscript-like ciphertext. Cryptologia. doi:10.1080/01611194.2025.2566408.</p>
+<p class="ref">Hopper, N. J., J. Langford, and L. von Ahn. 2002. Provably secure steganography. In Advances in Cryptology – CRYPTO 2002, LNCS 2442, 77–92. Berlin: Springer.</p>
+<p class="ref">Kinnison, R. 2026. The Voynich Manuscript's positional entropy collapse: Comparative evidence from languages and ciphers. Cryptologia. doi:10.1080/01611194.2026.2697318.</p>
+<p class="ref">Lindemann, L., and C. Bowern. 2020. Character entropy in modern and historical texts: Comparison metrics for an undeciphered manuscript. arXiv:2010.14697.</p>
+<p class="ref">Montemurro, M. A., and D. H. Zanette. 2013. Keywords and co-occurrence patterns in the Voynich manuscript: An information-theoretic analysis. PLoS ONE 8 (6):e66344.</p>
+<p class="ref">Rozanova, L., and A. Temerev. 2026. A glyph is not a letter, a token is not a word, a space is not a space: What the units of Voynichese are not. arXiv:2608.17096.</p>
+<p class="ref">Rugg, G. 2004. An elegant hoax? A possible solution to the Voynich manuscript. Cryptologia 28 (1):31–46.</p>
+<p class="ref">Stolfi, J. 2000. A grammar for Voynichese words. Mirrored at https://www.voynich.nu/hist/stolfi/grammar.html.</p>
+<p class="ref">Takahashi, T. 1999. Voynich manuscript transcription. Distributed as IT2a-n.txt at https://www.voynich.nu/transcr.html.</p>
+<p class="ref">Timm, T., and A. Schinner. 2020. A possible generating algorithm of the Voynich manuscript. Cryptologia 44 (1):1–19.</p>
+<p class="ref">Wayner, P. 1992. Mimic functions. Cryptologia 16 (3):193–214.</p>
+<p class="ref">Witten, I. H., R. M. Neal, and J. G. Cleary. 1987. Arithmetic coding for data compression. Communications of the ACM 30 (6):520–540.</p>
+<p class="ref">Zandbergen, R. n.d. The radio-carbon dating of the Voynich MS. https://www.voynich.nu/extra/carbon.html.</p>
+<p class="ref">Zandbergen, R., and G. Landini. 2025. ZL transliteration of the Voynich manuscript, version 3b. https://www.voynich.nu/transcr.html.</p>
+<p class="ref">Zattera, M. 2022. A new transliteration alphabet brings new evidence of word structure and multiple "languages" in the Voynich manuscript. International Conference on the Voynich Manuscript 2022, University of Malta.</p>
+</body></html>

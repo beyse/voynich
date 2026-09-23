@@ -1,0 +1,49 @@
+<html><head><meta charset="utf-8"><title>Supplementary material</title></head>
+<body>
+<h1>Supplementary material for "Constrained, not identifiable: preregistered tests of how the Voynich manuscript text was produced"</h1>
+<p class="author">Sebastian Beyer</p>
+<p class="affil">Built {{ v.date }} from repository commit {{ v.commit }}. All tables are generated from the result files by the same script that builds the main text.</p>
+
+<h2>S1. Deviations and preregistration timestamps</h2>
+{{ T.s_dev }}
+{{ T.s_prereg }}
+
+<h2>S2. Generator parameters</h2>
+{{ T.s_fits }}
+
+<h2>S3. Held-out statistics for every generator</h2>
+{{ T.s_e2 }}
+{{ T.s_e3 }}
+{{ T.s_e6 }}
+
+<h2>S4. Drift and burstiness</h2>
+{{ T.s_e5 }}
+{{ T.s_e4 }}
+
+<h2>S5. Definitions of the 40 phenotype statistics</h2>
+<p><b>Earlier battery</b> (companion manuscript):</p>
+<ul>
+<li>hapax share and type-token ratio;</li>
+<li>Zipf slope of the 200 most frequent types;</li>
+<li>mean word length;</li>
+<li>boundary MI: excess MI between the last glyph of a word and the first glyph of the next inside lines, against a within-line permutation null;</li>
+<li>word-pair MI and distance-2 word MI;</li>
+<li>line-break MI and line-break boundary MI, with the boundary MI at equal n;</li>
+<li>space predictability: information gain about word boundaries from the flanking glyph pair;</li>
+<li>lexicon test: share of held-out real words and of glyph-trigram samples attested in the training vocabulary;</li>
+<li>conditional glyph entropies h2–h4;</li>
+<li>lzma bits per character;</li>
+<li>page MI between page identity and word.</li>
+</ul>
+<p><b>Mechanism battery:</b> T1 page-conditional line-break ratio; T2a final-form excess (margin-bound, paragraph-final); T2b slack ratio (stars section); T2c dittography ratio; T3a zero replication (250-token chunks); T3b slot consistency and monotone share; T3c positional entropy (final, initial); T4 any periodicity peak; T5 step/smooth prediction-error ratio; T6a near and exact recency indices; T6b slope of line similarity over line distance 1–8; T7b deviant rate, recurrence share and slip share.</p>
+<p><b>E1:</b> graded line step, paragraph step, graded within-line decay, within-paragraph decay.</p>
+<p><b>Tolerance:</b> |G − V| ≤ 2√(SE<sub>V</sub>² + SD<sub>G</sub>²) + 0.01|V|. SE<sub>V</sub> is a leave-one-quire-out jackknife over the test half; SD<sub>G</sub> is taken over three generator seeds. T4 passes if at most one seed shows a peak.</p>
+
+<h2>S6. Implementation notes</h2>
+<ul>
+<li><b>Page-conditional T1 estimator.</b> Per page, the excess plug-in MI over 200 within-page re-pairings, for the break pairs and for consecutive blocks of within-line pairs of the same size, averaged over pages with weights equal to the number of break pairs. The pooled estimators failed a known-truth simulation in which each page of Latin received a different letter substitution; this estimator returned identical values with and without substitution.</li>
+<li><b>E1 expectations.</b> Position classes: offset from the line start (1 or ≥ 2), offset from the line end (1 or ≥ 2), paragraph-final line or not. The binary expectation is the exact mean over pairs of distinct eligible tokens of the page in the same class pair.</li>
+<li><b>E5 null.</b> For each type, the expected same-page pairs are Σ<sub>g</sub> C(n<sub>tg</sub>, 2) · Σ<sub>p∈g</sub> N<sub>p</sub>(N<sub>p</sub> − 1) / (N<sub>g</sub>(N<sub>g</sub> − 1)), with groups g = hand × section.</li>
+<li><b>E7 coder.</b> 32-bit Witten–Neal–Cleary arithmetic coding over integer transition counts. The end-of-line suppression below 60% of the target length and the stop at 140% are deterministic and replicated by the receiver.</li>
+</ul>
+</body></html>

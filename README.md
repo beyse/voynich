@@ -66,3 +66,12 @@ python3 -m mechanism.e5 A; python3 -m mechanism.e5 B          # frequenzaufgelö
 python3 -m mechanism.e6 fit; python3 -m mechanism.e6 generate; python3 -m mechanism.e6 phenotype; python3 -m mechanism.e6 report
 python3 -m mechanism.e7 run; python3 -m mechanism.e7 tmcheck   # Klartext in freien Entscheidungen
 ```
+
+## Zweites Manuskript (Mechanismusprogramm)
+- `paper2/paper.pdf`, `paper2/supplement.pdf`: "Constrained, not identifiable: preregistered tests of how the Voynich manuscript text was produced" (englisch), mit gerenderten Quellen `paper2/paper.html`, `paper2/supplement.html` und Vorlagen in `paper2/templates/`.
+- Jede Zahl wird von `paper2/build.py` direkt aus `results/mechanism/*.json` berechnet; Abbildungen: `paper2/make_figures.py`; lesbare Namen der 40 Statistiken: `paper2/labels.py`.
+- Red-Team-Prüfungen vor dem Schreiben: `python3 -m mechanism.redteam` (post hoc, als solche gekennzeichnet).
+```bash
+python3 -m mechanism.redteam
+python3 paper2/make_figures.py && python3 paper2/build.py
+```
