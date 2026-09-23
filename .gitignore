@@ -6,3 +6,4 @@ paper/figures/_render_*
 .DS_Store
 results/mechanism/e2/*.pkl
 results/mechanism/e3/*.pkl
+results/mechanism/e6/*.pkl
