@@ -1,33 +1,102 @@
 <html><head><meta charset="utf-8"><title>Supplementary material</title></head>
 <body>
-<h1>Supplementary material for &ldquo;A local glyph process suffices: an information-theoretic mechanism comparison for the Voynich manuscript&rdquo;</h1>
+<h1>Supplementary material for "Constrained, not identifiable: how the Voynich manuscript text was produced"</h1>
 <p class="author">Sebastian Beyer</p>
-<p class="affil">Prepared {{ v.date }}. All tables are generated from the analysis logs by the same script that builds the main text.</p>
+<p class="affil">Independent researcher, Vienna, Austria. All tables are generated from the result files by the script that builds the main text (https://github.com/beyse/voynich, commit {{ v.commit }}).</p>
 
-<h2>S1. Parsing of the IVTFF transliteration</h2>
-<p>Page headers of the form <tt>&lt;f1r&gt; &lt;! $Q=A $P=A $F=a $B=1 $I=T $L=A $H=1 ...&gt;</tt> supply the metadata. Locus lines <tt>&lt;f1r.1,@P0&gt; text</tt> carry a locus type whose first letter, after stripping the position markers <tt>@ + * = ~ ! / &amp;</tt>, gives the kind: P (paragraph text), L (label), C (circular), R (radial). Inline markup: <tt>[a:o]</tt> alternatives are resolved to the first reading; <tt>@nnn;</tt> extended glyph codes and <tt>?</tt> mark a token as uncertain and such tokens are removed; <tt>&lt;! ... &gt;</tt> comments and <tt>{...}</tt> annotations are removed; <tt>&lt;-&gt;</tt> and <tt>&lt;~&gt;</tt> drawing intrusions are treated as spaces; <tt>&lt;%&gt;</tt> and <tt>&lt;$&gt;</tt> paragraph markers are removed; <tt>!</tt> fillers are deleted; <tt>.</tt> is a space and <tt>,</tt> (uncertain space) is either joined (baseline) or treated as a space. The EVA alphabet is used as is; ligature and capitalized variants are kept as distinct glyphs. Resulting corpus: {{ v.lines_P }} paragraph-text lines on {{ v.pages_P }} pages, {{ v.tokens_P }} tokens after removing uncertain tokens; {{ v.labels_L }} label tokens.</p>
+<h2>S1. Exploratory profile: materials and methods</h2>
+<p><b>Parsing.</b> Page headers of the form <tt>&lt;f1r&gt; &lt;! $Q=A $P=A $F=a $B=1 $I=T $L=A $H=1 ...&gt;</tt> supply quire, illustration section, Currier language and hand. Locus lines <tt>&lt;f1r.1,@P0&gt; text</tt> carry a locus type whose first letter, after stripping the position markers <tt>@ + * = ~ ! / &amp;</tt>, gives the kind: P (paragraph text), L (label), C (circular), R (radial). Loci whose type is prefixed by <tt>&amp;</tt> (labels placed in drawings) are labels. Inline markup: alternatives <tt>[a:o]</tt> take the first reading; extended glyph codes <tt>@nnn;</tt> and <tt>?</tt> mark a token as uncertain, and such tokens are removed; comments <tt>&lt;! ... &gt;</tt> and annotations <tt>{...}</tt> are removed; drawing intrusions <tt>&lt;-&gt;</tt> and <tt>&lt;~&gt;</tt> are spaces; paragraph markers <tt>&lt;%&gt;</tt> and <tt>&lt;$&gt;</tt> are removed; fillers <tt>!</tt> are deleted. A <tt>.</tt> is a space ({{ p.dot }} occurrences) and a <tt>,</tt> an uncertain space ({{ p.comma }}), joined in the baseline. Ligature and capitalised variants are kept as distinct glyphs. Result: {{ p.lines_P }} paragraph-text lines on {{ p.pages_P }} pages, {{ p.tokens_P }} tokens; {{ p.labels_L }} label tokens.</p>
+<p><b>Line breaks.</b> For consecutive lines of the same paragraph, the excess MI of the pair (last token of line k, first token of line k+1) is compared with that of adjacent within-line pairs subsampled to the same n (eight subsamples). For consecutive lines of the same page we also compute the excess MI of all combinations of position classes, and the page specificity I(token; page) by position in the line.</p>
+<p><b>Boundary predictability.</b> Spaces are removed from each line and a model P(boundary | k glyphs on the left, k on the right) is fitted on a random half of the lines and evaluated on the other half. We report the information gain 1 − H(boundary | context)/H(boundary) and F<sub>1</sub> at threshold 0.5. The rule-spaced Latin control is stripped of spaces and re-spaced after m, s, t or y once the current token has at least three letters.</p>
+<p><b>Lexicon test.</b> A within-token glyph model with two glyphs of context and token start and end symbols is fitted on a random half of the tokens, and tokens are sampled from it. We compare the share of held-out real tokens (and types) whose string occurs in the training half with the same share for the sampled tokens. An open inventory defined only by local glyph constraints gives equal shares; a lexicon gives a large gap.</p>
+<p><b>Entropy profile and residual.</b> Each line is a string with the space as a symbol. Plug-in conditional entropies h(k) = H(x | k preceding symbols), k = 1–5, are compared with synthetic twins sampled from Markov models of order 1–3 fitted to the same corpus with the same line lengths; only the comparison with the twin is interpreted, because plug-in h(k) is biased downward for large k. The residual is the lzma rate (preset 9, bits per symbol) of a text minus that of an order-3 twin fitted separately for each combination of Currier language and section. A negative residual means redundancy the drifting automaton does not capture. The automaton's own samples (about ±0.03 bit) set the noise floor.</p>
+<p><b>Generators.</b> All generators produce text in the line-length, paragraph and page structure of the Voynich paragraph text.</p>
+<ul>
+<li><i>Glyph automata.</i> Counts of order-k contexts over the glyph stream of each line with k start symbols and an end symbol; sampling per line with the target glyph length of the corresponding real line, the end symbol suppressed until 60% of the target length and sampling stopped at 140%. Section drift: one model per (Currier language, section) group with at least 30 lines, otherwise the global model. Page drift: the next-symbol distribution is λ times the page's own normalised counts plus (1 − λ) times the section's, for contexts seen on the page; this variant sees the page's own text and is in-sample by construction.</li>
+<li><i>Table and grille</i> (after Rugg 2004). Slot decomposition of each attested token by the regular expression prefix = q?(o|y|d|s|ch|sh)?(k|t|p|f|ck|ct|cp|cf|ch|sh|ckh|cth|cph|cfh|l|r|d|s)?, midfix = e{0,3}(o|a|y)?, suffix = (i{0,3}(n|r|l|m)|d|l|r|s|y|dy|ly|ry|dl|ol|al|or|ar|am|an)?y?, with unmatched tokens split into thirds. Per section group a table of 40 columns and max(2, round(0.9 × tokens/40)) rows, each cell an independent draw of prefix, midfix and suffix from the empirical frequencies. Each page starts at a random cell; a line is the run of cells to the right (wrapping); each line advances one row.</li>
+<li><i>Copy and modify</i> (after Timm and Schinner 2020). Seeds: the 300 most frequent real tokens. Source: line above, same column ±1 (0.6); previous token in the line (0.2); random token of the page (0.15); seed (rest). Modification with probability 0.85, a second with 0.25: substitution within the similarity pairs (ch,sh), (k,t), (t,p), (k,f), (e,ee), (ee,eee), (i,ii), (ii,iii), (a,o), (y,dy), (r,l), (n,m), (ol,or), (ar,al), (ain,aiin), (ey,edy) with probability 0.5; otherwise addition or removal of a prefix from {q,o,d,s,y,l,ch,sh} (0.25) or a suffix from {y,dy,n,in,iin,r,l,s,m} (0.25), chosen so that tokens stay around five to six glyphs.</li>
+<li><i>Verbose cipher with fixed homophone choice.</i> Each of 23 Latin letters maps to one to three strings from a pool of 35 Voynich-like units; the homophone is selected by the code of the previous glyph modulo the number of homophones. Spaces after y, n, r, l, m, s once the current token has three glyphs, forced at nine. One independent Latin sentence per line.</li>
+<li><i>Ciphertext-feedback substitution.</i> c<sub>t</sub> = T[c<sub>t−1</sub>][p<sub>t</sub>] with 27 rows, each a random injective map from 23 letters to 27 glyph symbols; the two-glyph variant applies a second table with the intermediate glyph as state. Spaces after y, n, r, l, m at a minimum token length of three and a maximum of nine. Independent sentences per line.</li>
+<li><i>Naibbe cipher</i> (Greshko 2025). Tables from the file naibbe_tables.csv of the author's repository (138 unigram, 138 prefix and 138 suffix strings for 23 letters and six tables). Preprocessing: lower case, w→uu, j→i, k→c, letters only. The plaintext is cut into one- or two-letter tokens with unigram probability 17/36 (the last letter of a line is always a unigram). Deck: 20 alpha, 8 beta1, 8 beta2, 8 beta3, 4 gamma1, 4 gamma2, shuffled and dealt without replacement, reshuffled when exhausted; one card per plaintext letter (variant: per token). Two-letter tokens are prefix(first letter) + suffix(second letter). Each ciphertext space is removed with probability 0.03 (variant: none). Plaintext: Latin (Caesar) or Italian (Dante), one independent sentence per line (variant: running text). State-dependent variant: with probability w the table of the next token is drawn from a fixed random distribution over the six tables conditioned on the last glyph of the previous token (one Dirichlet(c) draw per glyph), otherwise from the deck.</li>
+</ul>
+<p><b>Drift and hand.</b> For pairs of pages of the same Currier language we compute the Jensen–Shannon divergence between their glyph-bigram distributions (450-glyph samples, additive smoothing 0.05) as a function of folio distance, grouped by whether the pages share section and hand. Hands follow Davis (2020) as recorded in the ZL metadata.</p>
+<p><b>Illustration features and text–image test.</b> Each page image of folios 1r–58v (free of fold-outs; folio 12 is missing) is rendered at 50 dpi from the Beinecke digital facsimile and cropped by 6% on each side. Pixels are classified relative to the page's median (parchment) colour into green, blue and red–brown. Features per page: the area shares of the three classes, their vertical and horizontal centroids, the mean hue of the green class, the blue and red shares of all coloured pixels, and the total coloured share (standardised). The page-to-folio assignment was verified visually on f26r, f27r and f58r. Text distances are Hellinger distances between relative token-frequency vectors (and, separately, glyph-bigram vectors); image distances are Euclidean. Their Spearman correlation over page pairs is tested by permuting page identities of the image matrix (10,000 permutations), excluding pairs closer than three folios and, for page sets with several hands, permuting within hand. The positive control adds k pseudo-tokens per page that are deterministic functions of four binary features (blue share, green area, red share, vertical centroid). A secondary analysis predicts the section of a page within one hand from its token or bigram frequencies (leave-one-page-out nearest centroid, excluding folio neighbours within a radius), against the majority rate and the nearest remaining folio; it is confounded by folio position because sections occupy contiguous folio ranges.</p>
+<p><b>Labels.</b> For each illustrated section, the share of label tokens whose type occurs on at least one other page of the section is compared with that of equally many randomly drawn paragraph-text tokens of the same pages (or, where a page has too little text, of the same section), averaged over 20 draws.</p>
+<p><b>Uncertainty.</b> A page bootstrap with replacement was tried first and rejected: duplicated pages create identical lines and token pairs, which inflates plug-in MI (token MI interval 0.49–0.71 around a point estimate of 0.08) and depresses the hapax share. The leave-one-quire-out jackknife ({{ p.jk_n }} quires) has no duplication and is used throughout.</p>
+<p><b>Re-segmentation.</b> Identical byte-pair merges (Sennrich, Haddow and Birch 2016) applied to all corpora leave the controls' ratio h<sub>2</sub>/h<sub>1</sub> within {{ p.bpe_lang_min }}–{{ p.bpe_lang_max }} at every inventory size, whereas the Voynich ratio rises only from {{ p.bpe_vms0 }} to {{ p.bpe_vms80 }} after 80 merges (Table {{ TN.p_bpe }}). The low conditional entropy is not an artefact of a letter being split into several glyphs.</p>
 
-<h2>S2. Additional tables</h2>
-{{ T.agree }}
-{{ T.direction }}
-{{ T.vertical }}
-{{ T.bpe }}
-{{ T.pmi }}
-{{ T.pos }}
-{{ T.combo }}
-{{ T.hier }}
-{{ T.naibbe_var }}
-{{ T.feat }}
-{{ T.full }}
+<h2>S2. Exploratory profile: tables</h2>
+<p><b>Basic statistics and the five properties.</b></p>
+{{ T.p_basic }}
+{{ T.p_proj }}
+{{ T.p_lineunit }}
+{{ T.p_spaces }}
+{{ T.p_lexicon }}
+{{ T.p_entropy }}
+<p><b>Mechanism battery and robustness.</b></p>
+{{ T.p_mech }}
+{{ T.p_hier }}
+{{ T.p_naibbe_var }}
+{{ T.p_transcr }}
+{{ T.p_robust }}
+{{ T.p_jack }}
+<p><b>Drift, hand, illustrations and labels.</b></p>
+{{ T.p_drift }}
+{{ T.p_hand }}
+{{ T.p_tvi }}
+{{ T.p_pc }}
+{{ T.p_feat }}
+{{ T.p_sect }}
+{{ T.p_labels }}
+<p><b>Neighbour similarity and line structure.</b> Adjacent inner tokens share their first or last glyphs, or are identical, as often as tokens of the same line in random order (ratios {{ p.ag_min }} to {{ p.ag_max }}), and single-glyph edits between neighbours are not directional (largest z = {{ p.dir_maxz }}).</p>
+{{ T.p_agree }}
+{{ T.p_direction }}
+{{ T.p_vertical }}
+{{ T.p_pmi }}
+{{ T.p_pos }}
+{{ T.p_combo }}
+{{ T.p_bpe }}
 
-<h2>S3. Generator parameters</h2>
-<p><b>Glyph automata.</b> Counts of order-k contexts over the glyph stream of each line with k start symbols and an end symbol; sampling per line with the target glyph length of the corresponding real line, the end symbol suppressed until 60% of the target length and sampling stopped at 140%. Section drift: one model per (Currier language, illustration section) group with at least 30 lines, otherwise the global model. Page drift: the next-symbol distribution is &lambda; times the page&rsquo;s own normalized counts plus (1 &minus; &lambda;) times the section&rsquo;s, for contexts seen on the page. Twins for the residual: order 3, section drift, fitted to the text under test.</p>
-<p><b>Table and grille.</b> Slot decomposition of each attested token by the regular expression prefix = q?(o|y|d|s|ch|sh)?(k|t|p|f|ck|ct|cp|cf|ch|sh|ckh|cth|cph|cfh|l|r|d|s)?, midfix = e{0,3}(o|a|y)?, suffix = (i{0,3}(n|r|l|m)|d|l|r|s|y|dy|ly|ry|dl|ol|al|or|ar|am|an)?y?, with unmatched tokens split into thirds. Per section group a table of 40 columns and max(2, round(0.9 &times; tokens/40)) rows, each cell an independent draw of prefix, midfix and suffix from the empirical frequencies. Each page starts at a random cell; a line is the run of cells to the right (wrapping); each line advances one row.</p>
-<p><b>Copy and modify.</b> Seeds: the 300 most frequent real tokens. Source choice: line above, same column &plusmn;1 (0.6); previous token in the line (0.2); random token of the page (0.15); seed (rest). Modification with probability 0.85; a second modification with probability 0.25. Modifications: substitution within the similarity pairs (ch,sh), (k,t), (t,p), (k,f), (e,ee), (ee,eee), (i,ii), (ii,iii), (a,o), (y,dy), (r,l), (n,m), (ol,or), (ar,al), (ain,aiin), (ey,edy) with probability 0.5; otherwise addition or removal of a prefix from {q,o,d,s,y,l,ch,sh} (0.25) or a suffix from {y,dy,n,in,iin,r,l,s,m} (0.25), the choice between addition and removal depending on the current length so that tokens stay around five to six glyphs.</p>
-<p><b>Verbose cipher with fixed homophone choice.</b> Each of 23 Latin letters is assigned one to three strings from a pool of 35 Voynich-like units; the homophone is selected by the code of the previous glyph modulo the number of homophones. Spaces are inserted after y, n, r, l, m, s once the current token has three glyphs, and forced at nine. One independent Latin sentence (split at . ; : ? !) per line, truncated to the required number of tokens.</p>
-<p><b>Ciphertext-feedback substitution.</b> c<sub>t</sub> = T[c<sub>t&minus;1</sub>][p<sub>t</sub>] with 27 rows, each a random injective map from 23 letters to 27 glyph symbols; the two-glyph variant applies a second table to the same letter with the intermediate glyph as state. Spaces after the glyphs y, n, r, l, m at a minimum token length of three and a maximum of nine. Independent sentences per line.</p>
-<p><b>Naibbe cipher.</b> Tables from the file naibbe_tables.csv of the author&rsquo;s repository (138 unigram strings, 138 prefix strings, 138 suffix strings for 23 letters and six tables). Preprocessing: lower case, w&rarr;uu, j&rarr;i, k&rarr;c, letters only. Tokenization of the plaintext into one- or two-letter tokens with unigram probability 17/36 (the last letter of a line is always a unigram). Deck: 20 alpha, 8 beta1, 8 beta2, 8 beta3, 4 gamma1, 4 gamma2, shuffled and dealt without replacement, reshuffled when exhausted; one card per plaintext letter (variant: one card per token). Two-letter tokens are prefix(first letter) + suffix(second letter). Post-processing: each ciphertext space is removed with probability 0.03 (variant: none). Plaintext: Latin (Caesar) or Italian (Dante); one independent sentence per line (variant: running text). State-dependent variant: with probability w the table of the next token is drawn from a fixed random distribution over the six tables conditioned on the last glyph of the previous token (one Dirichlet(c) draw per glyph), otherwise from the deck.</p>
+<h2>S3. Deviations and preregistration commits</h2>
+{{ T.s_dev }}
+{{ T.s_prereg }}
 
-<h2>S4. Note on uncertainty estimation</h2>
-<p>A page-level bootstrap with replacement was tried first and rejected: duplicated pages create identical lines and token pairs, which inflates the plug-in mutual information (token MI interval 0.49&ndash;0.71 around a point estimate of 0.08) and depresses the hapax share. The leave-one-quire-out jackknife (Table 10) has no duplication and is the uncertainty measure used throughout. The jackknife standard errors of the excess-MI statistics include the variation of the estimator&rsquo;s residual bias with sample size.</p>
+<h2>S4. Generator parameters</h2>
+{{ T.s_fits }}
+
+<h2>S5. Held-out statistics for every generator</h2>
+{{ T.s_e2 }}
+{{ T.s_e3 }}
+{{ T.s_e6 }}
+
+<h2>S6. Drift and burstiness</h2>
+{{ T.s_e5 }}
+{{ T.s_e4 }}
+
+<h2>S7. Definitions of the 40 phenotype statistics</h2>
+<p><b>Profile statistics</b> (Section 3 of the main text):</p>
+<ul>
+<li>hapax share and type-token ratio;</li>
+<li>Zipf slope of the 200 most frequent types;</li>
+<li>mean word length;</li>
+<li>boundary MI: excess MI between the last glyph of a word and the first glyph of the next inside lines, against a within-line permutation null;</li>
+<li>word-pair MI and distance-2 word MI;</li>
+<li>line-break MI and line-break boundary MI, with the boundary MI at equal n;</li>
+<li>space predictability: information gain about word boundaries from the flanking glyph pair;</li>
+<li>lexicon test: share of held-out real words and of glyph-trigram samples attested in the training vocabulary;</li>
+<li>conditional glyph entropies h2–h4;</li>
+<li>lzma bits per character;</li>
+<li>page MI between page identity and word.</li>
+</ul>
+<p><b>Mechanism battery:</b> T1 page-conditional line-break ratio; T2a final-form excess (margin-bound, paragraph-final); T2b slack ratio (stars section); T2c dittography ratio; T3a zero replication (250-token chunks); T3b slot consistency and monotone share; T3c positional entropy (final, initial); T4 any periodicity peak; T5 step/smooth prediction-error ratio; T6a near and exact recency indices; T6b slope of line similarity over line distance 1–8; T7b deviant rate, recurrence share and slip share.</p>
+<p><b>E1:</b> graded line step, paragraph step, graded within-line decay, within-paragraph decay.</p>
+<p><b>Tolerance:</b> |G − V| ≤ 2√(SE<sub>V</sub>² + SD<sub>G</sub>²) + 0.01|V|. SE<sub>V</sub> is a leave-one-quire-out jackknife over the test half; SD<sub>G</sub> is taken over three generator seeds. T4 passes if at most one seed shows a peak.</p>
+
+<h2>S8. Implementation notes</h2>
+<ul>
+<li><b>Page-conditional T1 estimator.</b> Per page, the excess plug-in MI over 200 within-page re-pairings, for the break pairs and for consecutive blocks of within-line pairs of the same size, averaged over pages with weights equal to the number of break pairs. The pooled estimators failed a known-truth simulation in which each page of Latin received a different letter substitution; this estimator returned identical values with and without substitution.</li>
+<li><b>E1 expectations.</b> Position classes: offset from the line start (1 or ≥ 2), offset from the line end (1 or ≥ 2), paragraph-final line or not. The binary expectation is the exact mean over pairs of distinct eligible tokens of the page in the same class pair.</li>
+<li><b>E5 null.</b> For each type, the expected same-page pairs are Σ<sub>g</sub> C(n<sub>tg</sub>, 2) · Σ<sub>p∈g</sub> N<sub>p</sub>(N<sub>p</sub> − 1) / (N<sub>g</sub>(N<sub>g</sub> − 1)), with groups g = hand × section.</li>
+<li><b>E7 coder.</b> 32-bit Witten–Neal–Cleary arithmetic coding over integer transition counts. The end-of-line suppression below 60% of the target length and the stop at 140% are deterministic and replicated by the receiver.</li>
+</ul>
 </body></html>

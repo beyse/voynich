@@ -1,5 +1,5 @@
-"""Build paper 2: results/mechanism/*.json + paper2/templates -> paper2/paper.html|pdf, supplement.html|pdf.
-Every number in text and tables is computed here from the result files."""
+"""Build the paper: results/mechanism/*.json + paper/numbers.json + paper/templates -> paper/paper.html|pdf, paper/supplement.html|pdf.
+Every number in text and tables is computed here (or in paper/profile.py) from the result files."""
 import datetime
 import json
 import os
@@ -10,8 +10,9 @@ import fitz
 import numpy as np
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-sys.path.insert(0, 'paper2')
-from labels import FITTED, STAT
+sys.path.insert(0, 'paper')
+import profile as profile_analysis  # noqa: E402  (paper/profile.py, not the stdlib profiler)
+from labels import FITTED, STAT  # noqa: E402
 
 R = 'results/mechanism'
 L = lambda p: json.load(open(f'{R}/{p}'))
@@ -211,6 +212,16 @@ v.update(e7_bpg=f(np.mean([r['bits_per_glyph'] for r in lz]), 2), e7_bpt=f(np.me
          e7_tm_a=f(E7C['prng_mean'], 3), e7_tm_asd=f(E7C['prng_sd'], 3), e7_tm_b=f(E7C['lzma_mean'], 3), e7_tm_bsd=f(E7C['lzma_sd'], 3), e7_tm_p=f(E7C['welch_p'], 2),
          e7_latin_chars=f"{int(rec['lzma:LAT']['plaintext_bytes_carried'] * os.path.getsize('data/ref/la_caesar.txt') / (rec['lzma:LAT']['bits_available'] / 8) / 1000):,}")
 
+# ---------------------------------------------------------------- table and figure numbers (order of first appearance)
+MAIN_T = ['p_mech_small', 'framework', 'calib', 'battery', 'e1', 'gen', 'e45', 'cls', 'excl', 'e7', 'redteam']
+SUPP_T = ['p_basic', 'p_proj', 'p_lineunit', 'p_spaces', 'p_lexicon', 'p_entropy', 'p_mech', 'p_hier', 'p_naibbe_var', 'p_transcr', 'p_robust', 'p_jack',
+          'p_drift', 'p_hand', 'p_tvi', 'p_pc', 'p_feat', 'p_sect', 'p_labels', 'p_agree', 'p_direction', 'p_vertical', 'p_pmi', 'p_pos', 'p_combo', 'p_bpe',
+          's_dev', 's_prereg', 's_fits', 's_e2', 's_e3', 's_e6', 's_e5', 's_e4']
+TN = {k: str(i + 1) for i, k in enumerate(MAIN_T)}
+TN.update({k: f'S{i + 1}' for i, k in enumerate(SUPP_T)})
+FN = {k: str(i + 1) for i, k in enumerate(['profile', 'constraints', 'line_endings', 'recency', 'heldout', 'drift', 'e7'])}
+
+
 # ---------------------------------------------------------------- tables
 
 
@@ -222,6 +233,8 @@ def table(head, rows, caption, note=None, cls=''):
 
 
 T = {}
+pv, PT = profile_analysis.build(TN, table, f, sg, pc)
+T.update({'p_' + k: x for k, x in PT.items()})
 T['framework'] = table(
     ['Axis', 'Hypothesis', 'Operational definition', 'Signature predicted in advance'],
     [['Generation', 'P, fixed procedure', 'explicit rules plus an external randomiser or schedule; no free choices; parameters change only at discrete points', 'hard zeros; stationarity within a setting; possible device periodicity; slip-like deviations'],
@@ -230,7 +243,7 @@ T['framework'] = table(
      ['Transmission', 'D', 'composed directly on the page', 'line-aware forms tied to the page\'s own lines'],
      ['', 'K-reflow', 'copied from a draft with different line breaks', 'no line-final forms; breaks as transparent as word boundaries'],
      ['', 'K-same', 'copied from a draft with the same line breaks', 'not separable from D by the transliteration (stated in advance)']],
-    'Table 1. Hypotheses and their operational definitions as preregistered. The two axes are independent.')
+    f'Table {TN["framework"]}. Hypotheses and their operational definitions as preregistered. The two axes are independent.')
 T['calib'] = table(
     ['Test', 'Calibration requirement', 'Outcome'],
     [['T1 break coupling', 'greedily wrapped Latin R ≥ 0.5', f"R = {v['t1_latw']} (SE {v['t1_latw_se']}): met, very noisy"],
@@ -242,7 +255,7 @@ T['calib'] = table(
      ['E1 boundary steps', 'settings controls step, recency control does not', 'met after position stratification (deviation, before the Voynich run)'],
      ['E4 drift', '≥ 3 languages with lexical drift; glyph-drift control sublexical; vocabulary-drift control lexical only', 'met'],
      ['E5 burstiness', '≥ 3 languages with positive gradient; Naibbe closer to 1', 'met (quire jackknife; deviation, before the Voynich run)']],
-    'Table 2. Calibration requirements on controls with known mechanism. A falsifier is applied only when its calibration holds.')
+    f'Table {TN["calib"]}. Calibration requirements on controls with known mechanism. A falsifier is applied only when its calibration holds.')
 T['battery'] = table(
     ['Test', 'Voynich (ZL3b)', 'Takahashi', 'Key controls', 'Reading'],
     [['T1 line-break ratio', f"{v['t1_v']} (SE {v['t1_v_se']})", f"{v['t1_it']} ({v['t1_it_se']})", f"gibberish {v['t1_gib']} ({v['t1_gib_se']}); automaton {v['t1_mk']}; copy-and-modify {v['t1_ts']}", 'strongly reduced coupling; K-reflow falsifier not triggered'],
@@ -258,7 +271,7 @@ T['battery'] = table(
      ['T6a recency (near)', f"{v['t6a_v']} {v['t6a_v_ci']}", v['t6a_it'], f"stationary 99th pct ≤ {v['t6a_p99']}; copy-and-modify {v['t6a_ts']}; English {v['t6a_eng']}", 'stationary procedures falsified'],
      ['T6b within-page drift', f"{v['t6b_v']} {v['t6b_v_ci']}", f(PH['it2a']['t4c']['slope_1_8'], 4), f"automaton {v['t6b_mk']}; languages {v['t6b_lang']}", 'drift of natural-language strength'],
      ['T7b deviant recurrence', f"{v['t7b_rec']} (slip share {v['t7b_slip']})", pc(PH['it2a']['t7b']['recurrence_share']), f"languages {v['t7b_lang']}; copy-and-modify {v['t7b_ts']}; automata {v['t7b_mk']}; Naibbe {v['t7b_naib']}", 'rare forms not reused']],
-    'Table 3. The preregistered battery on the Voynich text (Stage B) with the controls that calibrate each reading. Intervals are 95%.',
+    f'Table {TN["battery"]}. The preregistered battery on the Voynich text (Stage B) with the controls that calibrate each reading. Intervals are 95%.',
     'Takahashi values are post hoc replications with identical code.')
 m1 = lambda nm, st, d=3: f(np.mean(e1c(nm, st)), d)
 T['e1'] = table(
@@ -268,12 +281,12 @@ T['e1'] = table(
      ['paragraph step', f"{v['e1_ps']} {v['e1_ps_ci']}", v['e1_it_ps']] + [m1(nm, 'PS') for nm in ('SET-line', 'SET-para', 'REC', 'MK-sec')],
      ['within-line decay, graded', f"{v['e1_wldg']} {v['e1_wldg_ci']}", f(E1I['stats']['WLD_graded'])] + [m1(nm, 'WLD_graded') for nm in ('SET-line', 'SET-para', 'REC', 'MK-sec')],
      ['within-paragraph decay', f"{v['e1_wpd']} {v['e1_wpd_ci']}", f(E1I['stats']['WPD'])] + [m1(nm, 'WPD') for nm in ('SET-line', 'SET-para', 'REC', 'MK-sec')]],
-    'Table 4. E1: steps in pair similarity at line and paragraph boundaries at matched token distance, with position-stratified expectations. Control values are means over 5 seeds; intervals are 95% page-bootstrap intervals.')
+    f'Table {TN["e1"]}. E1: steps in pair similarity at line and paragraph boundaries at matched token distance, with position-stratified expectations. Control values are means over 5 seeds; intervals are 95% page-bootstrap intervals.')
 gen_rows = [['E2', 'hard grammar + recency + session state', f"{v['e2'][0]}/40", '–', '; '.join(STAT[k] for k in v['e2'][1])],
             ['E3', '+ margin-driven endings, slips, drift, temperature', f"{v['e3p'][0]}/40 ({v['e3p_unf']}/31 unfitted)", f"{v['e3s'][0]}/40", '; '.join(STAT[k] for k in v['e3p'][1])],
             ['E6', 'two routes: drifting repertoire + one-off coinage', f"{v['e6'][0]}/40", f"{v['e6s'][0]}/40", '; '.join(STAT[k] for k in v['e6'][1][:10]) + '; …']]
 T['gen'] = table(['Exp.', 'Generator', 'Held-out pass (primary)', 'Secondary', 'Failing statistics (primary)'], gen_rows,
-                 'Table 5. Explicit generators of the surviving class, fitted on one half of the manuscript (bifolio parity) and tested on the other against 40 statistics.',
+                 f'Table {TN["gen"]}. Explicit generators of the surviving class, fitted on one half of the manuscript (bifolio parity) and tested on the other against 40 statistics.',
                  'E2 was fitted on odd and tested on even bifolios. E3 and E6 were cross-fitted, and their primary direction (fit on even, test on odd) used Voynich values not computed before.')
 cls_rows = [
     ['C1', 'Rigid slot-like word grammar; zeros consistent within short stretches', f"T3b {v['t3b_v']} vs gibberish {v['t3b_gib']}, languages {v['t3b_lang']}; T3a (250 tokens) {v['t3a_v']} vs {v['t3a_gib']}, {v['t3a_lang']}; pruning necessary (E2)", 'strong (T3b); moderate (T3a: not at full size)'],
@@ -291,8 +304,8 @@ T['e45'] = table(['Corpus', 'Lexical drift L (E4)', 'Sublexical drift S (E4)', '
                   [('verbose cipher (Latin)', E4A['VB-run'], E5A['VB-run']), ('Naibbe (Latin)', E4A['NAIB-run'], E5A['NAIB-run']),
                    ('glyph-habit drift', E4A['GDRIFT'], None), ('vocabulary drift', E4A['LDRIFT'], E5A['LDRIFT']),
                    ('repertoire + coinage', None, E5A['REP']), ('glyph generator (E3)', None, E5A['HGR2']), ('order-3 automaton', E4A['MK-sec'], E5A['MK-sec'])]],
-                 'Table 6. E4 and E5: where the within-page drift and the page clustering live. Intervals in Tables S6–S7.')
-T['cls'] = table(['#', 'Property', 'Evidence', 'Strength'], cls_rows, 'Table 7. The nine properties that define the mechanism class, with their evidence and an explicit strength label.')
+                 f'Table {TN["e45"]}. E4 and E5: where the within-page drift and the page clustering live. Intervals in Tables {TN["s_e5"]} and {TN["s_e4"]}.')
+T['cls'] = table(['#', 'Property', 'Evidence', 'Strength'], cls_rows, f'Table {TN["cls"]}. The nine properties that define the mechanism class, with their evidence and an explicit strength label.')
 T['excl'] = table(['Status', 'Mechanism variant', 'Decisive evidence'], [
     ['Excluded', 'naive improvisation (Gaskell & Bowern-type samples)', 'T3a, T3b'],
     ['Excluded', 'stationary procedures (tables, grilles, automata, devices constant within a page)', 'T6a'],
@@ -307,12 +320,12 @@ T['excl'] = table(['Status', 'Mechanism variant', 'Decisive evidence'], [
     ['Unresolved', 'message carried by the free choices (mimic-function encoding)', 'E7: not identifiable from text'],
     ['Unresolved', 'direct composition vs. copying with identical line breaks', 'not separable by the transliteration'],
     ['Open', 'a generator reproducing C6 and C7 together', f"best explicit generator {v['e3p'][0]}/40"]],
-    'Table 8. What is excluded, and what remains open. "Unresolved" entries are shown to be undecidable from the text, or not decidable with the data used here.')
+    f'Table {TN["excl"]}. What is excluded, and what remains open. "Unresolved" entries are shown to be undecidable from the text, or not decidable with the data used here.')
 T['e7'] = table(['Condition', 'Bits consumed', 'Bits per glyph', 'Recovery mismatches', 'Statistics agreeing with random driving'],
                 [[k.replace('lzma:', 'compressed ').replace('raw:', 'raw ').replace('LAT', 'Latin').replace('ITA', 'Italian').replace('GER', 'German'),
                   f"{r['bits_consumed']:,}", f(r['bits_per_glyph'], 2), r['mismatches'],
                   (f"{E7['lzma']['agree']}/{E7['lzma']['n']}" if k.startswith('lzma') else f"{E7['raw']['agree']}/{E7['raw']['n']}")] for k, r in rec.items()],
-                'Table 9. E7: message-driven output of the order-3 glyph process. Agreement counts are per condition group (3 plaintexts against 3 random seeds).')
+                f'Table {TN["e7"]}. E7: message-driven output of the order-3 glyph process. Agreement counts are per condition group (3 plaintexts against 3 random seeds).')
 T['redteam'] = table(['Claim', 'Attack', 'Check', 'Result'], [
     ['C3 margin-driven endings', 'margin and paragraph effects not actually different', 'page bootstrap of the difference', f"{v['t2a_diff']} {v['t2a_diff_ci']}"],
     ['C3', 'lines end at drawings, not margins', 'text-only stars section', f"margin {v['t2a_star_m']} vs paragraph {v['t2a_star_p']} (n = {v['t2a_star_mn']}, {v['t2a_star_pn']})"],
@@ -323,7 +336,7 @@ T['redteam'] = table(['Claim', 'Attack', 'Check', 'Result'], [
     ['C7', 'depends on double coding or on one hand', 'no double coding; per hand, whole-text reference', f"{v['t7b_rec_nodc']}; hands {v['t7b_hand']}"],
     ['E7', 'single disagreement is a real trace', '8 runs per condition', f"word-pair MI {v['e7_tm_a']} ± {v['e7_tm_asd']} vs {v['e7_tm_b']} ± {v['e7_tm_bsd']}, p = {v['e7_tm_p']}"],
     ['All', 'transliteration choice', 'Takahashi transliteration', 'T3a, T3b, T5, T6a, T7b, T2a, E1, E5 replicate']],
-    'Table 10. Red-team checks run before writing, all post hoc and labelled as such in the repository.')
+    f'Table {TN["redteam"]}. Red-team checks run before writing, all post hoc and labelled as such in the repository.')
 
 # ---------------------------------------------------------------- supplement tables
 def held_table(rpt, keys, names, caption):
@@ -340,25 +353,25 @@ def held_table(rpt, keys, names, caption):
 
 
 T['s_e2'] = held_table(E2R, ['HGR', 'A1-norecency', 'A2-noprune-noslip', 'A3-nosession', 'A0-baseline'],
-                       ['full', 'no recency', 'no pruning', 'no session', 'plain automaton'], 'Table S3. E2: held-out statistics (test: even bifolios).')
+                       ['full', 'no recency', 'no pruning', 'no session', 'plain automaton'], f'Table {TN["s_e2"]}. E2: held-out statistics (test: even bifolios).')
 T['s_e3'] = held_table(E3R, ['primary:HGR2', 'primary:B1-noC1', 'primary:B2-noC2', 'primary:B3-noC3', 'primary:B0-E2class'],
-                       ['full', 'no margin rule', 'no drift', 'no slips etc.', 'E2 class'], 'Table S4. E3 primary direction (fit even, test odd).')
+                       ['full', 'no margin rule', 'no drift', 'no slips etc.', 'E2 class'], f'Table {TN["s_e3"]}. E3 primary direction (fit even, test odd).')
 T['s_e6'] = held_table(E6R, ['primary:TR', 'primary:D1-nocoin', 'primary:D2-norepvar', 'primary:D3-norecency', 'primary:D4-noK'],
-                       ['two-route', 'no coinage', 'no repertoire variation', 'no recency', 'no boundary rule'], 'Table S5. E6 primary direction (fit even, test odd).')
+                       ['two-route', 'no coinage', 'no repertoire variation', 'no recency', 'no boundary rule'], f'Table {TN["s_e6"]}. E6 primary direction (fit even, test odd).')
 T['s_fits'] = table(['Model', 'Fitted parameters (training half)'],
                     [['E2 HGR', ', '.join(f'{k} = {x}' for k, x in E2F['HGR']['params'].items())],
                      ['E3 HGR2 (fit even)', ', '.join(f'{k} = {x}' for k, x in E3F['primary:HGR2']['params'].items())],
                      ['E3 HGR2 (fit odd)', ', '.join(f'{k} = {x}' for k, x in E3F['secondary:HGR2']['params'].items())],
                      ['E6 TR (fit even)', ', '.join(f'{k} = {x}' for k, x in E6F['primary:TR']['params'].items())]],
-                    'Table S2. Fitted generator parameters. λ (lam): quire session weight; σ (sig): page tilt; σ_w (sigw): line-to-line drift; ρ, τ, e: recency rate, range, exact share; ε (eps): slip rate; m: pruning threshold; θ (theta): choice temperature; c: coinage rate; sq, sp, sw: quire, page and line variation of repertoire weights.', cls='small')
+                    f'Table {TN["s_fits"]}. Fitted generator parameters. λ (lam): quire session weight; σ (sig): page tilt; σ_w (sigw): line-to-line drift; ρ, τ, e: recency rate, range, exact share; ε (eps): slip rate; m: pruning threshold; θ (theta): choice temperature; c: coinage rate; sq, sp, sw: quire, page and line variation of repertoire weights.', cls='small')
 T['s_e5'] = table(['Corpus', 'G', 'B 2–4', 'B 5–19', 'B 20–99', 'B ≥ 100'],
                   [[n, sg(r['G'], 2) + ' ' + ci(r['G_ci95'], 2)] + [f(r['B'][b], 2) for b in ('R', 'M', 'F', 'VF')]
                    for n, r in [('Voynich', E5B), ('Voynich (Takahashi)', E5I)] + [(LN.get(k, k), E5A[k]) for k in ('LAT', 'ITA', 'GER', 'ENG', 'VB-run', 'NAIB-run', 'LDRIFT', 'REP', 'HGR2', 'MK-sec')]],
-                  'Table S6. E5: page clustering index B by frequency band and gradient G with quire-jackknife 95% intervals.', cls='small')
+                  f'Table {TN["s_e5"]}. E5: page clustering index B by frequency band and gradient G with quire-jackknife 95% intervals.', cls='small')
 T['s_e4'] = table(['Corpus', 'L (lexical)', 'S (sublexical)'],
                   [[n, sg(r['L'], 4) + ' ' + ci(r['L_ci95'], 4), sg(r['S'], 4) + ' ' + ci(r['S_ci95'], 4)]
                    for n, r in [('Voynich', E4B)] + [(LN.get(k, k), E4A[k]) for k in ('LAT', 'ITA', 'GER', 'ENG', 'VB-run', 'NAIB-run', 'GDRIFT', 'LDRIFT', 'MK-sec')]],
-                  'Table S7. E4: drift slopes of line similarity over line distance 2–8 with page-bootstrap 95% intervals.', cls='small')
+                  f'Table {TN["s_e4"]}. E4: drift slopes of line similarity over line distance 2–8 with page-bootstrap 95% intervals.', cls='small')
 dev_files = [('Battery', 'mechanism/DEVIATIONS.md'), ('E1', 'mechanism/E1_DEVIATIONS.md'), ('E5', 'mechanism/E5_DEVIATIONS.md')]
 
 
@@ -371,23 +384,23 @@ def md_items(path):
 
 T['s_dev'] = table(['File', 'Deviation (all made before the corresponding Voynich statistic was computed)'],
                    [[name, '; '.join(md_items(p))] for name, p in dev_files] + [['E2–E7', 'none beyond those recorded in PROGRAM.md (E6/E7: none)']],
-                   'Table S1. Logged deviations from the preregistrations. Full texts in the repository.', cls='small')
+                   f'Table {TN["s_dev"]}. Logged deviations from the preregistrations. Full texts in the repository.', cls='small')
 T['s_prereg'] = table(['Stage', 'Commit', 'Content'], [
     ['Battery preregistration', '28ae510', 'PREREG.md frozen'], ['Battery Stage A', '2403034', 'controls only'], ['Battery Stage B and report', '123ee76', 'Voynich'],
     ['E1 preregistration', 'b5dcb79', ''], ['E1 calibration', 'ea64b09', 'before the Voynich run'], ['E2 preregistration', '6b109a4', ''],
     ['E3 preregistration', '0f50303', ''], ['E4 preregistration', 'ce8bb45', ''], ['E5 preregistration', 'f3bb895', ''],
     ['E6 preregistration', '537e93b', ''], ['E7 preregistration', '6b6e555', ''], ['Red-team checks', '922722b', 'post hoc']],
-    'Table S8. Timestamps: each preregistration was committed before the corresponding Voynich outcome was computed.', cls='small')
+    f'Table {TN["s_prereg"]}. Timestamps: each preregistration was committed before the corresponding Voynich outcome was computed.', cls='small')
 
 # ---------------------------------------------------------------- render
-env = Environment(loader=FileSystemLoader('paper2/templates'), autoescape=False, undefined=StrictUndefined)
-CSS = open('paper/templates/style.css').read() + open('paper2/templates/extra.css').read()
-for name, out, head in (('main', 'paper', 'Beyer — Constrained, not identifiable: how the Voynich text was produced'),
+env = Environment(loader=FileSystemLoader('paper/templates'), autoescape=False, undefined=StrictUndefined)
+CSS = open('paper/templates/style.css').read() + open('paper/templates/extra.css').read()
+for name, out, head in (('main', 'paper', 'Beyer — Constrained, not identifiable: how the Voynich manuscript text was produced'),
                         ('supplement', 'supplement', 'Supplementary material')):
-    html = env.get_template(name + '.html').render(v=v, T=T, STAT=STAT)
-    open(f'paper2/{out}.html', 'w').write(html)
+    html = env.get_template(name + '.html').render(v=v, p=pv, T=T, TN=TN, FN=FN, STAT=STAT)
+    open(f'paper/{out}.html', 'w').write(html)
     story = fitz.Story(html=html, user_css=CSS, archive=fitz.Archive('.'))
-    path = f'paper2/{out}.pdf'
+    path = f'paper/{out}.pdf'
     writer = fitz.DocumentWriter(path)
     mb = fitz.paper_rect('a4')
     where = mb + (60, 62, -60, -66)

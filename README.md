@@ -1,77 +1,74 @@
-# Voynich: strukturelle Analyse und Mechanismus-Elimination
+# Constrained, not identifiable: how the Voynich manuscript text was produced
 
-Statistische Untersuchung des Voynich-Manuskripts auf Basis der Zandbergen-Landini-Transkription (EVA, IVTFF-Format).
-Ergebnisbericht: [REPORT.md](REPORT.md).
+Code, data, preregistrations and results for the paper of the same title by Sebastian Beyer (independent researcher, Vienna; [@BeyerSebastian](https://x.com/BeyerSebastian) on X).
 
-## Daten
-- `data/ZL3b-n.txt`, `data/IT2a-n.txt`: Transkriptionen von voynich.nu (ZL = Zandbergen-Landini, IT = Takahashi).
-- `data/ref/` (nicht versioniert): Referenztexte. Anlegen mit
-  `curl` von Gutenberg (Faust #2229, Dante #1012, Tolstoi #2600), Caesar von thelatinlibrary.com (Bücher 1-7, HTML-Tags entfernt), hebräische Genesis über die Sefaria-API (Nikkud entfernt). Siehe die Kommandos in `scripts/`.
-- `Voynich_Manuscript.pdf` (nicht versioniert): Beinecke-Scan, 209 Bildseiten ohne Textlayer. Zuordnung: PDF-Seite 3 = f1r, danach linear (f12 fehlt) bis Seite 116 = f58v; verifiziert an f26r (S. 51), f27r (S. 53), f58r (S. 115).
-- `data/naibbe/naibbe_tables.csv`: Substitutionstafeln der Naibbe-Chiffre aus dem Repository von Michael A. Greshko (github.com/greshko/naibbe-cipher, modifizierte MIT-Lizenz mit Attributionspflicht). Quelle: Greshko, M. A. (2025), "The Naibbe cipher: a substitution cipher that encrypts Latin and Italian as Voynich Manuscript-like ciphertext", Cryptologia, doi:10.1080/01611194.2025.2566408. Die Chiffre selbst ist in `voynich/generators.py` nach der dokumentierten Prozedur neu implementiert.
+- **Paper:** [`paper/paper.pdf`](paper/paper.pdf), with supplement [`paper/supplement.pdf`](paper/supplement.pdf)
+- **Main result:** the production mechanism of the Voynich text is tightly constrained: nine properties define it, and named alternatives are excluded. But whether its remaining free choices carry a message cannot be identified from the text alone. Nothing here shows that the text is meaningless, and nothing decodes it.
 
-## Code
-- `voynich/ivtff.py`: Parser für IVTFF (Seiten-Metadaten, Locus-Typen, Bereinigung der Inline-Markup).
-- `voynich/stats.py`: Entropien, Zipf, Wortstatistik.
-- `voynich/subst.py`: homophoner Substitutionslöser mit 4-Gramm-Sprachmodell und Kontrollen.
-- `voynich/battery.py`: gemeinsame Testbatterie (Edge-MI, Token-MI, Zeilenreset, Space-Vorhersagbarkeit, Lexikontest, Entropieprofil, Redundanz jenseits eines Ordnung-3-Automaten).
-- `voynich/generators.py`: Kandidatenmechanismen in exakt der Zeilen/Wort-Form des Manuskripts (Markov-Automaten mit Sektions- oder Seitendrift, Rugg-Gitter, Timm/Schinner-Kopieren, Verbose-Chiffre, Autokey-Chiffre, Latein-Kontrollen).
-- `scripts/`: je ein Experiment pro Datei, alle vom Repo-Wurzelverzeichnis aus starten (`python3 scripts/<name>.py`).
+The paper has two parts:
 
-## Reproduktion
+1. **An exploratory profile** (Section 3). It is not preregistered. It applies one information-theoretic battery to the manuscript, language controls and candidate generators, and shows that a local, low-order glyph process with drifting parameters is sufficient.
+2. **A preregistered program** (Sections 4–8). It consists of a calibrated battery T1–T7 and seven follow-up experiments E1–E7. Together they separate procedure, improvisation and plaintext-driven production, test explicit generators on held-out pages, and give a constructive non-identifiability result (E7).
+
+## Repository layout
+
+| Path | Content |
+|---|---|
+| `data/ZL3b-n.txt`, `data/IT2a-n.txt` | Transliterations from [voynich.nu](https://www.voynich.nu/transcr.html): Zandbergen–Landini ZL3b and Takahashi IT2a (IVTFF, EVA) |
+| `data/gibberish/` | Human gibberish corpus of Gaskell & Bowern (2022); licence notice in `SOURCE.md` |
+| `data/naibbe/naibbe_tables.csv` | Naibbe cipher tables from [greshko/naibbe-cipher](https://github.com/greshko/naibbe-cipher) (modified MIT licence, attribution required); the cipher itself is reimplemented in `voynich/generators.py` |
+| `voynich/` | IVTFF parser, statistics, profile battery and generators |
+| `scripts/` | One script per profile analysis; run from the repository root |
+| `results/logs/` | Logs of the profile analyses |
+| `mechanism/` | Preregistrations (`PREREG.md`, `E1_PREREG.md` … `E7_PREREG.md`), deviation logs, code for T1–T7 and E1–E7, the experiment log `PROGRAM.md` and the synthesis `SYNTHESIS.md` |
+| `results/mechanism/` | Results of the preregistered program (JSON) |
+| `paper/` | Paper sources: templates, build script, figure script, number extraction |
+| `REPORT.md` | Earlier working report on the profile (German), superseded by the paper |
+
+## Data not included
+
+- **Reference texts** in `data/ref/`:
+  - Project Gutenberg: Goethe, *Faust* (#2229); Dante, *Commedia* (#1012); Tolstoy, *War and Peace* (#2600).
+  - Caesar, *De bello Gallico*, books 1–7, from thelatinlibrary.com, with HTML tags removed.
+  - Genesis in Hebrew from the Sefaria API, with vowel points removed.
+- **Facsimile** `Voynich_Manuscript.pdf`: the Beinecke Library's digital reproduction of MS 408. Only the illustration features (`scripts/scripts_page_colors.py`) need it. PDF page 3 is f1r, then pages run linearly to page 116 = f58v, with f12 missing.
+
+## Reproduction
+
+Everything uses Python 3 with numpy, matplotlib, PyMuPDF (`fitz`) and Jinja2.
+
+Profile analysis (Section 3). Logs go to `results/logs/`, and the numbers are extracted into `paper/numbers.json`:
 ```bash
-python3 scripts/scripts_mechanisms3.py    # Mechanismus-Batterie (ca. 10 min)
-python3 scripts/scripts_markov_hier.py    # Automat mit Seitendrift
-python3 scripts/scripts_drift.py          # Drift mit Folio-Abstand
-python3 scripts/scripts_naibbe.py         # Naibbe-Chiffre durch die Batterie
-python3 scripts/scripts_naibbe_stateful.py # zustandsabhängige Naibbe-Variante
-python3 scripts/scripts_takahashi.py      # Kernbatterie auf beiden Transkriptionen
-python3 scripts/scripts_oos.py            # Out-of-sample, pro Hand, pro Currier-Sprache
-python3 scripts/scripts_hand_by_distance.py # Handeffekt bei festem Folio-Abstand
-python3 scripts/scripts_zodiac_labels.py  # Wiederkehr der Labels über Seiten
-python3 scripts/scripts_page_colors.py    # Bildmerkmale aus der PDF (benötigt Voynich_Manuscript.pdf, PyMuPDF, Pillow, numpy)
-python3 scripts/scripts_text_vs_image.py  # Mantel-Test Text gegen Bild, Positivkontrolle
-python3 scripts/scripts_text_vs_image2.py # stratifiziert nach Hand
-python3 scripts/scripts_section_within_hand.py # Sektion innerhalb der Hand (mit Folio-Vorbehalt)
+zsh paper/run_chain1.sh; zsh paper/run_chain2.sh
+python3 scripts/scripts_jackknife.py
+python3 paper/extract_numbers.py
 ```
 
-## Manuskript (Cryptologia-Einreichung)
-- `paper/paper.pdf`, `paper/supplement.pdf`: Haupttext und Supplement (englisch); `paper/paper.html`, `paper/supplement.html`: gerenderte, editierbare Quellen; `paper/templates/`: Jinja2-Vorlagen und CSS.
-- Jede Zahl im Manuskript stammt aus `paper/numbers.json`, das `paper/extract_numbers.py` aus den Logs in `results/logs/` und den JSON-Ergebnissen erzeugt. Abbildungen: `paper/make_figures.py` (rechnet direkt aus den Daten).
-- Neu bauen:
+Preregistered program (Sections 4–8):
 ```bash
-zsh paper/run_chain1.sh; zsh paper/run_chain2.sh        # alle Analysen, Logs nach results/logs/
-python3 scripts/scripts_jackknife.py                     # Konfidenzintervalle (Leave-one-quire-out)
-python3 paper/make_figures.py && python3 paper/extract_numbers.py && python3 paper/build_paper.py
+python3 -m mechanism.run A; python3 -m mechanism.run B      # battery: controls, then Voynich
+python3 -m mechanism.posthoc                                 # post hoc checks, labelled as such
+python3 -m mechanism.e1 A; python3 -m mechanism.e1 B
+for e in e2 e3 e6; do for s in fit generate phenotype report; do python3 -m mechanism.$e $s; done; done
+python3 -m mechanism.e4 A; python3 -m mechanism.e4 B
+python3 -m mechanism.e5 A; python3 -m mechanism.e5 B
+python3 -m mechanism.e7 run; python3 -m mechanism.e7 tmcheck
+python3 -m mechanism.redteam                                 # red-team checks (post hoc)
 ```
 
-## Mechanismus-Identifikation (präregistriert, Branch `mechanism-identification`)
-- Frage: Prozedur, geübte Improvisation oder klartextgesteuerte Prozedur; getrennt davon direkt auf der Seite komponiert oder aus einer Vorlage kopiert.
-- `mechanism/PREREG.md`: eingefrorene Hypothesen, Tests T1–T7, Vorhersagen, Falsifikatoren, Urteilsregeln (Commit `28ae510`). `mechanism/DEVIATIONS.md`: alle Abweichungen mit Zeitpunkt. `mechanism/REPORT.md`: Ergebnis.
-- Kontrolle für menschliche Improvisation: Gibberish-Korpus von Gaskell & Bowern (2022) in `data/gibberish/` (Lizenzhinweis in `SOURCE.md`).
-- Batterie-Ergebnis: begrenzte, unentschiedene Konkurrenz. Naive Improvisation, stationäre Prozeduren, periodische Geräte (ab Effektstärke 0,2), glatte Drift, propagierende Innovationen, wortbewahrende Chiffren und die Naibbe-Chiffre in der veröffentlichten Form sind ausgeschlossen; Umbruch einer fortlaufenden Vorlage (K-reflow) ist ausgeschlossen.
+Paper. Every number in the text and tables is computed from the result files at build time:
 ```bash
-python3 -m mechanism.run A        # Stufe A: nur Kontrollen -> results/mechanism/stageA.json
-python3 -m mechanism.run B        # Stufe B: Voynich -> results/mechanism/stageB.json
-python3 -m mechanism.posthoc      # als post hoc markierte Robustheitsprüfungen
-python3 -m mechanism.summarize AB # Tabellen
-```
-- Anschließendes iteratives Programm (E1–E7, jeweils präregistriert): `mechanism/PROGRAM.md` (Protokoll), `mechanism/SYNTHESIS.md` (Endpunkt). Der Mechanismus ist auf eine durch neun notwendige Eigenschaften definierte Klasse eingegrenzt. Ob die freien Entscheidungen von einer expliziten Regel, von Schreibgewohnheit oder von einer Nachricht getragen wurden, ist aus dem Text nicht entscheidbar; E7 zeigt das konstruktiv (Klartext in den freien Entscheidungen, exakt rückgewinnbar, in 40 Statistiken unsichtbar).
-```bash
-python3 -m mechanism.e1 A; python3 -m mechanism.e1 B          # E1 Grenz-Rezenz
-python3 -m mechanism.e2 fit; python3 -m mechanism.e2 generate; python3 -m mechanism.e2 phenotype; python3 -m mechanism.e2 report
-python3 -m mechanism.e3 fit; python3 -m mechanism.e3 generate; python3 -m mechanism.e3 phenotype; python3 -m mechanism.e3 report
-python3 -m mechanism.e4 A; python3 -m mechanism.e4 B          # lexikalische vs. sublexikalische Drift
-python3 -m mechanism.e5 A; python3 -m mechanism.e5 B          # frequenzaufgelöste Burstiness
-python3 -m mechanism.e6 fit; python3 -m mechanism.e6 generate; python3 -m mechanism.e6 phenotype; python3 -m mechanism.e6 report
-python3 -m mechanism.e7 run; python3 -m mechanism.e7 tmcheck   # Klartext in freien Entscheidungen
+python3 paper/make_figures.py && python3 paper/build.py
 ```
 
-## Zweites Manuskript (Mechanismusprogramm)
-- `paper2/paper.pdf`, `paper2/supplement.pdf`: "Constrained, not identifiable: preregistered tests of how the Voynich manuscript text was produced" (englisch), mit gerenderten Quellen `paper2/paper.html`, `paper2/supplement.html` und Vorlagen in `paper2/templates/`.
-- Jede Zahl wird von `paper2/build.py` direkt aus `results/mechanism/*.json` berechnet; Abbildungen: `paper2/make_figures.py`; lesbare Namen der 40 Statistiken: `paper2/labels.py`.
-- Red-Team-Prüfungen vor dem Schreiben: `python3 -m mechanism.redteam` (post hoc, als solche gekennzeichnet).
-```bash
-python3 -m mechanism.redteam
-python3 paper2/make_figures.py && python3 paper2/build.py
-```
+## Preregistration
+
+Each preregistration was committed to this repository before the corresponding Voynich outcome was computed. The commits are listed in Table S28 of the supplement, and deviations are logged in `mechanism/*DEVIATIONS.md`. The repository was private while the work was done and was published once it was complete. The commit timestamps are therefore the author's record, not entries in an independent registry.
+
+## Licences and attribution
+
+- The transliterations are the work of René Zandbergen and Gabriel Landini (ZL3b) and of T. Takahashi (IT2a). voynich.nu distributes them under CC0 ([Licences and copyright](https://www.voynich.nu/roadmap.html#cop)); please acknowledge the source.
+- The gibberish corpus and the Naibbe tables are redistributed under their own licences. Both require citation of the source papers:
+  - Gaskell & Bowern 2022, CEUR-WS 3313;
+  - Greshko 2025, *Cryptologia*, doi:10.1080/01611194.2025.2566408.
+- The analyses, code and drafts were prepared with the assistance of an AI system (Claude, Anthropic). The author verified the results and takes full responsibility for the content.
